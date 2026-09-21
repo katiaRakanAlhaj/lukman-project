@@ -1,0 +1,63 @@
+{
+    "contact": {
+        "email": "Email",
+        "contactUs": "Contact Us",
+        "followUs": "Follow Us",
+        "stayConnected": "Stay connected for updates and news",
+        "namePlaceholder": "Name",
+        "emailPlaceholder": "Email",
+        "messagePlaceholder": "Message",
+        "send": "Send",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "messageRequired": "Message is required",
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram",
+        "twitter": "X (Twitter)",
+        "facebook": "Facebook",
+        "youtube": "YouTube"
+    },
+    "navbar": {
+        "home": "Home",
+        "platform": "Platform Message",
+        "resume": "Resume",
+        "activities": "Activities",
+        "articles": "Articles",
+        "media": "Media",
+        "contact": "Contact Us",
+        "tagline": "Diplomat . Politician . Writer",
+        "english": "English",
+        "arabic": "العربية",
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram",
+        "twitter": "X (Twitter)",
+        "facebook": "Facebook",
+        "youtube": "YouTube"
+    },
+    "footer": {
+        "tagline": "Diplomat · Politician · Writer",
+        "quickLinks": "Quick Links",
+        "joinUs": "Join Us",
+        "rights": "© All rights reserved to Ambassador Lukman Al-Fayli 2025",
+        "resume": "Resume",
+        "activities": "Activities",
+        "articles": "Articles",
+        "media": "Media",
+        "visionAndPrinciples": "Vision & Principles",
+        "importantLinks": "Important Links",
+        "unitedNations": "United Nations",
+        "booksAndResearch": "Books & Research",
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram",
+        "twitter": "X (Twitter)",
+        "facebook": "Facebook",
+        "youtube": "YouTube"
+    },
+    "homeImage": {
+        "vision": "Vision & Principles",
+        "united": "United Nations",
+        "books": "Books & Research",
+        "highlights": "Highlights",
+        "links": "Important Links"
+    }
+}

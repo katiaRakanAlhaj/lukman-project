@@ -1,0 +1,63 @@
+{
+    "contact": {
+        "email": "بريد الالكتروني",
+        "contactUs": "اتصل بنا",
+        "followUs": "تابعنا",
+        "stayConnected": "ابقَ على تواصل للحصول على التحديثات والأخبار",
+        "namePlaceholder": "الاسم",
+        "emailPlaceholder": "بريد الالكتروني",
+        "messagePlaceholder": "الرسالة",
+        "send": "ارسال",
+        "nameRequired": "الاسم مطلوب",
+        "emailRequired": "الايميل مطلوب",
+        "messageRequired": "الرسالة مطلوبة",
+        "linkedin": "لينكد إن",
+        "instagram": "إنستغرام",
+        "twitter": "إكس (تويتر)",
+        "facebook": "فيسبوك",
+        "youtube": "يوتيوب"
+    },
+    "navbar": {
+        "home": "الرئيسية",
+        "platform": "رسالة المنصة",
+        "resume": "السيرة الذاتية",
+        "activities": "النشاطات",
+        "articles": "المقالات",
+        "media": "الميديا",
+        "contact": "اتصل بنا",
+        "tagline": "دبلوماسي . سياسي . كاتب",
+        "english": "English",
+        "arabic": "العربية",
+        "linkedin": "لينكد إن",
+        "instagram": "إنستغرام",
+        "twitter": "إكس (تويتر)",
+        "facebook": "فيسبوك",
+        "youtube": "يوتيوب"
+    },
+    "footer": {
+        "tagline": "دبلوماسي . سياسي . كاتب",
+        "quickLinks": "روابط سريعة",
+        "joinUs": "انضم لنا",
+        "rights": "© كل الحقوق محفوظة لصالح السفير لقمان الفيلي 2025",
+        "resume": "السيرة الذاتية",
+        "activities": "النشاطات",
+        "articles": "المقالات",
+        "media": "الميديا",
+        "visionAndPrinciples": "الرؤية والمبادئ",
+        "importantLinks": "روابط مهمة",
+        "unitedNations": "الأمم المتحدة",
+        "booksAndResearch": "الكتب والأبحاث",
+        "linkedin": "لينكد إن",
+        "instagram": "إنستغرام",
+        "twitter": "إكس (تويتر)",
+        "facebook": "فيسبوك",
+        "youtube": "يوتيوب"
+    },
+    "homeImage": {
+        "vision": "الرؤية والمبادئ",
+        "united": "الأمم المتحدة",
+        "books": "الكتب والأبحاث",
+        "highlights": "مقتطفات",
+        "links": "روابط مهمة"
+    }
+}

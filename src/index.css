@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+@import 'tailwindcss';
+.container {
+    max-width: 88%;
+    /* Prevent any overflow */
+}
+
+.container2 {
+    max-width: 87%;
+}
+
+.container3 {
+    max-width: 80%;
+}
+
+@theme {
+    --color-primary: #005770;
+    --color-secondary: #002F3C;
+    --color-negative: #D22E2E;
+}
+
+@font-face {
+    font-family: "ShamelSansOne";
+    src: url("assets/fonts/FF\ Shamel\ Family\ Sans\ One\ Book.ttf") format("truetype");
+    font-weight: 400;
+    /* normal */
+    font-style: normal;
+}
+
+
+/* FF Shamel Family Sans One Bold */
+
+@font-face {
+    font-family: "ShamelSansOne";
+    src: url("assets/fonts/FF\ Shamel\ Family\ Sans\ One\ Bold.ttf") format("truetype");
+    font-weight: 700;
+    /* bold */
+    font-style: normal;
+}
+
+.container1 {
+    max-width: 92%;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+@media only screen and (max-width: 400px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 769px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 770px) and (max-width: 863px) {
+    html {
+        font-size: 8px;
+    }
+}
+
+@media only screen and (min-width: 864px) and (max-width: 910px) {
+    html {
+        font-size: 8.5px;
+    }
+}
+
+@media only screen and (min-width: 910px) and (max-width: 976px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (min-width: 977px) and (max-width: 993px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (min-width: 994px) and (max-width: 1023px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1099px) {
+    html {
+        font-size: 10.7px;
+    }
+}
+
+@media only screen and (min-width: 1100px) and (max-width: 1250px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (min-width: 1251px) and (max-width: 1281px) {
+    html {
+        font-size: 12.5px;
+    }
+}
+
+@media only screen and (min-width: 1282px) and (max-width: 1365px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (min-width: 1366px) and (max-width: 1400px) {
+    html {
+        font-size: 13.5px;
+    }
+}
+
+@media only screen and (min-width: 1401px) and (max-width: 1534px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 1535px) and (max-width: 1600px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 1601px) and (max-width: 1800px) {
+    html {
+        font-size: 16.5px;
+    }
+}
+
+@media only screen and (min-width: 1801px) and (max-width: 2000px) {
+    html {
+        font-size: 18.7px;
+    }
+}
+
+@media only screen and (min-width: 2001px) and (max-width: 2200px) {
+    html {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 2201px) and (max-width: 2500px) {
+    html {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (min-width: 2501px) and (max-width: 2800px) {
+    html {
+        font-size: 26px;
+    }
+}
+
+@media only screen and (min-width: 2801px) and (max-width: 3000px) {
+    html {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 3001px) and (max-width: 3200px) {
+    html {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 3201px) and (max-width: 35000px) {
+    html {
+        font-size: 33px;
+    }
+}
+
+@media only screen and (min-width: 3501px) {
+    html {
+        font-size: 45px;
+    }
+}
