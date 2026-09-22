@@ -59,5 +59,16 @@
         "books": "Books & Research",
         "highlights": "Highlights",
         "links": "Important Links"
+    },
+    "resumePage": {
+        "downloading": "Downloading...",
+        "downloadCV": "Download Resume (PDF)",
+        "Lang": "Languages",
+        "skills": "Skills",
+        "postions": "Positions and Jobs"
+    },
+    "lukman_title": "Luqman Abdulrahim Al-Faili",
+    "Activities": {
+        "Activities": "Activities"
     }
 }

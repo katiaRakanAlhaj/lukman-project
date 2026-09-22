@@ -17,6 +17,8 @@ import Wrapper from "./component/wrapper/wrapper";
 import i18n from "./i18n/i18n";
 import Home from "./pages/Home";
 import Resume from "./pages/Resume";
+import Activities from "./pages/Activities";
+import Articles from "./pages/Artciles";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -84,6 +86,8 @@ function App() {
         <Route path="/:lang" element={<Wrapper />}>
           <Route index element={<Home />} />
           <Route path = "Resume" element={<Resume />} />
+          <Route path = "Activities" element={<Activities />} />
+          <Route path = "Articles" element={<Articles />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}

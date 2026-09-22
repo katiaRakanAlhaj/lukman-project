@@ -59,5 +59,17 @@
         "books": "الكتب والأبحاث",
         "highlights": "مقتطفات",
         "links": "روابط مهمة"
+    },
+    "resumePage": {
+        "downloading": "جاري التحميل...",
+        "downloadCV": "تحميل السيرة الذاتية (PDF)",
+        "Lang": "اللغات",
+        "skills": "مهارات",
+        "postions": "المناصب والوظائف"
+    },
+    "lukman_title": "لقمان عبدالرحيم الفيلي",
+    "Activities": {
+        "Activities": "النشاطات"
     }
+
 }

@@ -41,8 +41,8 @@ const navLinks = [
   { to: "/", key: "home" },
   { to: "/platform_message", key: "platform" },
   { to: "/Resume", key: "resume" },
-  { to: "/activities", key: "activities" },
-  { to: "/articles", key: "articles" },
+  { to: "/Activities", key: "activities" },
+  { to: "/Articles", key: "articles" },
   { to: "/media", key: "media" },
   { to: "/contact", key: "contact" },
 ];

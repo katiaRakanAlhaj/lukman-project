@@ -13,6 +13,10 @@
     max-width: 80%;
 }
 
+.container4 {
+    max-width: 92%;
+}
+
 @theme {
     --color-primary: #005770;
     --color-secondary: #002F3C;
