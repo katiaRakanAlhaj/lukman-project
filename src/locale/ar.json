@@ -70,6 +70,24 @@
     "lukman_title": "لقمان عبدالرحيم الفيلي",
     "Activities": {
         "Activities": "النشاطات"
+    },
+    "ArticlesGrid": {
+        "searchPlaceholder": "ابحث عن مقال",
+        "searchButton": "بحث",
+        "filterAndSort": "تصفية و ترتيب",
+        "categoryLabel": "تصنيف المقابلة",
+        "categoryAll": "الكل",
+        "sortLabel": "رتب حسب",
+        "sortPlaceholder": "اختر ترتيب الفرز",
+        "sortByTitle": "العنوان",
+        "sortOldestFirst": "الاقدم اولا",
+        "sortNewestFirst": "الاحدث اولا",
+        "reset": "إعادة تعيين",
+        "loading": "جاري التحميل...",
+        "updating": "يتم التحديث...",
+        "noArticles": "لا توجد مقالات",
+        "readMore": "قراءة المزيد",
+        "loadMore": "تحميل المزيد"
     }
 
 }

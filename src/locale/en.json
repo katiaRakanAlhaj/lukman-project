@@ -70,5 +70,23 @@
     "lukman_title": "Luqman Abdulrahim Al-Faili",
     "Activities": {
         "Activities": "Activities"
+    },
+    "ArticlesGrid": {
+        "searchPlaceholder": "Search for an article",
+        "searchButton": "Search",
+        "filterAndSort": "Filter and Sort",
+        "categoryLabel": "Interview category",
+        "categoryAll": "All",
+        "sortLabel": "Sort by",
+        "sortPlaceholder": "Choose sort order",
+        "sortByTitle": "Title",
+        "sortOldestFirst": "Oldest first",
+        "sortNewestFirst": "Newest first",
+        "reset": "Reset",
+        "loading": "Loading...",
+        "updating": "Updating...",
+        "noArticles": "No articles found",
+        "readMore": "Read more",
+        "loadMore": "Load more"
     }
 }

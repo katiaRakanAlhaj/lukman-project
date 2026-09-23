@@ -14,3 +14,11 @@ export const fetchArticles = async({ categoryName, sort }) => {
     });
     return response.data;
 };
+export const searchArticles = async({ query }) => {
+    const response = await client.get(`/articles-search`, {
+        params: {
+            ...(query ? { q: query } : {}),
+        },
+    });
+    return response.data;
+};

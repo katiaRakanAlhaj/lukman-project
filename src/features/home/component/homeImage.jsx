@@ -9,7 +9,7 @@ import links from "../../../assets/images/links.svg";
 
 /* ── Cards (keys only, translated via t()) ───────── */
 const cards = [
-  { id: 1, to: "/vision", icon: vission, key: "vision" },
+  { id: 1, to: "/Vision", icon: vission, key: "vision" },
   { id: 2, to: "/united", icon: united, key: "united" },
   { id: 3, to: "/books", icon: books, key: "books" },
   { id: 4, to: "/highlights", icon: highlights, key: "highlights" },

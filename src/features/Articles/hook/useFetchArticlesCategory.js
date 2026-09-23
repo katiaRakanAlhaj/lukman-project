@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
     fetchArticles,
     fetchArticlesCategory,
+    searchArticles,
 } from "../api/fetchArticles";
 
 export const useFetchArticlesCategory = () =>
@@ -16,4 +17,11 @@ export const useFetchArticles = (categoryName = "all", sort = "") =>
         queryKey: ["articles", { categoryName, sort }],
         queryFn: () => fetchArticles({ categoryName, sort }),
         keepPreviousData: true,
+    });
+export const useSearchArticles = (query = "") =>
+    useQuery({
+        queryKey: ["articles-search", query],
+        queryFn: () => searchArticles({ query }),
+        enabled: query.trim().length > 0, // don't fire on empty query
+        keepPreviousData: true, // smooth UX while typing
     });
