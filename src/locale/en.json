@@ -11,11 +11,15 @@
         "nameRequired": "Name is required",
         "emailRequired": "Email is required",
         "messageRequired": "Message is required",
+        "emailInvalid": "Please enter a valid email address.",
         "linkedin": "LinkedIn",
         "instagram": "Instagram",
         "twitter": "X (Twitter)",
         "facebook": "Facebook",
-        "youtube": "YouTube"
+        "youtube": "YouTube",
+        "sending": "Sending...",
+        "successMessage": "Message sent successfully!",
+        "errorMessage": "Something went wrong. Please try again."
     },
     "navbar": {
         "home": "Home",
@@ -88,5 +92,9 @@
         "noArticles": "No articles found",
         "readMore": "Read more",
         "loadMore": "Load more"
-    }
+    },
+    "Vision": {
+        "vission_and_principles": "Vision and Principles"
+    },
+    "loading": "Loading..."
 }

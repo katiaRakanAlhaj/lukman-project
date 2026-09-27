@@ -20,6 +20,8 @@ import Resume from "./pages/Resume";
 import Activities from "./pages/Activities";
 import Articles from "./pages/Artciles";
 import Vission from "./pages/Vission";
+import Contact from "./pages/Contact";
+import Books from "./pages/Books";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -89,7 +91,9 @@ function App() {
           <Route path = "Resume" element={<Resume />} />
           <Route path = "Activities" element={<Activities />} />
           <Route path = "Articles" element={<Articles />} />
-          <Route path = "Vission" element={<Vission />} />
+          <Route path = "Vision" element={<Vission />} />
+          <Route path = "Contact" element={<Contact />} />
+          <Route path = "Books" element={<Books />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}

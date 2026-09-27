@@ -44,7 +44,7 @@ const navLinks = [
   { to: "/Activities", key: "activities" },
   { to: "/Articles", key: "articles" },
   { to: "/media", key: "media" },
-  { to: "/contact", key: "contact" },
+  { to: "/Contact", key: "contact" },
 ];
 
 /* ── Helper: check if a social link is valid ─────── */

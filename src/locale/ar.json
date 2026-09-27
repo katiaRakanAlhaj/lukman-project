@@ -11,11 +11,15 @@
         "nameRequired": "الاسم مطلوب",
         "emailRequired": "الايميل مطلوب",
         "messageRequired": "الرسالة مطلوبة",
+        "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح.",
         "linkedin": "لينكد إن",
         "instagram": "إنستغرام",
         "twitter": "إكس (تويتر)",
         "facebook": "فيسبوك",
-        "youtube": "يوتيوب"
+        "youtube": "يوتيوب",
+        "sending": "جارٍ الإرسال...",
+        "successMessage": "تم إرسال الرسالة بنجاح!",
+        "errorMessage": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
     },
     "navbar": {
         "home": "الرئيسية",
@@ -88,6 +92,10 @@
         "noArticles": "لا توجد مقالات",
         "readMore": "قراءة المزيد",
         "loadMore": "تحميل المزيد"
-    }
+    },
+    "Vision": {
+        "vission_and_principles": "الرؤية والمبادئ"
+    },
+    "loading": "جاري التحميل ..."
 
 }

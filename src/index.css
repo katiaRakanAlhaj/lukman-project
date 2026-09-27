@@ -17,6 +17,10 @@
     max-width: 92%;
 }
 
+.container5 {
+    max-width: 84%;
+}
+
 @theme {
     --color-primary: #005770;
     --color-secondary: #002F3C;
@@ -186,4 +190,22 @@ html::-webkit-scrollbar {
     html {
         font-size: 45px;
     }
+}
+
+
+/* In your global CSS file */
+
+.prose ul,
+div ul {
+    list-style-type: disc !important;
+    list-style-position: inside !important;
+    margin-right: 1.5rem;
+    /* Adjust for RTL if needed */
+}
+
+.prose ol,
+div ol {
+    list-style-type: decimal !important;
+    list-style-position: inside !important;
+    margin-right: 1.5rem;
 }

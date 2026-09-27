@@ -11,7 +11,7 @@ import links from "../../../assets/images/links.svg";
 const cards = [
   { id: 1, to: "/Vision", icon: vission, key: "vision" },
   { id: 2, to: "/united", icon: united, key: "united" },
-  { id: 3, to: "/books", icon: books, key: "books" },
+  { id: 3, to: "/Books", icon: books, key: "books" },
   { id: 4, to: "/highlights", icon: highlights, key: "highlights" },
   { id: 5, to: "/links", icon: links, key: "links" },
 ];
