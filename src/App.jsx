@@ -22,6 +22,7 @@ import Articles from "./pages/Artciles";
 import Vission from "./pages/Vission";
 import Contact from "./pages/Contact";
 import Books from "./pages/Books";
+import Highlights from "./pages/Highlights";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -94,6 +95,7 @@ function App() {
           <Route path = "Vision" element={<Vission />} />
           <Route path = "Contact" element={<Contact />} />
           <Route path = "Books" element={<Books />} />
+          <Route path = "Highlights" element={<Highlights />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}
