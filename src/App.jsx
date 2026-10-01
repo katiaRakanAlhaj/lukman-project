@@ -24,6 +24,7 @@ import Contact from "./pages/Contact";
 import Books from "./pages/Books";
 import Highlights from "./pages/Highlights";
 import Links from "./pages/Links";
+import SingleArticle from "./pages/singleArticle";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -98,6 +99,7 @@ function App() {
           <Route path="Books" element={<Books />} />
           <Route path="Highlights" element={<Highlights />} />
           <Route path="Links" element={<Links />} />
+          <Route path="article/:id" element={<SingleArticle />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}

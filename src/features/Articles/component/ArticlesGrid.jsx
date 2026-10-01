@@ -4,6 +4,8 @@ import { SORT_OPTIONS } from "../hook/useArtcilesFilter";
 import { useSearchArticles } from "../hook/useFetchArticlesCategory";
 import search from "../../../assets/images/search.svg";
 import date from "../../../assets/images/date.svg";
+import { Link, useParams } from "react-router-dom";
+import i18n from "../../../i18n/i18n";
 
 // --- Inline SVG Components ---
 const ChevronDownIcon = () => (
@@ -29,6 +31,7 @@ const ArticlesGrid = ({
   filters,
 }) => {
   const { t } = useTranslation();
+  const { lang } = useParams(); // ✅ gets "ar" or "en"
 
   // ---- Filters come from parent via props ----
   const { category, sort, setCategory, setSort, reset } = filters;
@@ -234,43 +237,45 @@ const ArticlesGrid = ({
 
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem]">
                   {articlesList.map((article) => (
-                    <div
-                      key={article.id}
-                      className="h-[28rem] w-full object-cover relative rounded-3xl"
-                      style={{
-                        boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",
-                      }}
-                    >
-                      <img
-                        className="w-full h-[13rem] object-cover rounded-t-3xl"
-                        src={article.banner}
-                        alt={article.title}
-                      />
+                    <Link to={`/${lang}/article/${article.id}`}>
+                      <div
+                        key={article.id}
+                        className="h-[28rem] w-full object-cover relative rounded-3xl"
+                        style={{
+                          boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",
+                        }}
+                      >
+                        <img
+                          className="w-full h-[13rem] object-cover rounded-t-3xl"
+                          src={article.banner}
+                          alt={article.title}
+                        />
 
-                      <div className="mt-[1rem] px-[1rem]">
-                        <h1 className="text-[1.2rem] font-bold text-secondary line-clamp-2">
-                          {article.title}
-                        </h1>
+                        <div className="mt-[1rem] px-[1rem]">
+                          <h1 className="text-[1.2rem] font-bold text-secondary line-clamp-2">
+                            {article.title}
+                          </h1>
 
-                        <div className="flex gap-x-2 mt-2 items-center">
-                          <img src={date} alt="date" />
-                          <p className="text-secondary text-[0.9em]">
-                            {formatDate(article.date)}
-                          </p>
+                          <div className="flex gap-x-2 mt-2 items-center">
+                            <img src={date} alt="date" />
+                            <p className="text-secondary text-[0.9em]">
+                              {formatDate(article.date)}
+                            </p>
+                          </div>
+
+                          <div
+                            className="text-[1rem] text-[#666666] mt-1 line-clamp-3 whitespace-pre-line"
+                            dangerouslySetInnerHTML={{
+                              __html: article.description,
+                            }}
+                          />
                         </div>
 
-                        <div
-                          className="text-[1rem] text-[#666666] mt-1 line-clamp-3 whitespace-pre-line"
-                          dangerouslySetInnerHTML={{
-                            __html: article.description,
-                          }}
-                        />
+                        <button className="w-full h-[2.5em] right-0 bg-negative rounded-b-3xl text-white font-bold text-[1.1em] flex items-center justify-center cursor-pointer absolute bottom-0 hover:bg-red-700 transition-colors">
+                          {t("ArticlesGrid.readMore")}
+                        </button>
                       </div>
-
-                      <button className="w-full h-[2.5em] right-0 bg-negative rounded-b-3xl text-white font-bold text-[1.1em] flex items-center justify-center cursor-pointer absolute bottom-0 hover:bg-red-700 transition-colors">
-                        {t("ArticlesGrid.readMore")}
-                      </button>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </>
