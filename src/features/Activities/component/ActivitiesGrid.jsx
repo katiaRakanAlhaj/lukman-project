@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import DOMPurify from "dompurify";
-
+import { Link, useParams } from "react-router-dom";
 const ActivitiesGrid = ({ CategoryContent }) => {
+  const {lang} = useParams();
   // Safely access the categories array
   const categories = Array.isArray(CategoryContent)
     ? CategoryContent
@@ -51,35 +52,37 @@ const ActivitiesGrid = ({ CategoryContent }) => {
       {/* Activities list */}
       <div>
         {activities.map((activity) => (
-          <div
-            key={activity.id}
-            className="mt-[2.5rem] grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]"
-          >
-            {/* Left: text */}
-            <div className="lg:col-span-8 col-span-1">
-              <p className="text-[#000000] text-[0.9rem]">
-                {formatDate(activity.date)}
-              </p>
-              <h1 className="text-[#000000] mt-[1rem] font-bold text-[1.3rem]">
-                {activity.title}
-              </h1>
-              <div
-                className="text-[#666666] text-lg mt-2 w-[95%] whitespace-pre-line"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(activity.description || ""),
-                }}
-              />
-            </div>
+          <Link to={`/${lang}/Activity/${activity.id}`}>
+            <div
+              key={activity.id}
+              className="mt-[2.5rem] grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]"
+            >
+              {/* Left: text */}
+              <div className="lg:col-span-8 col-span-1">
+                <p className="text-[#000000] text-[0.9rem]">
+                  {formatDate(activity.date)}
+                </p>
+                <h1 className="text-[#000000] mt-[1rem] font-bold text-[1.3rem]">
+                  {activity.title}
+                </h1>
+                <div
+                  className="text-[#666666] text-lg mt-2 w-[95%] whitespace-pre-line"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(activity.description || ""),
+                  }}
+                />
+              </div>
 
-            {/* Right: image */}
-            <div className="lg:col-span-4 col-span-1">
-              <img
-                className="w-full h-[15rem] object-cover rounded-3xl cursor-pointer hover:opacity-90 transition-opacity"
-                src={activity.banner}
-                alt={activity.title}
-              />
+              {/* Right: image */}
+              <div className="lg:col-span-4 col-span-1">
+                <img
+                  className="w-full h-[15rem] object-cover rounded-3xl cursor-pointer hover:opacity-90 transition-opacity"
+                  src={activity.banner}
+                  alt={activity.title}
+                />
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
 
         {!activities.length && (

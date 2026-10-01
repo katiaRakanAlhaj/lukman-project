@@ -35,7 +35,7 @@ const LastArticles = ({ articlesData }) => {
 
       <div className="flex flex-col space-y-[1.4rem] mt-[2rem]">
         {latestArticles.map((article) => (
-          <Link to={`/${lang}/article/${article.id}`}>
+          <Link to={`/${lang}/Article/${article.id}`}>
             <div key={article.id} className="flex flex-col">
               {article.banner && (
                 <img

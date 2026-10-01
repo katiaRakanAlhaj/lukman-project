@@ -227,3 +227,30 @@ div ol {
   text-decoration: none;
   padding: 2px 6px;
 }
+/* Custom pagination container */
+.single-activity-swiper .swiper-pagination,
+.swiper-pagination-custom {
+    position: static !important;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Default (inactive) bullet — light gray */
+.single-activity-swiper .swiper-pagination-bullet,
+.swiper-pagination-custom .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #cfcfcf;
+    opacity: 1;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+}
+
+/* Active bullet — your brand/negative color (change to whatever you want) */
+.single-activity-swiper .swiper-pagination-bullet-active,
+.swiper-pagination-custom .swiper-pagination-bullet-active {
+    background: #b91c1c; /* red — replace with your "negative" color */
+    width: 28px;          /* pill shape for active */
+}

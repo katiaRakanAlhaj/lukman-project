@@ -7,8 +7,6 @@ const ActivitiesBanner = ({ ActivitiesData }) => {
 
   const banner = data.banner;
   const title = data.title;
-  const description = data.description;
-
   return (
     <div>
       <h1 className="font-bold text-[2rem] text-secondary lg:mt-[2.5rem] mt-[0.9rem]">

@@ -237,7 +237,7 @@ const ArticlesGrid = ({
 
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem]">
                   {articlesList.map((article) => (
-                    <Link to={`/${lang}/article/${article.id}`}>
+                    <Link to={`/${lang}/Article/${article.id}`}>
                       <div
                         key={article.id}
                         className="h-[28rem] w-full object-cover relative rounded-3xl"
