@@ -23,6 +23,7 @@ import Vission from "./pages/Vission";
 import Contact from "./pages/Contact";
 import Books from "./pages/Books";
 import Highlights from "./pages/Highlights";
+import Links from "./pages/Links";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -89,13 +90,14 @@ function App() {
         {/* Language routes */}
         <Route path="/:lang" element={<Wrapper />}>
           <Route index element={<Home />} />
-          <Route path = "Resume" element={<Resume />} />
-          <Route path = "Activities" element={<Activities />} />
-          <Route path = "Articles" element={<Articles />} />
-          <Route path = "Vision" element={<Vission />} />
-          <Route path = "Contact" element={<Contact />} />
-          <Route path = "Books" element={<Books />} />
-          <Route path = "Highlights" element={<Highlights />} />
+          <Route path="Resume" element={<Resume />} />
+          <Route path="Activities" element={<Activities />} />
+          <Route path="Articles" element={<Articles />} />
+          <Route path="Vision" element={<Vission />} />
+          <Route path="Contact" element={<Contact />} />
+          <Route path="Books" element={<Books />} />
+          <Route path="Highlights" element={<Highlights />} />
+          <Route path="Links" element={<Links />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}

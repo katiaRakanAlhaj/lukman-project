@@ -104,5 +104,8 @@
     "LoadingContent": "Loading content...",
     "ContentError": "An error occurred while loading.",
     "NoContent": "No content for this section."
+  },
+  "Links":{
+    "click_button":"Click to visit the website"
   }
 }
