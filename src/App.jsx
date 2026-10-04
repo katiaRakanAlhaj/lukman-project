@@ -26,6 +26,7 @@ import Highlights from "./pages/Highlights";
 import Links from "./pages/Links";
 import SingleArticle from "./pages/singleArticle";
 import SingleActivity from "./pages/singleActivity";
+import Media from "./pages/Media";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -102,6 +103,7 @@ function App() {
           <Route path="Links" element={<Links />} />
           <Route path="Article/:id" element={<SingleArticle />} />
           <Route path="Activity/:id" element={<SingleActivity />} />
+          <Route path="Media" element={<Media />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}

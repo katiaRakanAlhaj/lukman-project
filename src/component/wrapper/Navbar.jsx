@@ -43,7 +43,7 @@ const navLinks = [
   { to: "/Resume", key: "resume" },
   { to: "/Activities", key: "activities" },
   { to: "/Articles", key: "articles" },
-  { to: "/media", key: "media" },
+  { to: "/Media", key: "media" },
   { to: "/Contact", key: "contact" },
 ];
 
