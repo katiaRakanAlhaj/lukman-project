@@ -122,6 +122,7 @@
     "oldest_first":"Oldest first",
     "newest_first":"Newest first",
     "apply_filter":"Apply filter",
-    "reset":"Reset"
+    "reset":"Reset",
+    "applying":"Applying..."
   }
 }

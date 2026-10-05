@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import i18next from "i18next";
+
 const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
   // ===== Data: handle { data: [...] } OR [...] =====
   const categories = Array.isArray(videoCategoryData)
@@ -12,13 +13,16 @@ const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
   const [language, setLanguage] = useState("ar"); // "en" | "ar"
   const [selectedCategory, setSelectedCategory] = useState("all"); // "all" | category name
   const [sort, setSort] = useState("");
+  const [isApplying, setIsApplying] = useState(false);
 
   // ===== Handlers =====
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
   };
 
-  const handleApply = () => {
+  const handleApply = async () => {
+    setIsApplying(true);
+
     // Dynamic title sorting based on language
     let finalSort = sort;
     if (sort === "title_asc") {
@@ -27,9 +31,15 @@ const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
 
     const filters = { language, category: selectedCategory, sort: finalSort };
     console.log("Applied filters:", filters);
+
     if (onApplyFilters) {
-      onApplyFilters(filters);
+      await Promise.resolve(onApplyFilters(filters));
     }
+
+    // Keep the "Applying..." state active for at least 500ms so the user can see it
+    setTimeout(() => {
+      setIsApplying(false);
+    }, 500);
   };
 
   const handleReset = () => {
@@ -100,7 +110,7 @@ const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
           {categories.map((cat) => (
             <button
               key={cat.id || cat.name}
-              onClick={() => setSelectedCategory(cat.name)} // Send category name instead of ID
+              onClick={() => setSelectedCategory(cat.name)}
               className={`w-auto h-[2.2rem] px-[1rem] rounded-full flex justify-center items-center text-[1rem] transition-colors ${
                 selectedCategory === cat.name
                   ? "bg-negative text-white font-bold"
@@ -137,9 +147,16 @@ const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
 
             <button
               onClick={handleApply}
-              className="w-full py-2 rounded-lg text-white font-bold bg-negative hover:bg-red-700 transition-colors"
+              disabled={isApplying}
+              className={`w-full py-2 rounded-lg text-white font-bold transition-colors ${
+                isApplying
+                  ? "bg-gray-600 cursor-not-allowed"
+                  : "bg-negative hover:bg-red-700"
+              }`}
             >
-              {i18next.t("media.apply_filter")}
+              {isApplying
+                ? i18next.t("media.applying")
+                : i18next.t("media.apply_filter")}
             </button>
 
             <p
