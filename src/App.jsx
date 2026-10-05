@@ -27,6 +27,7 @@ import Links from "./pages/Links";
 import SingleArticle from "./pages/singleArticle";
 import SingleActivity from "./pages/singleActivity";
 import Media from "./pages/Media";
+import UnitedNations from "./pages/UnitedNations";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -104,6 +105,7 @@ function App() {
           <Route path="Article/:id" element={<SingleArticle />} />
           <Route path="Activity/:id" element={<SingleActivity />} />
           <Route path="Media" element={<Media />} />
+          <Route path="united_nation" element={<UnitedNations />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}

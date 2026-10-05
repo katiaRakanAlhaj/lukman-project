@@ -124,5 +124,8 @@
     "apply_filter":"Apply filter",
     "reset":"Reset",
     "applying":"Applying..."
+  },
+  "UnitedNations":{
+    "Sections":"Sections"
   }
 }
