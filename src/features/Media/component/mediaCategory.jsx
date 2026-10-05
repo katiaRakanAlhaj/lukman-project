@@ -1,35 +1,45 @@
 import React, { useState } from "react";
-
-const MediaCategory = ({ videoCategoryData }) => {
+import i18next from "i18next";
+const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
   // ===== Data: handle { data: [...] } OR [...] =====
   const categories = Array.isArray(videoCategoryData)
     ? videoCategoryData
     : Array.isArray(videoCategoryData?.data)
-    ? videoCategoryData.data
-    : [];
+      ? videoCategoryData.data
+      : [];
 
   // ===== State =====
   const [language, setLanguage] = useState("ar"); // "en" | "ar"
-  const [selectedCategory, setSelectedCategory] = useState("all"); // "all" | id
+  const [selectedCategory, setSelectedCategory] = useState("all"); // "all" | category name
   const [sort, setSort] = useState("");
-  const [applied, setApplied] = useState({
-    language: "ar",
-    category: "all",
-    sort: "",
-  });
 
   // ===== Handlers =====
+  const handleLanguageChange = (lang) => {
+    setLanguage(lang);
+  };
+
   const handleApply = () => {
-    setApplied({ language, category: selectedCategory, sort });
-    // 👉 Call your API / filter here using `applied` values
-    console.log("Applied filters:", { language, selectedCategory, sort });
+    // Dynamic title sorting based on language
+    let finalSort = sort;
+    if (sort === "title_asc") {
+      finalSort = language === "ar" ? "title_ar" : "title_en";
+    }
+
+    const filters = { language, category: selectedCategory, sort: finalSort };
+    console.log("Applied filters:", filters);
+    if (onApplyFilters) {
+      onApplyFilters(filters);
+    }
   };
 
   const handleReset = () => {
     setLanguage("ar");
     setSelectedCategory("all");
     setSort("");
-    setApplied({ language: "ar", category: "all", sort: "" });
+    const resetFilters = { language: "ar", category: "all", sort: "" };
+    if (onApplyFilters) {
+      onApplyFilters(resetFilters);
+    }
   };
 
   return (
@@ -39,42 +49,32 @@ const MediaCategory = ({ videoCategoryData }) => {
         style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
       >
         <h1 className="font-bold text-[1.2rem] text-secondary">
-          تصفية و ترتيب
+          {i18next.t("media.filter_and_sort")}
         </h1>
 
         {/* ===== Language ===== */}
         <div className="mt-4 mb-3">
           <p className="text-[1rem] mb-2 text-secondary font-medium">
-            لغة المقابلة
+            {i18next.t("media.interview_language")}
           </p>
           <div className="flex gap-2 p-1 rounded-full">
             <button
-              onClick={() => setLanguage("en")}
+              onClick={() => handleLanguageChange("en")}
               className={`flex-1 px-4 text-[1rem] py-2 rounded-full transition-colors ${
                 language === "en"
                   ? "bg-negative text-white font-bold"
                   : "text-primary bg-[#E7EDF3] hover:bg-gray-200"
               }`}
-              style={
-                language === "en"
-                  ? { fontFamily: '"FF Shamel", sans-serif' }
-                  : undefined
-              }
             >
               English
             </button>
             <button
-              onClick={() => setLanguage("ar")}
+              onClick={() => handleLanguageChange("ar")}
               className={`flex-1 px-4 py-2 text-[1rem] rounded-full transition-colors ${
                 language === "ar"
                   ? "bg-negative text-white font-bold"
                   : "text-primary bg-[#E7EDF3] hover:bg-gray-200"
               }`}
-              style={
-                language === "ar"
-                  ? { fontFamily: '"FF Shamel", sans-serif' }
-                  : undefined
-              }
             >
               العربية
             </button>
@@ -83,10 +83,9 @@ const MediaCategory = ({ videoCategoryData }) => {
 
         {/* ===== Category ===== */}
         <p className="text-[1rem] font-medium text-secondary">
-          تصنيف المقابلة
+          {i18next.t("media.interview_category")}
         </p>
         <div className="flex flex-row flex-wrap gap-x-[0.5rem] gap-y-[1rem] mt-4">
-          {/* "All" button */}
           <button
             onClick={() => setSelectedCategory("all")}
             className={`w-auto h-[2.2rem] px-[1rem] rounded-full flex justify-center items-center text-[1rem] transition-colors ${
@@ -95,16 +94,15 @@ const MediaCategory = ({ videoCategoryData }) => {
                 : "bg-[#E7EDF3] text-primary hover:bg-gray-200"
             }`}
           >
-            الكل
+            {i18next.t("media.all")}
           </button>
 
-          {/* Dynamic categories from API */}
           {categories.map((cat) => (
             <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
+              key={cat.id || cat.name}
+              onClick={() => setSelectedCategory(cat.name)} // Send category name instead of ID
               className={`w-auto h-[2.2rem] px-[1rem] rounded-full flex justify-center items-center text-[1rem] transition-colors ${
-                selectedCategory === cat.id
+                selectedCategory === cat.name
                   ? "bg-negative text-white font-bold"
                   : "bg-[#E7EDF3] text-primary hover:bg-gray-200"
               }`}
@@ -121,7 +119,7 @@ const MediaCategory = ({ videoCategoryData }) => {
               htmlFor="sort"
               className="block text-sm font-medium text-gray-700"
             >
-              رتب حسب
+              {i18next.t("media.sort_by")}
             </label>
             <select
               id="sort"
@@ -130,25 +128,25 @@ const MediaCategory = ({ videoCategoryData }) => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
             >
               <option value="" disabled hidden>
-                اختر ترتيب الفرز
+                {i18next.t("media.choose_sort_order")}
               </option>
-              <option value="title_asc">العنوان</option>
-              <option value="id_asc">الاقدم اولا</option>
-              <option value="id_desc">الاحدث اولا</option>
+              <option value="title_asc">{i18next.t("media.address")}</option>
+              <option value="id_asc">{i18next.t("media.oldest_first")}</option>
+              <option value="id_desc">{i18next.t("media.newest_first")}</option>
             </select>
 
             <button
               onClick={handleApply}
               className="w-full py-2 rounded-lg text-white font-bold bg-negative hover:bg-red-700 transition-colors"
             >
-              تطبيق الفلتر
+              {i18next.t("media.apply_filter")}
             </button>
 
             <p
               onClick={handleReset}
               className="text-[#5B1B1B] text-center cursor-pointer hover:text-red-700"
             >
-              إعادة تعيين
+              {i18next.t("media.reset")}
             </p>
           </div>
         </div>

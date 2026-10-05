@@ -108,5 +108,20 @@
   "Links": {
     "click_button": "اضغط لزيارة الموقع"
   },
-  "last-articles":"آخر المقالات"
+  "last-articles":"آخر المقالات",
+  "media":{
+    "media":"الميديا",
+    "filter_and_sort":"تصفية و ترتيب",
+    "no_video":"لا توجد فيديوهات حالياً",
+    "interview_language":"لغة المقابلة",
+    "interview_category":"تصنيف المقابلة",
+    "all":"الكل",
+    "sort_by":"رتب حسب",
+    "choose_sort_order":"اختر ترتيب الفرز",
+    "address":"العنوان",
+    "oldest_first":"الاقدم اولا",
+    "newest_first":"الاحدث اولا",
+    "apply_filter":"تطبيق الفلتر",
+    "reset":"إعادة تعيين"
+  }
 }

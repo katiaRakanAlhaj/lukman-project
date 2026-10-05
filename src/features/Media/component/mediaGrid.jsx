@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import DOMPurify from "dompurify";
-
+import i18next from "i18next";
+import autoPlay from "../../../assets/images/autoPlay.svg";
 const MediaGrid = ({ videosData, homePageData }) => {
   const [activeVideo, setActiveVideo] = useState(null);
   const [rect, setRect] = useState(null);
   const gridRef = useRef(null);
 
-  // ===== Normalize data: handle array OR { data: [...] } =====
+  // ===== Normalize data: handle array, pagination {data: [...]}, or category object {videos: [...]} =====
   const videos = Array.isArray(videosData)
     ? videosData
-    : Array.isArray(videosData?.data)
-    ? videosData.data
-    : [];
-
-  // ===== Play icon (base64) =====
-  const playIcon =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAA2CAYAAACBWxqaAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHxSURBVHgB1ZqJbcJAEEXHUQqgBNJBSiAdQAfQAakAqCCkAkMFoQPTQehgtwPo4GcmixUHGV/s+aQvcchiv+fP+ILoCoARa8Uq8Mc3a06xw4scsxTuo6I20rL4KoWYpZiQPYv+5NEYueZ8CAoxxAqPo4IagT1yhIgV7PPh1QjcoOApVpn8GrlDs2ZZlp3IEU/kljFLplzuLFbwy4psA/8oWOwP1z3QhPSF9IemB3DdA028sqQaOR7oj5AVqKJZO67GhnoSi4ESzdqwkV3XDWIzUHJgvXfpj5A90MSUOvZHrAZK5qyiaezGGqE6NJlYHaofxl6BKmPW122sUqpAlQvrTU4SUzUgiImXlCJ0y4i1TLkCgk7dQFJTqI5L6gZOqRvYp9wDBz4OzFKtwJ61kBfPlBaateA9fyw/SKUCctSVE7mX6uKFFCrwyVrzwi91X8Zs4Ehmrzfe1YvRgKabnDcRkwGJiMRley8udcRiYEcmLp0XXhJ6Ch3JXJgshiz+F4RBwdL9Ud8RGpTzRuAPuSAfk23gnoI1IVfAHWfWklwDN6xZI/IB7FLA97Ni2EHBZc5bDJwxHNl2TSHB/z849WELXzlvMTBBPwqEiss9YKZGG4o1pVi5mqjrhzN8jsWeZNU3MCNwQuYRqKDJPD20c97igB/F1DzJIPMHcgAAAABJRU5ErkJggg==";
+    : Array.isArray(videosData?.videos)
+      ? videosData.videos
+      : Array.isArray(videosData?.data)
+        ? videosData.data
+        : [];
 
   // ===== Helper: format date =====
   const formatDate = (dateStr) => {
@@ -70,7 +69,7 @@ const MediaGrid = ({ videosData, homePageData }) => {
 
     // ---- YouTube ----
     const ytMatch = url.match(
-      /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]+)/
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]+)/,
     );
     if (ytMatch) {
       const videoId = ytMatch[1];
@@ -82,7 +81,7 @@ const MediaGrid = ({ videosData, homePageData }) => {
         `&playsinline=1` +
         `&enablejsapi=1` +
         `&origin=${encodeURIComponent(
-          typeof window !== "undefined" ? window.location.origin : ""
+          typeof window !== "undefined" ? window.location.origin : "",
         )}`;
 
       return (
@@ -128,14 +127,12 @@ const MediaGrid = ({ videosData, homePageData }) => {
     <div ref={gridRef}>
       {/* ===== Header ===== */}
       <h1 className="font-bold text-[1.5rem] text-secondary mt-[1rem]">
-        الميديا
+        {i18next.t("media.media")}
       </h1>
       {homePageData?.data?.media_description && (
         <p
           dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(
-              homePageData?.data?.media_description
-            ),
+            __html: DOMPurify.sanitize(homePageData?.data?.media_description),
           }}
           className="text-[#666666] text-[1rem] lg:w-[60%] w-[100%] mt-2 whitespace-pre-line"
         />
@@ -144,7 +141,7 @@ const MediaGrid = ({ videosData, homePageData }) => {
       {/* ===== Grid ===== */}
       {videos.length === 0 ? (
         <p className="text-[#666666] text-[0.9rem] mt-[2rem]">
-          لا توجد فيديوهات حالياً
+          {i18next.t("media.no_video")}
         </p>
       ) : (
         <div className="grid md:grid-cols-2 grid-cols-1 gap-x-[3rem] gap-y-[2rem] mt-[2rem]">
@@ -178,20 +175,23 @@ const MediaGrid = ({ videosData, homePageData }) => {
                       <img
                         className="md:w-[2rem] w-[1rem]"
                         alt="play"
-                        src={playIcon}
+                        src={autoPlay}
                       />
                     </div>
                   </div>
 
                   {/* Bottom title + date */}
-                  <div className="absolute bottom-4 left-0 right-0 px-6 z-10 flex justify-between items-center gap-4">
+                  <div
+                    className="absolute bottom-4 left-0 right-0 px-6 z-10 flex justify-between items-end gap-4"
+                    dir="rtl"
+                  >
                     {video.title && (
-                      <h3 className="text-white text-[0.9rem] font-bold flex-1 width_title">
+                      <h3 className="text-white text-[0.9rem] font-bold text-right leading-snug flex-1">
                         {video.title}
                       </h3>
                     )}
                     {video.date && (
-                      <p className="text-white text-[0.9rem] opacity-90 whitespace-nowrap">
+                      <p className="text-white text-[0.85rem] opacity-90 whitespace-nowrap">
                         {formatDate(video.date)}
                       </p>
                     )}

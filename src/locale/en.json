@@ -108,5 +108,20 @@
   "Links":{
     "click_button":"Click to visit the website"
   },
-  "last-articles":"Last Articles"
+  "last-articles":"Last Articles",
+  "media":{
+    "media":"Media",
+    "filter_and_sort":"Filter and sort",
+    "no_video":"No videos at the moment",
+    "interview_language":"Interview language",
+    "interview_category":"Interview category",
+    "all":"All",
+    "sort_by":"Sort by",
+    "choose_sort_order":"Choose sort order",
+    "address":"Address",
+    "oldest_first":"Oldest first",
+    "newest_first":"Newest first",
+    "apply_filter":"Apply filter",
+    "reset":"Reset"
+  }
 }
