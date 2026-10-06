@@ -16,7 +16,7 @@ const ContactBanner = ({ contactDataPage }) => {
 
           {/* Name Label Background */}
           <div
-            className="absolute lg:block hidden left-[13%] bg-[#f0f0f0] backdrop-blur-sm"
+            className={`absolute lg:block hidden ${i18next.language == "ar" ? "left-[13%]" : "right-[13%]"} bg-[#f0f0f0] backdrop-blur-sm`}
             style={{
               top: "83%",
               width: "calc(29%)",
@@ -27,12 +27,16 @@ const ContactBanner = ({ contactDataPage }) => {
           ></div>
 
           {/* Name Label Text */}
-          <div className="absolute lg:block hidden top-[90%] left-[16rem] text-primary font-bold text-[1.7rem]">
+          <div
+            className={`absolute lg:block hidden top-[90%] ${i18next.language == "ar" ? "left-[16rem]" : "right-[13rem]"} text-primary font-bold text-[1.7rem]`}
+          >
             {i18next.t("lukman_title")}{" "}
           </div>
 
           {/* Banner Title */}
-          <div className="absolute right-[3rem] bottom-[3rem] text-[2rem] text-white font-bold">
+          <div
+            className={`absolute ${i18next.language == "ar" ? "right-[3rem]" : "left-[3rem]"} bottom-[3rem] text-[2rem] text-white font-bold`}
+          >
             {data.title}
           </div>
         </div>

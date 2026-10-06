@@ -73,7 +73,8 @@
   },
   "lukman_title": "لقمان عبدالرحيم الفيلي",
   "Activities": {
-    "Activities": "النشاطات"
+    "Activities": "النشاطات",
+    "last_activities":"آخر الأنشطة"
   },
   "ArticlesGrid": {
     "searchPlaceholder": "ابحث عن مقال",

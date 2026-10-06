@@ -39,7 +39,6 @@ function formatDate(date) {
 /* ── Nav links (keys only, translated via t()) ───── */
 const navLinks = [
   { to: "/", key: "home" },
-  { to: "/platform_message", key: "platform" },
   { to: "/Resume", key: "resume" },
   { to: "/Activities", key: "activities" },
   { to: "/Articles", key: "articles" },

@@ -31,7 +31,7 @@ const ActivitiesBanner = ({ ActivitiesData }) => {
         </div>
 
         {/* Bottom-right title label */}
-        <div className="absolute bottom-[2rem] right-[4rem] text-[2rem] font-bold text-white">
+        <div className={`absolute bottom-[2rem] ${i18next.language == "en"?'left-[4rem]':'right-[4rem]'} text-[2rem] font-bold text-white`}>
           {title}
         </div>
       </div>

@@ -2,10 +2,10 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SORT_OPTIONS } from "../hook/useArtcilesFilter";
 import { useSearchArticles } from "../hook/useFetchArticlesCategory";
-import search from "../../../assets/images/search.svg";
 import date from "../../../assets/images/date.svg";
 import { Link, useParams } from "react-router-dom";
 import i18n from "../../../i18n/i18n";
+import i18next from "i18next";
 
 // --- Inline SVG Components ---
 const ChevronDownIcon = () => (
@@ -20,6 +20,22 @@ const ChevronDownIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"></path>
+  </svg>
+);
+
+const SearchIcon = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 );
 
@@ -39,6 +55,7 @@ const ArticlesGrid = ({
   // ---- Search state (local) ----
   const [searchInput, setSearchInput] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   // ✅ Debounce: only update debouncedQuery 400ms after the user stops typing
   useEffect(() => {
@@ -101,10 +118,12 @@ const ArticlesGrid = ({
             {/* --- Search box --- */}
             <div className="relative">
               <input
-                className="w-full h-[3.3rem] border border-[#E7E8E9] outline-none p-[1rem] rounded-tr-lg"
+                className={`w-full h-[3.3rem] border border-[#E7E8E9] outline-none p-[1rem] ${i18next.language == "ar" ? "rounded-tr-lg" : "rounded-tl-lg"}`}
                 type="search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
@@ -112,23 +131,30 @@ const ArticlesGrid = ({
                   }
                 }}
               />
-              {!searchInput && (
-                <p className="absolute right-10 top-4 pointer-events-none text-gray-400">
+
+              {/* Placeholder text — hidden when typing or focused */}
+              {!searchInput && !isFocused && (
+                <p
+                  className={`absolute ${i18next.language == "ar" ? "right-10" : "left-10"} top-4 pointer-events-none text-gray-400`}
+                >
                   {t("ArticlesGrid.searchPlaceholder")}
                 </p>
               )}
 
-              {!searchInput && (
-                <img
-                  src={search}
-                  alt="search"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-[1.2rem] h-[1.5rem] pointer-events-none"
+              {/* Search SVG icon — hidden on focus */}
+              {!searchInput && !isFocused && (
+                <SearchIcon
+                  className={`absolute ${
+                    i18next.language == "ar" ? "right-3" : "left-3"
+                  } top-1/2 -translate-y-1/2 w-[1.2rem] h-[1.2rem] pointer-events-none text-gray-400`}
                 />
               )}
 
               <div
                 onClick={handleSearchClick}
-                className="absolute w-[5.5rem] left-0 top-0 bottom-0 bg-negative h-full rounded-tl-lg font-bold text-[1rem] text-white flex justify-center items-center cursor-pointer"
+                className={`absolute w-[5.5rem] ${
+                  i18next.language == "en" ? "right-0" : "left-0"
+                } top-0 bottom-0 bg-negative h-full ${i18next.language == "ar" ? "rounded-tl-lg" : "rounded-tr-lg"} font-bold text-[1rem] text-white flex justify-center items-center cursor-pointer`}
               >
                 {t("ArticlesGrid.searchButton")}
               </div>
@@ -237,9 +263,11 @@ const ArticlesGrid = ({
 
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem]">
                   {articlesList.map((article) => (
-                    <Link to={`/${lang}/Article/${article.id}`}>
+                    <Link
+                      to={`/${lang}/Article/${article.id}`}
+                      key={article.id}
+                    >
                       <div
-                        key={article.id}
                         className="h-[28rem] w-full object-cover relative rounded-3xl"
                         style={{
                           boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",

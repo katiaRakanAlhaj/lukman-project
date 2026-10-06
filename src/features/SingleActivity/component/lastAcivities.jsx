@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 const LastAcivities = ({ activityContent }) => {
   // ===== Take the first category, then its first 6 activities =====
   const firstCategory = activityContent?.data?.[0];
@@ -14,7 +16,9 @@ const LastAcivities = ({ activityContent }) => {
 
   return (
     <div className="lg:col-span-4 col-span-1">
-      <h1 className="text-[#333333] font-bold text-[1.3rem]">آخر الأنشطة</h1>
+      <h1 className="text-[#333333] font-bold text-[1.3rem]">
+        {i18next.t("Activities.last_activities")}
+      </h1>
       <div
         className="w-full h-[0.3rem] bg-negative"
         style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px -2px 4px 0px" }}

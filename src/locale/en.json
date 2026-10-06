@@ -73,7 +73,8 @@
   },
   "lukman_title": "Luqman Abdulrahim Al-Faili",
   "Activities": {
-    "Activities": "Activities"
+    "Activities": "Activities",
+    "last_activities":"Latest Activities"
   },
   "ArticlesGrid": {
     "searchPlaceholder": "Search for an article",
