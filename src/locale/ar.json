@@ -127,5 +127,10 @@
   },
   "UnitedNations":{
     "Sections":"الأقسام"
+  },
+   "books":{
+    "down-arabic":"تحميل (عربي)",
+    "down_english":"تحميل (انكليزي)",
+    "Uploading":"جاري التحميل"
   }
 }

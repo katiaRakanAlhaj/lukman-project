@@ -1,6 +1,7 @@
 import Model1 from "./UnitedNationsModels/model1";
 import Model10 from "./UnitedNationsModels/model10";
 import Model11 from "./UnitedNationsModels/model11";
+import Model12 from "./UnitedNationsModels/model12";
 import Model13 from "./UnitedNationsModels/model13";
 import Model14 from "./UnitedNationsModels/model14";
 import Model15 from "./UnitedNationsModels/model15";
@@ -46,7 +47,7 @@ const UnitedNationsModels = ({ categoryDetails }) => {
           case 11:
             return <Model11 key={contentItem.id} data={contentItem} />;
           case 12:
-            return <model12 key={contentItem.id} data={contentItem} />;
+            return <Model12 key={contentItem.id} data={contentItem} />;
           case 13:
             return <Model13 key={contentItem.id} data={contentItem} />;
           case 14:
