@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import ActivitiesBanner from "../features/Activities/component/ActivitiesBanner";
@@ -6,6 +7,7 @@ import {
   useFetchActivitiesPage,
   useFetchCategoryContent,
 } from "../features/Activities/hook/useFetchActivities";
+import MetaHelmet from "../component/metaHelmet/metaHelmet";
 
 const Activities = () => {
   const {
@@ -25,10 +27,16 @@ const Activities = () => {
   return (
     <div>
       <ScrollToTop />
-      <div className="container4 mx-auto">
-        <ActivitiesBanner ActivitiesData={ActivitiesData} />
-        <ActivitiesGrid CategoryContent={CategoryContent} />
-      </div>
+      <HelmetProvider>
+        <MetaHelmet
+          title={ActivitiesData?.data?.meta_title}
+          description={ActivitiesData?.data?.meta_description}
+        />
+        <div className="container4 mx-auto">
+          <ActivitiesBanner ActivitiesData={ActivitiesData} />
+          <ActivitiesGrid CategoryContent={CategoryContent} />
+        </div>
+      </HelmetProvider>
     </div>
   );
 };

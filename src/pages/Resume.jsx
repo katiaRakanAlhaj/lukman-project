@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { useFetchHomePage } from "../features/home/hook/useFetchHome";
@@ -13,6 +14,7 @@ import { useFetchPositions } from "../features/Resume/hook/useFetchPostions";
 import { useFetchProfissionalExperiences } from "../features/Resume/hook/useFetchProfissionalExperiences";
 import { useFetchResumePage } from "../features/Resume/hook/usefetchResumePage";
 import { useFetchSkills } from "../features/Resume/hook/useFetchSkills";
+import MetaHelmet from "../component/metaHelmet/metaHelmet";
 
 const Resume = () => {
   const {
@@ -63,17 +65,23 @@ const Resume = () => {
   }
   return (
     <div>
-      <ScrollToTop/>
-      <div className="container4 mx-auto">
-      <ResumePage resumePageData={resumePageData} />
-      <ResumeGrid homePageData={homePageData} degreesData={degreesData} />
-      <ResumeDescription
-        ProfissionalExperiencesData={ProfissionalExperiencesData}
-      />
-      <ResumePositions PositionsData={PositionsData} />
-      <ResumeLanguages LanguagesData={LanguagesData} />
-      <ResumeSkills SkillsData={SkillsData} />
-    </div>
+      <ScrollToTop />
+      <HelmetProvider>
+        <MetaHelmet
+          title={resumePageData?.data?.meta_title}
+          description={resumePageData?.data?.meta_description}
+        />
+        <div className="container4 mx-auto">
+          <ResumePage resumePageData={resumePageData} />
+          <ResumeGrid homePageData={homePageData} degreesData={degreesData} />
+          <ResumeDescription
+            ProfissionalExperiencesData={ProfissionalExperiencesData}
+          />
+          <ResumePositions PositionsData={PositionsData} />
+          <ResumeLanguages LanguagesData={LanguagesData} />
+          <ResumeSkills SkillsData={SkillsData} />
+        </div>
+      </HelmetProvider>
     </div>
   );
 };

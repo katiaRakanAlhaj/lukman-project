@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import VissionBanner from "../features/Vission/component/vissionBanner";
@@ -6,6 +7,7 @@ import {
   useFetchVissionCategory,
   useFetchVissionPage,
 } from "../features/Vission/hook/useFetchVission";
+import MetaHelmet from "../component/metaHelmet/metaHelmet";
 
 const Vission = () => {
   const {
@@ -26,8 +28,14 @@ const Vission = () => {
   return (
     <div>
       <ScrollToTop />
-      <VissionBanner vissionpageData={vissionpageData} />
-      <VissionGrid vissionCategoryContent={vissionCategoryContent} />
+      <HelmetProvider>
+        <MetaHelmet
+          title={vissionpageData?.data?.meta_title}
+          description={vissionpageData?.data?.meta_description}
+        />
+        <VissionBanner vissionpageData={vissionpageData} />
+        <VissionGrid vissionCategoryContent={vissionCategoryContent} />
+      </HelmetProvider>
     </div>
   );
 };

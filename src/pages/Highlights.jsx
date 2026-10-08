@@ -8,6 +8,8 @@ import {
 } from "../features/Highlights/hooks/useFetchHighlights";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
+import { HelmetProvider } from "react-helmet-async";
+import MetaHelmet from "../component/metaHelmet/metaHelmet";
 
 const Highlights = () => {
   const [activeCategoryId, setActiveCategoryId] = useState(null);
@@ -49,16 +51,22 @@ const Highlights = () => {
   return (
     <div>
       <ScrollToTop />
-      <HighlightsBanner highlightsPageData={highlightsPageData} />
-      <HighlightsGrid
-        categories={highlightsCategoriesData?.data || []}
-        categoriesLoading={highlightsCategoriesDataLoading}
-        activeCategoryId={activeCategoryId}
-        onSelectCategory={setActiveCategoryId}
-        content={highlightsCategoryContentData}
-        contentLoading={highlightsCategoryContentLoading}
-        contentError={highlightsCategoryContentError}
-      />
+      <HelmetProvider>
+        <MetaHelmet
+          title={highlightsPageData?.data?.meta_title}
+          description={highlightsPageData?.data?.meta_description}
+        />
+        <HighlightsBanner highlightsPageData={highlightsPageData} />
+        <HighlightsGrid
+          categories={highlightsCategoriesData?.data || []}
+          categoriesLoading={highlightsCategoriesDataLoading}
+          activeCategoryId={activeCategoryId}
+          onSelectCategory={setActiveCategoryId}
+          content={highlightsCategoryContentData}
+          contentLoading={highlightsCategoryContentLoading}
+          contentError={highlightsCategoryContentError}
+        />
+      </HelmetProvider>
     </div>
   );
 };
