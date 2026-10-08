@@ -5,6 +5,7 @@ import ContactBanner from "../features/contact/component/contactBanner";
 import ContactGrid from "../features/contact/component/contactGrid";
 import { useFetchContactInfo } from "../features/contact/hook/useFetchContactInfo";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Contact = () => {
   const {
@@ -14,6 +15,9 @@ const Contact = () => {
   } = useFetchContactInfo();
   if (contactDataPageLoading) {
     return <Loader />;
+  }
+  if (contactDataPageError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

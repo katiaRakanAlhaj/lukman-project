@@ -11,6 +11,7 @@ import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Media = () => {
   // Define state for active filters with default language set to "ar"
@@ -20,22 +21,43 @@ const Media = () => {
     sort: "",
   });
 
-  const { data: mediaData, isLoading: mediaDataLoading } = useFetchVideosPage();
-  const { data: videoCategoryData, isLoading: videoCategoryDataLoading } =
-    useFetchVideoCategory();
-  const { data: homePageData, isLoading: homePageDataLoading } =
-    useFetchHomePage();
+  const {
+    data: mediaData,
+    isLoading: mediaDataLoading,
+    error: mediaDataError,
+  } = useFetchVideosPage();
+  const {
+    data: videoCategoryData,
+    isLoading: videoCategoryDataLoading,
+    error: videoCategoryDataError,
+  } = useFetchVideoCategory();
+  const {
+    data: homePageData,
+    isLoading: homePageDataLoading,
+    error: homePageDataError,
+  } = useFetchHomePage();
 
   // Pass filters to the hook so it automatically fetches with query params when changed
-  const { data: videosData, isLoading: videosDataLoading } =
-    useFetchVideos(filters);
+  const {
+    data: videosData,
+    isLoading: videosDataLoading,
+    error: videosDataError,
+  } = useFetchVideos(filters);
   const combinedLoading =
     mediaDataLoading ||
     videoCategoryDataLoading ||
     videosDataLoading ||
     homePageDataLoading;
+  const combinedError =
+    mediaDataError ||
+    videoCategoryDataError ||
+    videosDataError ||
+    homePageDataError;
   if (combinedLoading) {
     return <Loader />;
+  }
+  if (combinedError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

@@ -8,6 +8,7 @@ import {
   useFetchLinksPage,
 } from "../features/Links/hook/useFetchLinks";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Links = () => {
   const {
@@ -22,6 +23,9 @@ const Links = () => {
   } = useFetchLinks();
   if (LinksDataPageLoading || LinksDataLoading) {
     return <Loader />;
+  }
+  if (LinksDataPageError || LinksDataError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

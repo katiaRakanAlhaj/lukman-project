@@ -6,6 +6,7 @@ import { useFetchCategoryContent } from "../features/Activities/hook/useFetchAct
 import LastAcivities from "../features/SingleActivity/component/lastAcivities";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const SingleActivity = () => {
   const { id } = useParams();
@@ -28,6 +29,9 @@ const SingleActivity = () => {
   const combinedLoading = singleActivityDataLoading || activityContentLoading;
   if (combinedLoading) {
     return <Loader />;
+  }
+  if (singleActivityDataError || activityContentError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

@@ -8,6 +8,7 @@ import {
   useFetchVissionPage,
 } from "../features/Vission/hook/useFetchVission";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Vission = () => {
   const {
@@ -24,6 +25,9 @@ const Vission = () => {
     vissionpageDataLoading || vissionCategoryContentLoading;
   if (combinedLoading) {
     return <Loader />;
+  }
+  if (vissionpageDataError || vissionCategoryContentError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

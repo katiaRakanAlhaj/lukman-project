@@ -9,6 +9,7 @@ import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const UnitedNations = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -16,6 +17,7 @@ const UnitedNations = () => {
   const {
     data: unitedNationCategoryData,
     isLoading: unitedNationCategoryDataLoading,
+    error: unitedNationCategoryDataError,
   } = useFetchUnitedNationCategory();
 
   // Set default id when categories load
@@ -31,12 +33,15 @@ const UnitedNations = () => {
   const {
     data: categoryDetails,
     isLoading: categoryDetailsLoading,
-    error,
+    error: categoryDetailsError,
   } = useFetchUnitedNationCategoryId(selectedCategoryId);
   const combinedLoading =
     unitedNationCategoryDataLoading || categoryDetailsLoading;
   if (combinedLoading) {
     return <Loader />;
+  }
+  if (categoryDetailsError || unitedNationCategoryDataError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

@@ -8,6 +8,7 @@ import {
   useFetchCategoryContent,
 } from "../features/Activities/hook/useFetchActivities";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Activities = () => {
   const {
@@ -21,8 +22,12 @@ const Activities = () => {
     error: CategoryContentError,
   } = useFetchCategoryContent();
   const combinedLoading = ActivitiesDataLoading || CategoryContentLoading;
+  const combinedError = ActivitiesDataError || CategoryContentError;
   if (combinedLoading) {
     return <Loader />;
+  }
+  if (combinedError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

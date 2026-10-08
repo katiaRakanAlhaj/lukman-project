@@ -10,6 +10,7 @@ import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Articles = () => {
   const filters = useArticlesFilters();
@@ -17,17 +18,29 @@ const Articles = () => {
   const {
     data: articlesData,
     isLoading: articlesDataLoading,
+    error: articlesDataError,
     isFetching: articlesFetching,
   } = useFetchArticles(filters.category, filters.sort);
 
-  const { data: articlesCategoryData, isLoading: articlesCategoryDataLoading } =
-    useFetchArticlesCategory();
-  const { data: homePageData, isLoading: homePageDataLoading } =
-    useFetchHomePage();
+  const {
+    data: articlesCategoryData,
+    isLoading: articlesCategoryDataLoading,
+    error: articlesCategoryDataError,
+  } = useFetchArticlesCategory();
+  const {
+    data: homePageData,
+    isLoading: homePageDataLoading,
+    error: homePageDataError,
+  } = useFetchHomePage();
   const finalLoading =
     articlesDataLoading || articlesCategoryDataLoading || homePageDataLoading;
+  const combinedError =
+    articlesDataError || articlesCategoryDataError || homePageDataError;
   if (finalLoading) {
     return <Loader />;
+  }
+  if (combinedError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

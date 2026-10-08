@@ -7,6 +7,7 @@ import ContactSection from "../features/home/component/contactSection";
 import HomeImage from "../features/home/component/homeImage";
 import { useFetchHomePage } from "../features/home/hook/useFetchHome";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Home = () => {
   const {
@@ -20,6 +21,10 @@ const Home = () => {
     error: contactdataError,
   } = useFetchContactInfo();
   const combinedLoading = homePageDataLoading || contactdataloading;
+  const combinedError = homePageDataError || contactdataError;
+  if (combinedError) {
+    return <ErrorMessageNetwork />;
+  }
   if (combinedLoading) {
     return <Loader />;
   }

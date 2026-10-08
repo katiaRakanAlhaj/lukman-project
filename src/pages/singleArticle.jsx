@@ -8,6 +8,7 @@ import SingleArticleContent from "../features/singleArticle/component/singleArti
 import LastArticles from "../features/singleArticle/component/LastArticles";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 const SingleArticle = () => {
   const { id } = useParams();
   const {
@@ -23,6 +24,9 @@ const SingleArticle = () => {
   const combinedLoading = articleByIdDataLoading || articlesDataLoading;
   if (combinedLoading) {
     return <Loader />;
+  }
+  if (articleByIdDataError || articlesDataError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

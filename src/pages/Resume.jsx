@@ -15,6 +15,7 @@ import { useFetchProfissionalExperiences } from "../features/Resume/hook/useFetc
 import { useFetchResumePage } from "../features/Resume/hook/usefetchResumePage";
 import { useFetchSkills } from "../features/Resume/hook/useFetchSkills";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Resume = () => {
   const {
@@ -60,6 +61,17 @@ const Resume = () => {
     LanguagesDataLoading ||
     SkillsDataLoading ||
     PositionsDataLoading;
+  const combinedError =
+    resumePageDataError ||
+    homePageDataError ||
+    degreesDataError ||
+    ProfissionalExperiencesDataError ||
+    LanguagesDataError ||
+    SkillsDataError ||
+    PositionsDataError;
+  if (combinedError) {
+    return <ErrorMessageNetwork />;
+  }
   if (combinedLoading) {
     return <Loader />;
   }

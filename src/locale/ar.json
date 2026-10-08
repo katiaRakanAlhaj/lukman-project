@@ -138,5 +138,10 @@
     "down-arabic":"تحميل (عربي)",
     "down_english":"تحميل (انكليزي)",
     "Uploading":"جاري التحميل"
+  },
+    "errorMessage": {
+    "errorOops": "عذراً!",
+    "errorMessage": "حدث خطأ ما في الاتصال بالشبكة.",
+    "errorRetryButton": "إعادة المحاولة"
   }
 }

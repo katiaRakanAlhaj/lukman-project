@@ -8,6 +8,7 @@ import {
   useFetchBooksPage,
 } from "../features/Books/hook/useFetchBooks";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 
 const Books = () => {
   const {
@@ -23,6 +24,9 @@ const Books = () => {
   } = useFetchBooks();
   if (booksPageDataLoading || booksDataLoading) {
     return <Loader />;
+  }
+  if (booksPageDataError || booksDataError) {
+    return <ErrorMessageNetwork />;
   }
   return (
     <div>

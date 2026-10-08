@@ -138,5 +138,10 @@
     "down-arabic":"Download (Arabic)",
     "down_english":"Download (English)",
     "Uploading":"Uploading..."
+  },
+    "errorMessage": {
+    "errorOops": "Oops!",
+    "errorMessage": "Something went wrong with the network connection.",
+    "errorRetryButton": "Retry"
   }
 }
