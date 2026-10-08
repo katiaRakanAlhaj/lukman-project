@@ -1,6 +1,11 @@
+import Loader from "../component/loader/loader";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import VissionBanner from "../features/Vission/component/vissionBanner";
 import VissionGrid from "../features/Vission/component/vissionGrid";
-import { useFetchVissionCategory, useFetchVissionPage } from "../features/Vission/hook/useFetchVission";
+import {
+  useFetchVissionCategory,
+  useFetchVissionPage,
+} from "../features/Vission/hook/useFetchVission";
 
 const Vission = () => {
   const {
@@ -8,15 +13,21 @@ const Vission = () => {
     isLoading: vissionpageDataLoading,
     error: vissionpageDataError,
   } = useFetchVissionPage();
-    const {
+  const {
     data: vissionCategoryContent,
     isLoading: vissionCategoryContentLoading,
     error: vissionCategoryContentError,
   } = useFetchVissionCategory();
+  const combinedLoading =
+    vissionpageDataLoading || vissionCategoryContentLoading;
+  if (combinedLoading) {
+    return <Loader />;
+  }
   return (
     <div>
-      <VissionBanner vissionpageData = {vissionpageData}/>
-      <VissionGrid vissionCategoryContent = {vissionCategoryContent}/>
+      <ScrollToTop />
+      <VissionBanner vissionpageData={vissionpageData} />
+      <VissionGrid vissionCategoryContent={vissionCategoryContent} />
     </div>
   );
 };

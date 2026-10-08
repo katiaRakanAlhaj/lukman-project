@@ -1,3 +1,5 @@
+import Loader from "../component/loader/loader";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import BooksGrid from "../features/Books/component/booksGrid";
 import BooksHeader from "../features/Books/component/booksHeader";
 import {
@@ -17,10 +19,16 @@ const Books = () => {
     isLoading: booksDataLoading,
     error: booksDataError,
   } = useFetchBooks();
+  if (booksPageDataLoading || booksDataLoading) {
+    return <Loader />;
+  }
   return (
-    <div className="container5 mx-auto">
-      <BooksHeader booksPageData = {booksPageData}/>
-      <BooksGrid booksData = {booksData}/>
+    <div>
+      <ScrollToTop />
+      <div className="container5 mx-auto">
+        <BooksHeader booksPageData={booksPageData} />
+        <BooksGrid booksData={booksData} />
+      </div>
     </div>
   );
 };

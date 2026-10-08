@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import 'tailwindcss';
 .container {
     max-width: 88%;
     /* Prevent any overflow */
@@ -45,7 +44,21 @@
     /* bold */
     font-style: normal;
 }
+@font-face {
+    font-family: 'Lufga';
+    src: url('./assets/fonts/Lufga Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
 
+@font-face {
+    font-family: 'Lufga';
+    src: url('./assets/fonts/Lufga Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 .container1 {
     max-width: 92%;
 }

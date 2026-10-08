@@ -1,8 +1,11 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
+import { useTranslation } from "react-i18next";
 
 const Model14 = ({ data }) => {
   const [openIndex, setOpenIndex] = useState(null);
+  const { i18n } = useTranslation();
+  const isRTL = i18n.language === "ar";
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -33,7 +36,7 @@ const Model14 = ({ data }) => {
                 </h2>
                 <div
                   className={`text-[2rem] text-primary transition-transform duration-300 ${
-                    isOpen ? "rotate-90" : "rotate-0"
+                    isOpen ? "rotate-90" : isRTL ? "rotate-0" : "rotate-180"
                   }`}
                 >
                   <svg
@@ -45,6 +48,7 @@ const Model14 = ({ data }) => {
                     width="1em"
                     xmlns="http://www.w3.org/2000/svg"
                   >
+                    {/* Chevron points left by default (good for RTL closed state) */}
                     <path d="m14 7-5 5 5 5V7z"></path>
                     <path fill="none" d="M24 0v24H0V0h24z"></path>
                   </svg>

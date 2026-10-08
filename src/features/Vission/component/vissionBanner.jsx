@@ -8,7 +8,7 @@ const VissionBanner = ({ vissionpageData }) => {
           className="absolute w-full h-full bg-cover -z-10 transition-all duration-700"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 47, 60) 100%), url("${vissionpageData?.data?.banner}")`,
-            backgroundRepeat: 'no-repeat',
+            backgroundRepeat: "no-repeat",
           }}
         ></div>
         <div className="mt-[2rem] lg:mt-0 w-[60%]">
@@ -16,7 +16,9 @@ const VissionBanner = ({ vissionpageData }) => {
           <p className="text-white font-[400] text-[1.2rem] lg:line-clamp-none line-clamp-3 px-[2rem]"></p>
         </div>
       </div>
-      <div className="absolute bottom-[4rem] right-[4rem] text-[2.5rem] font-bold text-white">
+      <div
+        className={`absolute bottom-[4rem] ${i18next.language == "ar" ? "right-[4rem]" : "left-[4rem]"} text-[2.5rem] font-bold text-white`}
+      >
         {i18next.t("Vision.vission_and_principles")}
       </div>
     </div>

@@ -1,5 +1,5 @@
 // src/component/footer/Footer.jsx
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/images/logo.png";
 import youtube from "../../assets/images/youtube.svg";
@@ -14,13 +14,15 @@ const quickLinksCol1 = [
   { to: "/activities", key: "activities" },
   { to: "/articles", key: "articles" },
   { to: "/media", key: "media" },
+  { to: "/Contact", key: "contact" },
 ];
 
 const quickLinksCol2 = [
-  { to: "/vision_and_principles", key: "visionAndPrinciples" },
-  { to: "/important_links", key: "importantLinks" },
-  { to: "/united_nations", key: "unitedNations" },
-  { to: "/books_and_research", key: "booksAndResearch" },
+  { to: "/Vision", key: "visionAndPrinciples" },
+  { to: "/Links", key: "importantLinks" },
+  { to: "/united_nation", key: "unitedNations" },
+  { to: "/Books", key: "booksAndResearch" },
+  { to: "/Highlights", key: "highlights" },
 ];
 
 /* ── Helper: check if a social link is valid ─────── */
@@ -34,8 +36,16 @@ const isValidSocialLink = (href) => {
 const Footer = ({ contactData }) => {
   const { t } = useTranslation();
   const { lang } = useParams();
+  const location = useLocation();
   const currentLang = lang === "en" ? "en" : "ar";
 
+  /* ── Active link detection ─────────────────────── */
+  /* ── Active link detection (Case-insensitive) ─── */
+  const isActive = (to) => {
+    const fullPath = `/${currentLang}${to}`;
+    const normalize = (p) => p.replace(/\/+$/, "").toLowerCase() || "/";
+    return normalize(location.pathname) === normalize(fullPath);
+  };
   const allSocials = [
     {
       href: contactData?.data?.linkedin,
@@ -99,32 +109,56 @@ const Footer = ({ contactData }) => {
             <div className="mt-[2em] grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 lg:gap-y-0 md:gap-y-[2rem] gap-y-[2rem]">
               {/* Column 1 */}
               <div className="col-span-1 lg:col-span-4 space-y-1">
-                {quickLinksCol1.map(({ to, key }) => (
-                  <div key={to} className="flex items-center gap-x-2 mb-2">
-                    <div className="w-[1em] h-[0.1em] bg-[#099EC8] rounded-full translate-y-[-0.2em]" />
-                    <Link
-                      to={`/${currentLang}${to}`}
-                      className="text-white text-[1em]"
-                    >
-                      {t(`footer.${key}`)}
-                    </Link>
-                  </div>
-                ))}
+                {quickLinksCol1.map(({ to, key }) => {
+                  const active = isActive(to);
+                  return (
+                    <div key={to} className="flex items-center gap-x-2 mb-2">
+                      <div
+                        className={`w-[1em] h-[0.1em] rounded-full translate-y-[-0.2em] ${
+                          active ? "bg-negative" : "bg-[#099EC8]"
+                        }`}
+                      />
+                      <Link
+                        to={`/${currentLang}${to}`}
+                        aria-current={active ? "page" : undefined}
+                        className={`text-[1em] transition-colors duration-200 ${
+                          active
+                            ? "text-negative font-bold"
+                            : "text-white hover:text-[#099EC8] font-normal"
+                        }`}
+                      >
+                        {t(`footer.${key}`)}
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Column 2 */}
               <div className="col-span-1 lg:col-span-4 space-y-1">
-                {quickLinksCol2.map(({ to, key }) => (
-                  <div key={to} className="flex items-center gap-x-2 mb-2">
-                    <div className="w-[1em] h-[0.1em] bg-[#099EC8] rounded-full translate-y-[-0.2em]" />
-                    <Link
-                      to={`/${currentLang}${to}`}
-                      className="text-white text-[1em]"
-                    >
-                      {t(`footer.${key}`)}
-                    </Link>
-                  </div>
-                ))}
+                {quickLinksCol2.map(({ to, key }) => {
+                  const active = isActive(to);
+                  return (
+                    <div key={to} className="flex items-center gap-x-2 mb-2">
+                      <div
+                        className={`w-[1em] h-[0.1em] rounded-full translate-y-[-0.2em] ${
+                          active ? "bg-negative" : "bg-[#099EC8]"
+                        }`}
+                      />
+                      <Link
+                        to={`/${currentLang}${to}`}
+                        aria-current={active ? "page" : undefined}
+                        className={`text-[1em] transition-colors duration-200 ${
+                          active
+                            ? "text-negative font-bold"
+                            : "text-white hover:text-[#099EC8] font-normal"
+                        }`}
+                      >
+                        {t(`footer.${key}`)}
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Column 3 — Join us */}

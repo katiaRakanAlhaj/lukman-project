@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 const Model1 = ({ data }) => {
   return (
     <div className="w-full relative h-[20rem]">
@@ -8,7 +10,9 @@ const Model1 = ({ data }) => {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <div className="mt-[2rem] lg:mt-0 absolute bottom-[3rem] right-[2rem]">
+      <div
+        className={`mt-[2rem] lg:mt-0 absolute bottom-[3rem] ${i18next.language == "ar" ? "right-[2rem]" : "left-[2rem]"}`}
+      >
         <p className="text-white font-[700] lg:text-[2.8rem] text-[1.7rem]">
           {data?.title}
         </p>

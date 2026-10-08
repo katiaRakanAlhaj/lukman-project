@@ -7,6 +7,8 @@ import {
   useFetchVideos,
   useFetchVideosPage,
 } from "../features/Media/hook/useFetchVideos";
+import Loader from "../component/loader/loader";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 
 const Media = () => {
   // Define state for active filters with default language set to "ar"
@@ -25,18 +27,28 @@ const Media = () => {
   // Pass filters to the hook so it automatically fetches with query params when changed
   const { data: videosData, isLoading: videosDataLoading } =
     useFetchVideos(filters);
-
+  const combinedLoading =
+    mediaDataLoading ||
+    videoCategoryDataLoading ||
+    videosDataLoading ||
+    homePageDataLoading;
+  if (combinedLoading) {
+    return <Loader />;
+  }
   return (
-    <div className="container4 mx-auto lg:mt-[4rem] mt-[2.5rem]">
-      <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
-        <div className="lg:col-span-3 col-span-full">
-          <MediaCategory
-            videoCategoryData={videoCategoryData}
-            onApplyFilters={(newFilters) => setFilters(newFilters)}
-          />
-        </div>
-        <div className="lg:col-span-9 col-span-1">
-          <MediaGrid homePageData={homePageData} videosData={videosData} />
+    <div>
+      <ScrollToTop />
+      <div className="container4 mx-auto lg:mt-[4rem] mt-[2.5rem]">
+        <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
+          <div className="lg:col-span-3 col-span-full">
+            <MediaCategory
+              videoCategoryData={videoCategoryData}
+              onApplyFilters={(newFilters) => setFilters(newFilters)}
+            />
+          </div>
+          <div className="lg:col-span-9 col-span-1">
+            <MediaGrid homePageData={homePageData} videosData={videosData} />
+          </div>
         </div>
       </div>
     </div>

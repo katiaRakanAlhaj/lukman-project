@@ -21,7 +21,11 @@ const LinksGrid = ({ LinksData }) => {
               <p className="text-white font-bold text-[1.1rem] mt-[0.2rem]">
                 {i18next.t("Links.click_button")}
               </p>
-              <img src={click} className="w-[1.5rem]" alt="click svg" />
+              <img
+                src={click}
+                className={`w-[1.5rem] ${i18next.language == "en" ? "rotate-90" : ""}`}
+                alt="click svg"
+              />
             </button>
           </a>
           <div className="px-[1.8rem] py-[1rem] flex flex-col space-y-4">

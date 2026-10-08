@@ -19,7 +19,10 @@
     "youtube": "YouTube",
     "sending": "Sending...",
     "successMessage": "Message sent successfully!",
-    "errorMessage": "Something went wrong. Please try again."
+    "errorMessage": "Something went wrong. Please try again.",
+    "contact_description":"We are always ready to communicate and answer your guestions",
+    "social_media_website":"Social media sites",
+    "contact_us":"Contact Us"
   },
   "navbar": {
     "home": "Home",
@@ -55,7 +58,9 @@
     "instagram": "Instagram",
     "twitter": "X (Twitter)",
     "facebook": "Facebook",
-    "youtube": "YouTube"
+    "youtube": "YouTube",
+    "highlights":"Highlights",
+    "contact":"Contact Us"
   },
   "homeImage": {
     "vision": "Vision & Principles",

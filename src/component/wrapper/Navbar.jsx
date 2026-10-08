@@ -77,6 +77,13 @@ const Navbar = ({ contactData }) => {
   const time = formatTime(now);
   const date = formatDate(now);
 
+  /* ── Active link detection ─────────────────────── */
+  const isActive = (to) => {
+    const fullPath = `/${currentLang}${to}`;
+    const normalize = (p) => p.replace(/\/+$/, "") || "/";
+    return normalize(location.pathname) === normalize(fullPath);
+  };
+
   const handleSwitchLanguage = () => {
     const segments = location.pathname.split("/").filter(Boolean);
     segments[0] = otherLang;
@@ -142,15 +149,31 @@ const Navbar = ({ contactData }) => {
           </Link>
 
           <div className="flex gap-x-8 justify-center flex-1 relative">
-            {navLinks.map(({ to, key }) => (
-              <Link
-                key={to}
-                to={`/${currentLang}${to}`}
-                className="relative cursor-pointer px-2 py-1 text-primary text-[1.1rem]"
-              >
-                {t(`navbar.${key}`)}
-              </Link>
-            ))}
+            {navLinks.map(({ to, key }) => {
+              const active = isActive(to);
+              return (
+                <Link
+                  key={to}
+                  to={`/${currentLang}${to}`}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative cursor-pointer text-[1.1rem] transition-colors duration-200 pb-4 ${
+                    active
+                      ? "text-negative font-bold"
+                      : "text-primary hover:text-secondary font-normal"
+                  }`}
+                >
+                  {t(`navbar.${key}`)}
+
+                  {/* Active red block indicator */}
+                  {active && (
+                    <span
+                      className="absolute left-0 right-0 -bottom-[2rem] bg-negative"
+                      style={{ height: "2.2rem", width: "100%"}}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           <button

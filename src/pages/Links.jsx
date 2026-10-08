@@ -1,3 +1,5 @@
+import Loader from "../component/loader/loader";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import LinksGrid from "../features/Links/component/LinksGrid";
 import LinksHeader from "../features/Links/component/LinksHeader";
 import {
@@ -16,10 +18,16 @@ const Links = () => {
     isLoading: LinksDataLoading,
     error: LinksDataError,
   } = useFetchLinks();
+  if (LinksDataPageLoading || LinksDataLoading) {
+    return <Loader />;
+  }
   return (
-    <div className="container4 mx-auto">
-      <LinksHeader LinksDataPage = {LinksDataPage}/>
-      <LinksGrid LinksData = {LinksData}/>
+    <div>
+      <ScrollToTop />
+      <div className="container4 mx-auto">
+        <LinksHeader LinksDataPage={LinksDataPage} />
+        <LinksGrid LinksData={LinksData} />
+      </div>
     </div>
   );
 };

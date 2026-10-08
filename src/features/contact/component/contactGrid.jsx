@@ -8,6 +8,7 @@ import linkedin from "../../../assets/images/linkedin.svg";
 import Spinner from "../../../component/ux/spinner";
 import { useContactForm } from "../hook/useContactForm";
 import ToastProvider from "../../../component/ux/Toaster";
+import i18next from "i18next";
 
 /* ── Helper ──────────────────────────────────────────── */
 const isValidSocialLink = (href) => {
@@ -40,7 +41,7 @@ const ContactGrid = ({ contactDataPage }) => {
           {/* Left Column — Info */}
           <div className="flex flex-col justify-center h-full">
             <p className="text-[1.6rem] font-bold text-[#000000]">
-              نحن دائما على استعداد للتواصل والإجابة على أسئلتك
+             {i18next.t("contact.contact_description")}
             </p>
 
             <div
@@ -54,7 +55,7 @@ const ContactGrid = ({ contactDataPage }) => {
               <div className="flex flex-col md:space-y-[4rem] space-y-[2rem]">
                 <div className="space-y-1">
                   <h1 className="font-bold text-[#000000] text-[1.2rem]">
-                    بريد إلكتروني
+                    {i18next.t("contact.email")}
                   </h1>
                   <p className="text-secondary text-[0.9rem]">{data.email}</p>
                 </div>
@@ -63,8 +64,7 @@ const ContactGrid = ({ contactDataPage }) => {
               <div className="flex flex-col md:space-y-[4rem] space-y-[2rem] mt-[2rem] md:mt-0">
                 <div className="space-y-1">
                   <h1 className="font-bold text-[#000000] text-[1.2rem]">
-                    مواقع التواصل
-                  </h1>
+                    {i18next.t("contact.social_media_website")}                  </h1>
                   <div className="flex items-center justify-center gap-x-[1.6rem]">
                     {socials.map(({ href, icon, alt }) => (
                       <a
@@ -94,7 +94,7 @@ const ContactGrid = ({ contactDataPage }) => {
           {/* Right Column — Contact Form */}
           <div className="w-full h-[35rem] border border-[#C7C7C7] mt-[3rem] rounded-3xl px-[1.5rem] relative">
             <h1 className="font-bold mt-[2rem] text-[1.5rem] text-[#000000]">
-              تواصل معنا
+              {i18next.t("contact.contact_us")}
             </h1>
 
             <div

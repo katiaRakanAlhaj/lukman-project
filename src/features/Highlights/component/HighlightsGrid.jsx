@@ -77,7 +77,9 @@ const HighlightsGrid = ({
                 key={index}
                 className="w-auto bg-[#CEECF4] h-auto rounded-lg relative mt-[1rem]"
               >
-                <div className="absolute w-[0.3rem] h-full bg-primary right-0 rounded-tr-lg rounded-br-lg"></div>
+                <div
+                  className={`absolute w-[0.3rem] h-full bg-primary ${i18next.language == "ar" ? "right-0 rounded-tr-lg rounded-br-lg" : "left-0 rounded-tl-lg rounded-bl-lg"}`}
+                ></div>
                 <div className="p-[1.5rem]">
                   <h1 className="font-bold text-[1.2rem] text-[#099EC8]">
                     {item.title}

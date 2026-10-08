@@ -12,7 +12,9 @@ const HighlightsBanner = ({ highlightsPageData }) => {
           }}
         ></div>
       </div>
-      <div className="absolute bottom-[4rem] right-[4rem] text-[2.5rem] font-bold text-white">
+      <div
+        className={`absolute bottom-[4rem] ${i18next.language == "ar" ? "right-[4rem]" : "left-[4rem]"} text-[2.5rem] font-bold text-white`}
+      >
         {i18next.t("Highlights.Highlights")}
       </div>
     </div>

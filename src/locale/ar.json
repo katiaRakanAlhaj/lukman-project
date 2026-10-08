@@ -19,7 +19,10 @@
     "youtube": "يوتيوب",
     "sending": "جارٍ الإرسال...",
     "successMessage": "تم إرسال الرسالة بنجاح!",
-    "errorMessage": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+    "errorMessage": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "contact_description":"نحن دائما على استعداد للتواصل والإجابة على أسئلتك",
+    "social_media_website":"مواقع التواصل",
+    "contact_us":"تواصل معنا"
   },
   "navbar": {
     "home": "الرئيسية",
@@ -55,7 +58,9 @@
     "instagram": "إنستغرام",
     "twitter": "إكس (تويتر)",
     "facebook": "فيسبوك",
-    "youtube": "يوتيوب"
+    "youtube": "يوتيوب",
+    "highlights":"مقتطفات",
+    "contact":"اتصل بنا"
   },
   "homeImage": {
     "vision": "الرؤية والمبادئ",

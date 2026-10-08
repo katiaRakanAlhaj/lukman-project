@@ -1,3 +1,5 @@
+import Loader from "../component/loader/loader";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { useFetchHomePage } from "../features/home/hook/useFetchHome";
 import ResumeDescription from "../features/Resume/component/ResumeDescription";
 import ResumeGrid from "../features/Resume/component/ResumeGrid";
@@ -43,19 +45,35 @@ const Resume = () => {
     isLoading: SkillsDataLoading,
     error: SkillsDataError,
   } = useFetchSkills();
-    const {
+  const {
     data: PositionsData,
     isLoading: PositionsDataLoading,
     error: PositionsDataError,
   } = useFetchPositions();
+  const combinedLoading =
+    resumePageDataLoading ||
+    homePageDataLoading ||
+    degreesDataLoading ||
+    ProfissionalExperiencesDataLoading ||
+    LanguagesDataLoading ||
+    SkillsDataLoading ||
+    PositionsDataLoading;
+  if (combinedLoading) {
+    return <Loader />;
+  }
   return (
-    <div className = "container4 mx-auto">
+    <div>
+      <ScrollToTop/>
+      <div className="container4 mx-auto">
       <ResumePage resumePageData={resumePageData} />
-      <ResumeGrid homePageData = {homePageData} degreesData = {degreesData}/>
-      <ResumeDescription ProfissionalExperiencesData = {ProfissionalExperiencesData}/>
-      <ResumePositions PositionsData = {PositionsData}/>
-      <ResumeLanguages LanguagesData = {LanguagesData}/>
-      <ResumeSkills SkillsData = {SkillsData}/>
+      <ResumeGrid homePageData={homePageData} degreesData={degreesData} />
+      <ResumeDescription
+        ProfissionalExperiencesData={ProfissionalExperiencesData}
+      />
+      <ResumePositions PositionsData={PositionsData} />
+      <ResumeLanguages LanguagesData={LanguagesData} />
+      <ResumeSkills SkillsData={SkillsData} />
+    </div>
     </div>
   );
 };

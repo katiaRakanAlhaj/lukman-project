@@ -6,6 +6,8 @@ import {
   useFetchCategoryContent,
   useFetchHighlights,
 } from "../features/Highlights/hooks/useFetchHighlights";
+import Loader from "../component/loader/loader";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 
 const Highlights = () => {
   const [activeCategoryId, setActiveCategoryId] = useState(null);
@@ -37,9 +39,16 @@ const Highlights = () => {
     isLoading: highlightsCategoryContentLoading,
     error: highlightsCategoryContentError,
   } = useFetchCategoryContent(activeCategoryId);
-
+  const combinedLoading =
+    highlightsPageDataLoading ||
+    highlightsCategoriesDataLoading ||
+    highlightsCategoryContentLoading;
+  if (combinedLoading) {
+    return <Loader />;
+  }
   return (
     <div>
+      <ScrollToTop />
       <HighlightsBanner highlightsPageData={highlightsPageData} />
       <HighlightsGrid
         categories={highlightsCategoriesData?.data || []}

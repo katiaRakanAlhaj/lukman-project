@@ -1,4 +1,6 @@
 // src/features/home/Home.jsx
+import Loader from "../component/loader/loader";
+import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { useFetchContactInfo } from "../features/contact/hook/useFetchContactInfo";
 import ContactSection from "../features/home/component/contactSection";
 import HomeImage from "../features/home/component/homeImage";
@@ -15,14 +17,16 @@ const Home = () => {
     isLoading: contactdataloading,
     error: contactdataError,
   } = useFetchContactInfo();
-  // Optional: simple loading / error handling
-  if (homePageDataLoading) return <div>Loading…</div>;
-  if (homePageDataError) return <div>Something went wrong.</div>;
+  const combinedLoading = homePageDataLoading || contactdataloading;
+  if (combinedLoading) {
+    return <Loader />;
+  }
 
   return (
     <div>
+      <ScrollToTop />
       <HomeImage banner={homePageData?.data?.banner} />
-      <ContactSection contactdata = {contactdata} />
+      <ContactSection contactdata={contactdata} />
     </div>
   );
 };
