@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import youtube from "../../../assets/images/youtube.svg";
 import facebook from "../../../assets/images/facebook.svg";
-import twitter from "../../../assets/images/twitter.svg";
+import twitter from "../../../assets/images/x.svg";
 import instgram from "../../../assets/images/instgram.svg";
 import linkedin from "../../../assets/images/linkedin.svg";
 import Spinner from "../../../component/ux/spinner";
