@@ -5,6 +5,7 @@ import autoPlay from "../../../assets/images/autoPlay.svg";
 import SeeMoreButton from "../../../component/ux/seeMoreButton";
 import MediaSkeleton from "./MediaSkeleton";
 import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
+import formatDate from "../../../component/ux/formatDate";
 
 const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
   const [activeVideo, setActiveVideo] = useState(null);
@@ -44,19 +45,6 @@ const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
     }, 1200);
   };
 
-  // ===== Format date =====
-  const formatDate = (dateStr) => {
-    if (!dateStr) return "";
-    if (/[\u0600-\u06FF]/.test(dateStr)) return dateStr;
-
-    const d = new Date(dateStr);
-    if (isNaN(d)) return dateStr;
-
-    const day = String(d.getDate()).padStart(2, "0");
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const year = d.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
 
   // ===== Lock body scroll while modal is open =====
   useEffect(() => {
@@ -212,7 +200,7 @@ const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
                       dir="rtl"
                     >
                       {video.title && (
-                        <h3 className="text-white text-[0.9rem] font-bold text-right leading-snug flex-1">
+                        <h3 className="text-white text-[1rem] font-bold text-right leading-snug flex-1">
                           {video.title}
                         </h3>
                       )}

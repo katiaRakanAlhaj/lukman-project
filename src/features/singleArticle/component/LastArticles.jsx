@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import DOMPurify from "dompurify";
 import { Link, useParams } from "react-router-dom";
+import formatDate from "../../../component/ux/formatDate";
 const LastArticles = ({ articlesData }) => {
   const { lang } = useParams();
   // Handle both possible response shapes: array directly, or { data: [...] }
@@ -12,15 +13,6 @@ const LastArticles = ({ articlesData }) => {
   const latestArticles = articles.slice(0, 6);
 
   if (!latestArticles.length) return null;
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const dateObj = new Date(dateString);
-    const day = String(dateObj.getDate()).padStart(2, "0");
-    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-    const year = dateObj.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
 
   return (
     <div className="lg:col-span-4 col-span-1">

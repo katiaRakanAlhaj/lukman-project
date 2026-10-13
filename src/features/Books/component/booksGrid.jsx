@@ -2,35 +2,50 @@ import React, { useState } from "react";
 import DOMPurify from "dompurify";
 import date from "../../../assets/images/date.svg";
 import uploadBook from "../../../assets/images/uploadBook.svg";
-import i18next from "i18next"
+import i18next from "i18next";
+import BooksGridSkeleton from "./BooksGridSkeleton";
+import SeeMoreButton from "../../../component/ux/seeMoreButton";
+import formatDate from "../../../component/ux/formatDate";
+
+const BOOKS_PER_PAGE = 6;
+
 const BooksGrid = ({ booksData }) => {
-  // حالة لتخزين معرف الكتاب الذي يتم تحميله حالياً
   const [downloadingId, setDownloadingId] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(BOOKS_PER_PAGE);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  // Format date from ISO string to DD-MM-YYYY
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
+  const allBooks = booksData?.data || [];
+  const visibleBooks = allBooks.slice(0, visibleCount);
+  const hasMore = visibleCount < allBooks.length;
 
-  // دالة محاكاة التحميل أو التعامل مع الملف
+ 
   const handleDownload = (e, book) => {
-    // إذا أردت فتح الرابط مباشرة مع إظهار حالة التحميل مؤقتاً:
     setDownloadingId(book.id);
-
-    // محاكاة انتهاء التحميل بعد فترة (أو يمكنك إزالتها إذا كان المتصفح سيتولى التحميل الفوري)
     setTimeout(() => {
       setDownloadingId(null);
     }, 2000);
   };
 
+  // Show skeleton for 400ms, then reveal next batch
+  const handleSeeMore = () => {
+    if (isLoadingMore) return;
+    setIsLoadingMore(true);
+
+    setTimeout(() => {
+      setVisibleCount((prev) => prev + BOOKS_PER_PAGE);
+      setIsLoadingMore(false);
+    }, 400);
+  };
+
+  // How many skeletons to render: full page unless fewer books remain
+  const remaining = allBooks.length - visibleCount;
+  const skeletonCount = Math.min(BOOKS_PER_PAGE, remaining);
+
   return (
     <div>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-[4rem] gap-y-[9rem] lg:mt-[11rem] md:mt-[9rem] mt-[8rem]">
-        {booksData?.data?.map((book) => {
+        {/* Already-visible books */}
+        {visibleBooks.map((book) => {
           const isDownloading = downloadingId === book.id;
 
           return (
@@ -48,11 +63,7 @@ const BooksGrid = ({ booksData }) => {
                   {book.title}
                 </h1>
                 <div className="flex gap-x-2 mt-2 items-center">
-                  <img
-                    className="w-6 h-6"
-                    src={date}
-                    alt="calendar"
-                  />
+                  <img className="w-6 h-6" src={date} alt="calendar" />
                   <p className="text-secondary text-[0.9em]">
                     {formatDate(book.date)}
                   </p>
@@ -64,17 +75,20 @@ const BooksGrid = ({ booksData }) => {
                   }}
                 />
               </div>
-              
+
               <a
                 href={book.file}
                 download
                 onClick={(e) => handleDownload(e, book)}
-                className={`w-full h-[3.8rem] flex items-center justify-center rounded-b-3xl gap-x-[0.8rem] absolute bottom-0 cursor-pointer transition-all ${isDownloading?'bg-primary':'bg-negative'}`}
+                className={`w-full h-[3.8rem] flex items-center justify-center rounded-b-3xl gap-x-[0.8rem] absolute bottom-0 cursor-pointer transition-all ${
+                  isDownloading ? "bg-primary" : "bg-negative"
+                }`}
               >
                 {isDownloading ? (
                   <>
-                    <p className="text-white text-[1.2rem] font-bold">{i18next.t("loading")}</p>
-                    {/* أيقونة الدائرة المتحركة للتحميل */}
+                    <p className="text-white text-[1.2rem] font-bold">
+                      {i18next.t("loading")}
+                    </p>
                     <svg
                       className="w-6 h-6 text-white animate-spin"
                       fill="none"
@@ -109,7 +123,18 @@ const BooksGrid = ({ booksData }) => {
             </div>
           );
         })}
+
+        {/* Skeleton placeholders for the next batch */}
+        {isLoadingMore &&
+          Array.from({ length: skeletonCount }).map((_, i) => (
+            <BooksGridSkeleton key={`sk-${i}`} />
+          ))}
       </div>
+
+      {/* Show button only when not loading and there is more to show */}
+      {hasMore && !isLoadingMore && (
+        <SeeMoreButton onClick={handleSeeMore} />
+      )}
     </div>
   );
 };

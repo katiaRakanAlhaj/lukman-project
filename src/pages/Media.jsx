@@ -87,7 +87,7 @@ const Media = () => {
           description={mediaData?.data?.meta_description}
         />
 
-        <div className="container4 mx-auto lg:mt-[4rem] mt-[2.5rem]">
+        <div className="container4 mx-auto lg:mt-[4rem]">
           <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
             <div className="lg:col-span-3 col-span-full">
               <MediaCategory

@@ -1,14 +1,4 @@
 import i18next from "i18next";
-
-/**
- * Skeleton that mimics the exact shape of a Highlight content card:
- * - rounded-lg container with a light blue background (#CEECF4)
- * - colored vertical bar on the left (en) / right (ar)
- * - title placeholder line
- * - a few description placeholder lines
- *
- * @param {number} count - how many skeleton cards to render
- */
 const HighlightsContentSkeleton = ({ count = 3 }) => {
   return (
     <>

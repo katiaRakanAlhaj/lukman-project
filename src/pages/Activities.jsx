@@ -37,7 +37,7 @@ const Activities = () => {
           title={ActivitiesData?.data?.meta_title}
           description={ActivitiesData?.data?.meta_description}
         />
-        <div className="container4 mx-auto">
+        <div className="container4 mx-auto relative">
           <ActivitiesBanner ActivitiesData={ActivitiesData} />
           <ActivitiesGrid CategoryContent={CategoryContent} />
         </div>

@@ -8,6 +8,7 @@ import i18next from "i18next";
 import SeeMoreButton from "../../../component/ux/seeMoreButton";
 import ArticlesGridSkeleton from "./ArticleCardSkeleton ";
 import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
+import formatDate from "../../../component/ux/formatDate";
 
 // --- Inline SVG Components ---
 const SearchIcon = ({ className }) => (
@@ -75,15 +76,6 @@ const ArticlesGrid = ({
   } = useSearchArticles(submittedQuery);
 
   const isSearching = submittedQuery.trim().length > 0;
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const dateObj = new Date(dateString);
-    const day = String(dateObj.getDate()).padStart(2, "0");
-    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-    const year = dateObj.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
 
   const categories = articlesCategoryData?.data || [];
 

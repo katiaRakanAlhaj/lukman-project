@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import ActivitiesGridSkeleton from "./ActivitiesGridSkeleton";
 import SeeMoreButton from "../../../component/ux/seeMoreButton";
 import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
+import formatDate from "../../../component/ux/formatDate";
 
 const INITIAL_COUNT = 4;
 const LOAD_MORE_COUNT = 6;
@@ -42,17 +43,6 @@ const ActivitiesGrid = ({ CategoryContent }) => {
       setVisibleCount(activities.length);
     }
   }, [activities.length, visibleCount]);
-
-  const formatDate = (isoDate) => {
-    if (!isoDate) return "";
-    const d = new Date(isoDate);
-    if (isNaN(d.getTime())) return isoDate;
-    const day = String(d.getDate()).padStart(2, "0");
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const year = d.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
-
   const handleSeeMore = () => {
     setLoadingMore(true);
     setTimeout(() => {

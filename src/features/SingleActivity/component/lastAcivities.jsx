@@ -1,18 +1,10 @@
 import i18next from "i18next";
+import formatDate from "../../../component/ux/formatDate";
 
 const LastAcivities = ({ activityContent }) => {
   // ===== Take the first category, then its first 6 activities =====
   const firstCategory = activityContent?.data?.[0];
   const recentActivities = firstCategory?.activities?.slice(0, 3) || [];
-
-  // ===== Helper: format ISO date -> DD-MM-YYYY =====
-  const formatDate = (isoDate) => {
-    const d = new Date(isoDate);
-    const day = String(d.getDate()).padStart(2, "0");
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const year = d.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
 
   return (
     <div className="lg:col-span-4 col-span-1">
