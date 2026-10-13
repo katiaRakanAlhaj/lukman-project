@@ -1,5 +1,8 @@
 import i18next from "i18next";
 import DOMPurify from "dompurify";
+import HighlightsContentSkeleton from "./HighlightsContentSkeleton";
+import EmptyState from "../../../component/ux/emptyState";
+
 const HighlightsGrid = ({
   categories = [],
   categoriesLoading,
@@ -8,6 +11,7 @@ const HighlightsGrid = ({
   content,
   contentLoading,
   contentError,
+  isCategorySwitching = false,
 }) => {
   const activeCategory = categories.find((c) => c.id === activeCategoryId);
 
@@ -40,7 +44,9 @@ const HighlightsGrid = ({
               return (
                 <div
                   key={category.id}
-                  onClick={() => onSelectCategory(category.id)}
+                  onClick={() => {
+                    if (!isActive) onSelectCategory(category.id);
+                  }}
                   className={`mt-[1.5rem] cursor-pointer transition-all duration-200 ${
                     isActive
                       ? "bg-[#F4CECE] text-negative font-semibold"
@@ -64,40 +70,52 @@ const HighlightsGrid = ({
             {activeCategory?.name || ""}
           </h1>
 
-          {contentLoading && <p>{i18next.t("Highlights.LoadingContent")}</p>}
-          {contentError && (
-            <p className="text-red-500">
-              {i18next.t("Highlights.ContentError")}
-            </p>
-          )}
+          {/* Category switching → skeleton matching content card shape */}
+          {isCategorySwitching ? (
+            <HighlightsContentSkeleton count={3} />
+          ) : (
+            <>
+              {contentLoading && (
+                <p>{i18next.t("Highlights.LoadingContent")}</p>
+              )}
+              {contentError && (
+                <p className="text-red-500">
+                  {i18next.t("Highlights.ContentError")}
+                </p>
+              )}
 
-          {!contentLoading &&
-            items.map((item, index) => (
-              <div
-                key={index}
-                className="w-auto bg-[#CEECF4] h-auto rounded-lg relative mt-[1rem]"
-              >
-                <div
-                  className={`absolute w-[0.3rem] h-full bg-primary ${i18next.language == "ar" ? "right-0 rounded-tr-lg rounded-br-lg" : "left-0 rounded-tl-lg rounded-bl-lg"}`}
-                ></div>
-                <div className="p-[1.5rem]">
-                  <h1 className="font-bold text-[1.2rem] text-[#099EC8]">
-                    {item.title}
-                  </h1>
+              {!contentLoading &&
+                items.map((item, index) => (
                   <div
-                    dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(item.description),
-                    }}
-                    className="text-[1rem] text-[#333333] flex text-justify"
-                  />
-                </div>
-              </div>
-            ))}
+                    key={index}
+                    className="w-auto bg-[#CEECF4] h-auto rounded-lg relative mt-[1rem]"
+                  >
+                    <div
+                      className={`absolute w-[0.3rem] h-full bg-primary ${
+                        i18next.language == "ar"
+                          ? "right-0 rounded-tr-lg rounded-br-lg"
+                          : "left-0 rounded-tl-lg rounded-bl-lg"
+                      }`}
+                    ></div>
+                    <div className="p-[1.5rem]">
+                      <h1 className="font-bold text-[1.2rem] text-[#099EC8]">
+                        {item.title}
+                      </h1>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(item.description),
+                        }}
+                        className="text-[1rem] text-[#333333] flex text-justify"
+                      />
+                    </div>
+                  </div>
+                ))}
 
-          {!contentLoading && items.length === 0 && (
-            <p className="text-[1rem] text-[#333333]">
-              {i18next.t("Highlights.NoContent")}
-            </p>
+              {/* Empty state (reusable component) */}
+              {!contentLoading && items.length === 0 && (
+                <EmptyState message={i18next.t("Highlights.NoHighlights")} />
+              )}
+            </>
           )}
         </div>
       </div>

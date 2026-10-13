@@ -16,19 +16,22 @@ const Vission = () => {
     isLoading: vissionpageDataLoading,
     error: vissionpageDataError,
   } = useFetchVissionPage();
+
   const {
     data: vissionCategoryContent,
     isLoading: vissionCategoryContentLoading,
     error: vissionCategoryContentError,
   } = useFetchVissionCategory();
+
   const combinedLoading =
     vissionpageDataLoading || vissionCategoryContentLoading;
-  if (combinedLoading) {
-    return <Loader />;
-  }
+
+  if (combinedLoading) return <Loader />;
+
   if (vissionpageDataError || vissionCategoryContentError) {
     return <ErrorMessageNetwork />;
   }
+
   return (
     <div>
       <ScrollToTop />
@@ -43,4 +46,5 @@ const Vission = () => {
     </div>
   );
 };
+
 export default Vission;

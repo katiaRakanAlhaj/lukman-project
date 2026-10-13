@@ -102,7 +102,8 @@
     "noResults": "لا توجد مقالات مطابقة لبحثك"
   },
   "Vision": {
-    "vission_and_principles": "الرؤية والمبادئ"
+    "vission_and_principles": "الرؤية والمبادئ",
+    "no_content":"لا يوجد محتوى متاح لهذا التصنيف حالياً."
   },
   "loading": "جاري التحميل ...",
   "Highlights": {
@@ -111,7 +112,7 @@
     "Loading": "جارٍ التحميل...",
     "LoadingContent": "جارٍ تحميل المحتوى...",
     "ContentError": "حدث خطأ أثناء التحميل.",
-    "NoContent": "لا يوجد محتوى لهذا القسم."
+    "NoHighlights": "لا توجد مقتطفات  في هذا القسم."
   },
   "Links": {
     "click_button": "اضغط لزيارة الموقع"

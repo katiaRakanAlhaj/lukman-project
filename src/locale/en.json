@@ -20,9 +20,9 @@
     "sending": "Sending...",
     "successMessage": "Message sent successfully!",
     "errorMessage": "Something went wrong. Please try again.",
-    "contact_description":"We are always ready to communicate and answer your guestions",
-    "social_media_website":"Social media sites",
-    "contact_us":"Contact Us"
+    "contact_description": "We are always ready to communicate and answer your guestions",
+    "social_media_website": "Social media sites",
+    "contact_us": "Contact Us"
   },
   "navbar": {
     "home": "Home",
@@ -59,8 +59,8 @@
     "twitter": "X (Twitter)",
     "facebook": "Facebook",
     "youtube": "YouTube",
-    "highlights":"Highlights",
-    "contact":"Contact Us"
+    "highlights": "Highlights",
+    "contact": "Contact Us"
   },
   "homeImage": {
     "vision": "Vision & Principles",
@@ -79,7 +79,7 @@
   "lukman_title": "Luqman Abdulrahim Al-Faili",
   "Activities": {
     "Activities": "Activities",
-    "last_activities":"Latest Activities",
+    "last_activities": "Latest Activities",
     "noActivities": "No activities in this section."
   },
   "ArticlesGrid": {
@@ -102,7 +102,8 @@
     "noResults": "No articles match your search"
   },
   "Vision": {
-    "vission_and_principles": "Vision and Principles"
+    "vission_and_principles": "Vision and Principles",
+    "no_content":"There is no content available for this category at the moment."
   },
   "loading": "Loading...",
   "Highlights": {
@@ -111,40 +112,40 @@
     "Loading": "Loading...",
     "LoadingContent": "Loading content...",
     "ContentError": "An error occurred while loading.",
-    "NoContent": "No content for this section."
+    "NoHighlights": "No highlights in this section."
   },
-  "Links":{
-    "click_button":"Click to visit the website"
+  "Links": {
+    "click_button": "Click to visit the website"
   },
-  "last-articles":"Last Articles",
-  "media":{
-    "media":"Media",
-    "filter_and_sort":"Filter and sort",
-    "no_video":"No videos at the moment",
-    "interview_language":"Interview language",
-    "interview_category":"Interview category",
-    "all":"All",
-    "sort_by":"Sort by",
-    "choose_sort_order":"Choose sort order",
-    "address":"Address",
-    "oldest_first":"Oldest first",
-    "newest_first":"Newest first",
-    "apply_filter":"Apply filter",
-    "reset":"Reset",
-    "applying":"Applying..."
+  "last-articles": "Last Articles",
+  "media": {
+    "media": "Media",
+    "filter_and_sort": "Filter and sort",
+    "no_video": "No videos at the moment",
+    "interview_language": "Interview language",
+    "interview_category": "Interview category",
+    "all": "All",
+    "sort_by": "Sort by",
+    "choose_sort_order": "Choose sort order",
+    "address": "Address",
+    "oldest_first": "Oldest first",
+    "newest_first": "Newest first",
+    "apply_filter": "Apply filter",
+    "reset": "Reset",
+    "applying": "Applying..."
   },
-  "UnitedNations":{
-    "Sections":"Sections"
+  "UnitedNations": {
+    "Sections": "Sections"
   },
-  "books":{
-    "down-arabic":"Download (Arabic)",
-    "down_english":"Download (English)",
-    "Uploading":"Uploading..."
+  "books": {
+    "down-arabic": "Download (Arabic)",
+    "down_english": "Download (English)",
+    "Uploading": "Uploading..."
   },
-    "errorMessage": {
+  "errorMessage": {
     "errorOops": "Oops!",
     "errorMessage": "Something went wrong with the network connection.",
     "errorRetryButton": "Retry"
   },
-  "load_more":"Load More"
+  "load_more": "Load More"
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HighlightsBanner from "../features/Highlights/component/HighlightsBanner";
 import HighlightsGrid from "../features/Highlights/component/HighlightsGrid";
 import {
@@ -15,6 +15,9 @@ import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 const Highlights = () => {
   const [activeCategoryId, setActiveCategoryId] = useState(null);
 
+  // Track whether the first content load has finished at least once
+  const hasLoadedOnceRef = useRef(false);
+
   // Banner data
   const {
     data: highlightsPageData,
@@ -29,33 +32,53 @@ const Highlights = () => {
     error: highlightsCategoriesDataError,
   } = useFetchCategories();
 
-  // ✅ Auto-select first category once categories arrive
+  // Auto-select first category once categories arrive
   useEffect(() => {
     if (!activeCategoryId && highlightsCategoriesData?.data?.length > 0) {
       setActiveCategoryId(highlightsCategoriesData.data[0].id);
     }
   }, [highlightsCategoriesData, activeCategoryId]);
 
-  // ✅ This hook will re-run whenever activeCategoryId changes
+  // Re-runs whenever activeCategoryId changes
   const {
     data: highlightsCategoryContentData,
     isLoading: highlightsCategoryContentLoading,
     error: highlightsCategoryContentError,
   } = useFetchCategoryContent(activeCategoryId);
-  const combinedLoading =
-    highlightsPageDataLoading ||
-    highlightsCategoriesDataLoading ||
-    highlightsCategoryContentLoading;
+
+  // Mark first successful content load
+  if (
+    activeCategoryId &&
+    !highlightsCategoryContentLoading &&
+    highlightsCategoryContentData
+  ) {
+    hasLoadedOnceRef.current = true;
+  }
+
+  // Full-page loader only on the very first load
+  const isInitialLoading =
+    !hasLoadedOnceRef.current &&
+    (highlightsPageDataLoading ||
+      highlightsCategoriesDataLoading ||
+      highlightsCategoryContentLoading);
+
   const combinedError =
     highlightsPageDataError ||
     highlightsCategoriesDataError ||
     highlightsCategoryContentError;
-  if (combinedLoading) {
+
+  if (isInitialLoading) {
     return <Loader />;
   }
+
   if (combinedError) {
     return <ErrorMessageNetwork />;
   }
+
+  // After the first load, switching category = show skeleton in the grid
+  const isCategorySwitching =
+    hasLoadedOnceRef.current && highlightsCategoryContentLoading;
+
   return (
     <div>
       <ScrollToTop />
@@ -73,6 +96,7 @@ const Highlights = () => {
           content={highlightsCategoryContentData}
           contentLoading={highlightsCategoryContentLoading}
           contentError={highlightsCategoryContentError}
+          isCategorySwitching={isCategorySwitching} // 👈 new prop
         />
       </HelmetProvider>
     </div>
