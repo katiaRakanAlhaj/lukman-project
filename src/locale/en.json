@@ -79,7 +79,8 @@
   "lukman_title": "Luqman Abdulrahim Al-Faili",
   "Activities": {
     "Activities": "Activities",
-    "last_activities":"Latest Activities"
+    "last_activities":"Latest Activities",
+    "noActivities": "No activities in this section."
   },
   "ArticlesGrid": {
     "searchPlaceholder": "Search for an article",
@@ -97,7 +98,8 @@
     "updating": "Updating...",
     "noArticles": "No articles found",
     "readMore": "Read more",
-    "loadMore": "Load more"
+    "loadMore": "Load more",
+    "noResults": "No articles match your search"
   },
   "Vision": {
     "vission_and_principles": "Vision and Principles"
@@ -143,5 +145,6 @@
     "errorOops": "Oops!",
     "errorMessage": "Something went wrong with the network connection.",
     "errorRetryButton": "Retry"
-  }
+  },
+  "load_more":"Load More"
 }

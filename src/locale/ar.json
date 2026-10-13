@@ -20,9 +20,9 @@
     "sending": "جارٍ الإرسال...",
     "successMessage": "تم إرسال الرسالة بنجاح!",
     "errorMessage": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-    "contact_description":"نحن دائما على استعداد للتواصل والإجابة على أسئلتك",
-    "social_media_website":"مواقع التواصل",
-    "contact_us":"تواصل معنا"
+    "contact_description": "نحن دائما على استعداد للتواصل والإجابة على أسئلتك",
+    "social_media_website": "مواقع التواصل",
+    "contact_us": "تواصل معنا"
   },
   "navbar": {
     "home": "الرئيسية",
@@ -59,8 +59,8 @@
     "twitter": "إكس (تويتر)",
     "facebook": "فيسبوك",
     "youtube": "يوتيوب",
-    "highlights":"مقتطفات",
-    "contact":"اتصل بنا"
+    "highlights": "مقتطفات",
+    "contact": "اتصل بنا"
   },
   "homeImage": {
     "vision": "الرؤية والمبادئ",
@@ -79,7 +79,8 @@
   "lukman_title": "لقمان عبدالرحيم الفيلي",
   "Activities": {
     "Activities": "النشاطات",
-    "last_activities":"آخر الأنشطة"
+    "last_activities": "آخر الأنشطة",
+    "noActivities": "لا توجد أنشطة في هذا القسم."
   },
   "ArticlesGrid": {
     "searchPlaceholder": "ابحث عن مقال",
@@ -97,7 +98,8 @@
     "updating": "يتم التحديث...",
     "noArticles": "لا توجد مقالات",
     "readMore": "قراءة المزيد",
-    "loadMore": "تحميل المزيد"
+    "loadMore": "تحميل المزيد",
+    "noResults": "لا توجد مقالات مطابقة لبحثك"
   },
   "Vision": {
     "vission_and_principles": "الرؤية والمبادئ"
@@ -114,34 +116,35 @@
   "Links": {
     "click_button": "اضغط لزيارة الموقع"
   },
-  "last-articles":"آخر المقالات",
-  "media":{
-    "media":"الميديا",
-    "filter_and_sort":"تصفية و ترتيب",
-    "no_video":"لا توجد فيديوهات حالياً",
-    "interview_language":"لغة المقابلة",
-    "interview_category":"تصنيف المقابلة",
-    "all":"الكل",
-    "sort_by":"رتب حسب",
-    "choose_sort_order":"اختر ترتيب الفرز",
-    "address":"العنوان",
-    "oldest_first":"الاقدم اولا",
-    "newest_first":"الاحدث اولا",
-    "apply_filter":"تطبيق الفلتر",
-    "reset":"إعادة تعيين",
-    "applying":"جاري التطبيق..."
+  "last-articles": "آخر المقالات",
+  "media": {
+    "media": "الميديا",
+    "filter_and_sort": "تصفية و ترتيب",
+    "no_video": "لا توجد فيديوهات حالياً",
+    "interview_language": "لغة المقابلة",
+    "interview_category": "تصنيف المقابلة",
+    "all": "الكل",
+    "sort_by": "رتب حسب",
+    "choose_sort_order": "اختر ترتيب الفرز",
+    "address": "العنوان",
+    "oldest_first": "الاقدم اولا",
+    "newest_first": "الاحدث اولا",
+    "apply_filter": "تطبيق الفلتر",
+    "reset": "إعادة تعيين",
+    "applying": "جاري التطبيق..."
   },
-  "UnitedNations":{
-    "Sections":"الأقسام"
+  "UnitedNations": {
+    "Sections": "الأقسام"
   },
-   "books":{
-    "down-arabic":"تحميل (عربي)",
-    "down_english":"تحميل (انكليزي)",
-    "Uploading":"جاري التحميل"
+  "books": {
+    "down-arabic": "تحميل (عربي)",
+    "down_english": "تحميل (انكليزي)",
+    "Uploading": "جاري التحميل"
   },
-    "errorMessage": {
+  "errorMessage": {
     "errorOops": "عذراً!",
     "errorMessage": "حدث خطأ ما في الاتصال بالشبكة.",
     "errorRetryButton": "إعادة المحاولة"
-  }
+  },
+  "load_more": "تحميل المزيد"
 }

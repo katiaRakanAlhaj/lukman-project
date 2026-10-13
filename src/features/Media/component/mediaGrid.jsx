@@ -1,13 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import DOMPurify from "dompurify";
 import i18next from "i18next";
 import autoPlay from "../../../assets/images/autoPlay.svg";
-const MediaGrid = ({ videosData, homePageData }) => {
+import SeeMoreButton from "../../../component/ux/seeMoreButton";
+import MediaSkeleton from "./MediaSkeleton";
+import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
+
+const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
   const [activeVideo, setActiveVideo] = useState(null);
   const [rect, setRect] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(8); // show first 8
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const gridRef = useRef(null);
 
-  // ===== Normalize data: handle array, pagination {data: [...]}, or category object {videos: [...]} =====
+  // ===== Normalize data =====
   const videos = Array.isArray(videosData)
     ? videosData
     : Array.isArray(videosData?.videos)
@@ -16,7 +22,29 @@ const MediaGrid = ({ videosData, homePageData }) => {
         ? videosData.data
         : [];
 
-  // ===== Helper: format date =====
+  // ===== Slice videos for pagination =====
+  const visibleVideos = videos.slice(0, visibleCount);
+  const hasMore = visibleCount < videos.length;
+
+  // ===== Reset pagination + scroll to top of grid when data changes =====
+  useEffect(() => {
+    setVisibleCount(8);
+    if (gridRef.current) {
+      gridRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [videosData]);
+
+  // ===== Handle see more with skeleton =====
+  const handleSeeMore = () => {
+    setIsLoadingMore(true);
+    // simulate loading delay (replace with real API call if needed)
+    setTimeout(() => {
+      setVisibleCount((prev) => prev + 6); // load 6 more
+      setIsLoadingMore(false);
+    }, 1200);
+  };
+
+  // ===== Format date =====
   const formatDate = (dateStr) => {
     if (!dateStr) return "";
     if (/[\u0600-\u06FF]/.test(dateStr)) return dateStr;
@@ -51,7 +79,7 @@ const MediaGrid = ({ videosData, homePageData }) => {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // ===== Handle thumbnail click — capture its exact position & size =====
+  // ===== Handle thumbnail click =====
   const handleOpen = (e, video) => {
     const r = e.currentTarget.getBoundingClientRect();
     setRect({
@@ -63,11 +91,10 @@ const MediaGrid = ({ videosData, homePageData }) => {
     setActiveVideo(video);
   };
 
-  // ===== Render video player (native YouTube/Vimeo UI or HTML5 video) =====
+  // ===== Render video player =====
   const renderPlayer = (video) => {
     const url = video?.video || "";
 
-    // ---- YouTube ----
     const ytMatch = url.match(
       /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]+)/,
     );
@@ -96,7 +123,6 @@ const MediaGrid = ({ videosData, homePageData }) => {
       );
     }
 
-    // ---- Vimeo ----
     const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
     if (vimeoMatch) {
       return (
@@ -111,7 +137,6 @@ const MediaGrid = ({ videosData, homePageData }) => {
       );
     }
 
-    // ---- Direct video file (.mp4, .webm, etc.) ----
     return (
       <video
         src={url}
@@ -138,78 +163,87 @@ const MediaGrid = ({ videosData, homePageData }) => {
         />
       )}
 
-      {/* ===== Grid ===== */}
-      {videos.length === 0 ? (
-        <p className="text-[#666666] text-[0.9rem] mt-[2rem]">
-          {i18next.t("media.no_video")}
-        </p>
-      ) : (
+      {/* ===== Filtering: show skeleton grid ===== */}
+      {isFiltering ? (
         <div className="grid md:grid-cols-2 grid-cols-1 gap-x-[3rem] gap-y-[2rem] mt-[2rem]">
-          {videos.map((video) => (
-            <div key={video.id} className="relative">
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={(e) => handleOpen(e, video)}
-                  className="relative block w-full lg:h-[22rem] h-[20rem] rounded-3xl cursor-pointer overflow-hidden text-left"
-                >
-                  {/* Banner image */}
-                  <img
-                    className="w-full h-full object-cover"
-                    alt={video.title || "media"}
-                    src={video.video_image}
-                  />
-
-                  {/* Dark gradient overlay */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.95) 100%)",
-                    }}
-                  ></div>
-
-                  {/* Play button */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="lg:w-[7rem] lg:h-[7rem] md:w-[5rem] md:h-[5rem] w-[3.5rem] h-[3.5rem] rounded-full bg-[#FF000080] flex justify-center items-center border border-white/30">
-                      <img
-                        className="md:w-[2rem] w-[1rem]"
-                        alt="play"
-                        src={autoPlay}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Bottom title + date */}
-                  <div
-                    className="absolute bottom-4 left-0 right-0 px-6 z-10 flex justify-between items-end gap-4"
-                    dir="rtl"
-                  >
-                    {video.title && (
-                      <h3 className="text-white text-[0.9rem] font-bold text-right leading-snug flex-1">
-                        {video.title}
-                      </h3>
-                    )}
-                    {video.date && (
-                      <p className="text-white text-[0.85rem] opacity-90 whitespace-nowrap">
-                        {formatDate(video.date)}
-                      </p>
-                    )}
-                  </div>
-                </button>
-              </div>
-            </div>
-          ))}
+          <MediaSkeleton count={6} />
         </div>
+      ) : videos.length === 0 ? (
+        /* ---- Empty state (reusable component) ---- */
+        <EmptyState message={i18next.t("media.no_video")} />
+      ) : (
+        <>
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-x-[3rem] gap-y-[2rem] mt-[2rem]">
+            {/* Real cards */}
+            {visibleVideos.map((video) => (
+              <div key={video.id} className="relative">
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={(e) => handleOpen(e, video)}
+                    className="relative block w-full lg:h-[22rem] h-[20rem] rounded-3xl cursor-pointer overflow-hidden text-left"
+                  >
+                    <img
+                      className="w-full h-full object-cover"
+                      alt={video.title || "media"}
+                      src={video.video_image}
+                    />
+
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.95) 100%)",
+                      }}
+                    ></div>
+
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="lg:w-[7rem] lg:h-[7rem] md:w-[5rem] md:h-[5rem] w-[3.5rem] h-[3.5rem] rounded-full bg-[#FF000080] flex justify-center items-center border border-white/30">
+                        <img
+                          className="md:w-[2rem] w-[1rem]"
+                          alt="play"
+                          src={autoPlay}
+                        />
+                      </div>
+                    </div>
+
+                    <div
+                      className="absolute bottom-4 left-0 right-0 px-6 z-10 flex justify-between items-end gap-4"
+                      dir="rtl"
+                    >
+                      {video.title && (
+                        <h3 className="text-white text-[0.9rem] font-bold text-right leading-snug flex-1">
+                          {video.title}
+                        </h3>
+                      )}
+                      {video.date && (
+                        <p className="text-white text-[0.85rem] opacity-90 whitespace-nowrap">
+                          {formatDate(video.date)}
+                        </p>
+                      )}
+                    </div>
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {/* Skeleton cards while loading more */}
+            {isLoadingMore && <MediaSkeleton count={6} />}
+          </div>
+
+          {/* ===== See More Button ===== */}
+          {hasMore && !isLoadingMore && (
+            <SeeMoreButton onClick={handleSeeMore} />
+          )}
+        </>
       )}
 
-      {/* ===== Video Modal — positioned exactly over the clicked thumbnail ===== */}
+      {/* ===== Video Modal ===== */}
       {activeVideo && rect && (
         <div
           className="fixed inset-0 z-[9999]"
           onClick={() => setActiveVideo(null)}
         >
-          {/* Player wrapper positioned exactly where the thumbnail was */}
           <div
             className="absolute"
             style={{
@@ -220,11 +254,9 @@ const MediaGrid = ({ videosData, homePageData }) => {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Player container – same size & position as the thumbnail */}
             <div className="relative w-full h-full rounded-3xl overflow-hidden bg-black">
               {renderPlayer(activeVideo)}
 
-              {/* Close button — INSIDE the video, top-right corner */}
               <button
                 type="button"
                 onClick={() => setActiveVideo(null)}

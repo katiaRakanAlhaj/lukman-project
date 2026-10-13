@@ -1,28 +1,15 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { SORT_OPTIONS } from "../hook/useArtcilesFilter";
 import { useSearchArticles } from "../hook/useFetchArticlesCategory";
 import date from "../../../assets/images/date.svg";
 import { Link, useParams } from "react-router-dom";
-import i18n from "../../../i18n/i18n";
 import i18next from "i18next";
+import SeeMoreButton from "../../../component/ux/seeMoreButton";
+import ArticlesGridSkeleton from "./ArticleCardSkeleton ";
+import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
 
 // --- Inline SVG Components ---
-const ChevronDownIcon = () => (
-  <svg
-    stroke="currentColor"
-    fill="currentColor"
-    strokeWidth="0"
-    viewBox="0 0 256 512"
-    className="text-white text-[1.3rem]"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"></path>
-  </svg>
-);
-
 const SearchIcon = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -39,42 +26,56 @@ const SearchIcon = ({ className }) => (
   </svg>
 );
 
+const INITIAL_COUNT = 6;
+const LOAD_MORE_COUNT = 6;
+
 const ArticlesGrid = ({
   articlesCategoryData,
   articlesData,
-  isLoading,
   isFetching,
   filters,
 }) => {
   const { t } = useTranslation();
-  const { lang } = useParams(); // ✅ gets "ar" or "en"
+  const { lang } = useParams();
 
-  // ---- Filters come from parent via props ----
   const { category, sort, setCategory, setSort, reset } = filters;
 
-  // ---- Search state (local) ----
   const [searchInput, setSearchInput] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [submittedQuery, setSubmittedQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
 
-  // ✅ Debounce: only update debouncedQuery 400ms after the user stops typing
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(searchInput.trim());
-    }, 400);
-    return () => clearTimeout(timer);
-  }, [searchInput]);
+  const [gridSkeleton, setGridSkeleton] = useState(false);
+  const firstRunRef = useRef(true);
 
-  // ---- Search hook — fires automatically as the debounced value changes ----
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+  useEffect(() => {
+    if (firstRunRef.current) return;
+    setVisibleCount(INITIAL_COUNT);
+    setGridSkeleton(true);
+    const timer = setTimeout(() => setGridSkeleton(false), 700);
+    return () => clearTimeout(timer);
+  }, [category, sort]);
+
+  useEffect(() => {
+    if (firstRunRef.current) {
+      firstRunRef.current = false;
+      return;
+    }
+    setVisibleCount(INITIAL_COUNT);
+    setGridSkeleton(true);
+    const timer = setTimeout(() => setGridSkeleton(false), 700);
+    return () => clearTimeout(timer);
+  }, [submittedQuery]);
+
   const {
     data: searchResults,
     isLoading: isSearchLoading,
     isFetching: isSearchFetching,
-  } = useSearchArticles(debouncedQuery);
+  } = useSearchArticles(submittedQuery);
 
-  const isSearching = debouncedQuery.trim().length > 0;
+  const isSearching = submittedQuery.trim().length > 0;
 
-  // ---- Helpers ----
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const dateObj = new Date(dateString);
@@ -99,14 +100,36 @@ const ArticlesGrid = ({
     return normalizeArticles(articlesData);
   }, [isSearching, searchResults, articlesData]);
 
+  const visibleArticles = useMemo(
+    () => articlesList.slice(0, visibleCount),
+    [articlesList, visibleCount],
+  );
+
+  const hasMore = visibleCount < articlesList.length;
+
+  const isLoading =
+    isFetching || isSearchLoading || isSearchFetching || gridSkeleton;
+
+  const isEmpty = !isLoading && articlesList.length === 0;
+
+  const handleLoadMore = () => {
+    setGridSkeleton(true);
+    setTimeout(() => {
+      setVisibleCount((prev) =>
+        Math.min(prev + LOAD_MORE_COUNT, articlesList.length),
+      );
+      setGridSkeleton(false);
+    }, 700);
+  };
+
   const handleReset = () => {
     reset();
     setSearchInput("");
-    setDebouncedQuery("");
+    setSubmittedQuery("");
   };
 
   const handleSearchClick = () => {
-    setDebouncedQuery(searchInput.trim());
+    setSubmittedQuery(searchInput.trim());
   };
 
   return (
@@ -115,10 +138,12 @@ const ArticlesGrid = ({
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
           {/* ============ Sidebar ============ */}
           <div className="lg:col-span-3 col-span-full">
-            {/* --- Search box --- */}
+            {/* Search box */}
             <div className="relative">
               <input
-                className={`w-full h-[3.3rem] border border-[#E7E8E9] outline-none p-[1rem] ${i18next.language == "ar" ? "rounded-tr-lg" : "rounded-tl-lg"}`}
+                className={`w-full h-[3.3rem] border border-[#E7E8E9] outline-none p-[1rem] ${
+                  i18next.language == "ar" ? "rounded-tr-lg" : "rounded-tl-lg"
+                }`}
                 type="search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
@@ -132,16 +157,16 @@ const ArticlesGrid = ({
                 }}
               />
 
-              {/* Placeholder text — hidden when typing or focused */}
               {!searchInput && !isFocused && (
                 <p
-                  className={`absolute ${i18next.language == "ar" ? "right-10" : "left-10"} top-4 pointer-events-none text-gray-400`}
+                  className={`absolute ${
+                    i18next.language == "ar" ? "right-10" : "left-10"
+                  } top-4 pointer-events-none text-gray-400`}
                 >
                   {t("ArticlesGrid.searchPlaceholder")}
                 </p>
               )}
 
-              {/* Search SVG icon — hidden on focus */}
               {!searchInput && !isFocused && (
                 <SearchIcon
                   className={`absolute ${
@@ -154,13 +179,15 @@ const ArticlesGrid = ({
                 onClick={handleSearchClick}
                 className={`absolute w-[5.5rem] ${
                   i18next.language == "en" ? "right-0" : "left-0"
-                } top-0 bottom-0 bg-negative h-full ${i18next.language == "ar" ? "rounded-tl-lg" : "rounded-tr-lg"} font-bold text-[1rem] text-white flex justify-center items-center cursor-pointer`}
+                } top-0 bottom-0 bg-negative h-full ${
+                  i18next.language == "ar" ? "rounded-tl-lg" : "rounded-tr-lg"
+                } font-bold text-[1rem] text-white flex justify-center items-center cursor-pointer`}
               >
                 {t("ArticlesGrid.searchButton")}
               </div>
             </div>
 
-            {/* --- Filter / sort card --- */}
+            {/* Filter card */}
             <div
               className="w-full h-auto py-[1.5rem] mt-[1rem] rounded-3xl p-[1.5rem]"
               style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
@@ -172,7 +199,6 @@ const ArticlesGrid = ({
                 {t("ArticlesGrid.categoryLabel")}
               </p>
 
-              {/* --- Category buttons (by NAME) --- */}
               <div className="flex flex-row flex-wrap gap-x-[0.5rem] gap-y-[1rem] mt-4">
                 <button
                   type="button"
@@ -202,7 +228,6 @@ const ArticlesGrid = ({
                 ))}
               </div>
 
-              {/* --- Sort select --- */}
               <div className="mt-5">
                 <div className="space-y-2">
                   <label
@@ -243,89 +268,62 @@ const ArticlesGrid = ({
             </div>
           </div>
 
-          {/* ============ Articles Grid ============ */}
+          {/* ============ Grid ============ */}
           <div className="lg:col-span-9 col-span-1">
-            {isLoading || (isSearching && isSearchLoading) ? (
-              <div className="text-center py-10 text-secondary">
-                {t("ArticlesGrid.loading")}
-              </div>
-            ) : articlesList.length === 0 ? (
-              <div className="text-center py-10 text-secondary">
-                {t("ArticlesGrid.noArticles")}
-              </div>
+            {gridSkeleton ? (
+              <ArticlesGridSkeleton cards={6} />
+            ) : isEmpty ? (
+              /* ---- Empty state (now a reusable component) ---- */
+              <EmptyState message={t("ArticlesGrid.noResults")} />
             ) : (
-              <>
-                {(isFetching || (isSearching && isSearchFetching)) && (
-                  <div className="text-center text-sm text-gray-400 mb-2">
-                    {t("ArticlesGrid.updating")}
-                  </div>
-                )}
-
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem]">
-                  {articlesList.map((article) => (
-                    <Link
-                      to={`/${lang}/Article/${article.id}`}
-                      key={article.id}
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem]">
+                {visibleArticles.map((article) => (
+                  <Link to={`/${lang}/Article/${article.id}`} key={article.id}>
+                    <div
+                      className="h-[28rem] w-full object-cover relative rounded-3xl"
+                      style={{
+                        boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",
+                      }}
                     >
-                      <div
-                        className="h-[28rem] w-full object-cover relative rounded-3xl"
-                        style={{
-                          boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",
-                        }}
-                      >
-                        <img
-                          className="w-full h-[13rem] object-cover rounded-t-3xl"
-                          src={article.banner}
-                          alt={article.title}
-                        />
+                      <img
+                        className="w-full h-[13rem] object-cover rounded-t-3xl"
+                        src={article.banner}
+                        alt={article.title}
+                      />
 
-                        <div className="mt-[1rem] px-[1rem]">
-                          <h1 className="text-[1.2rem] font-bold text-secondary line-clamp-2">
-                            {article.title}
-                          </h1>
+                      <div className="mt-[1rem] px-[1rem]">
+                        <h1 className="text-[1.2rem] font-bold text-secondary line-clamp-2">
+                          {article.title}
+                        </h1>
 
-                          <div className="flex gap-x-2 mt-2 items-center">
-                            <img src={date} alt="date" />
-                            <p className="text-secondary text-[0.9em]">
-                              {formatDate(article.date)}
-                            </p>
-                          </div>
-
-                          <div
-                            className="text-[1rem] text-[#666666] mt-1 line-clamp-3 whitespace-pre-line"
-                            dangerouslySetInnerHTML={{
-                              __html: article.description,
-                            }}
-                          />
+                        <div className="flex gap-x-2 mt-2 items-center">
+                          <img src={date} alt="date" />
+                          <p className="text-secondary text-[0.9em]">
+                            {formatDate(article.date)}
+                          </p>
                         </div>
 
-                        <button className="w-full h-[2.5em] right-0 bg-negative rounded-b-3xl text-white font-bold text-[1.1em] flex items-center justify-center cursor-pointer absolute bottom-0 hover:bg-red-700 transition-colors">
-                          {t("ArticlesGrid.readMore")}
-                        </button>
+                        <div
+                          className="text-[1rem] text-[#666666] mt-1 line-clamp-3 whitespace-pre-line"
+                          dangerouslySetInnerHTML={{
+                            __html: article.description,
+                          }}
+                        />
                       </div>
-                    </Link>
-                  ))}
-                </div>
-              </>
+
+                      <button className="w-full h-[2.5em] right-0 bg-negative rounded-b-3xl text-white font-bold text-[1.1em] flex items-center justify-center cursor-pointer absolute bottom-0 hover:bg-red-700 transition-colors">
+                        {t("ArticlesGrid.readMore")}
+                      </button>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             )}
 
-            {/* --- Load more --- */}
-            <div className="flex justify-center items-center mt-[3rem]">
-              <div>
-                <button
-                  type="button"
-                  className="flex items-center justify-center gap-x-[0.5rem] w-[18rem] h-[3.5rem] bg-negative rounded-t-xl"
-                  style={{
-                    boxShadow: "rgba(0, 0, 0, 0.25) 0px 5px 4px 0px",
-                  }}
-                >
-                  <p className="text-[1.1rem] text-white font-bold">
-                    {t("ArticlesGrid.loadMore")}
-                  </p>
-                  <ChevronDownIcon />
-                </button>
-              </div>
-            </div>
+            {/* --- Load more (uses SeeMoreButton) --- */}
+            {!gridSkeleton && !isEmpty && hasMore && (
+              <SeeMoreButton onClick={handleLoadMore} />
+            )}
           </div>
         </div>
       </div>

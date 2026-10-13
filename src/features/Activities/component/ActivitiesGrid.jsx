@@ -1,22 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import ActivitiesGridSkeleton from "./ActivitiesGridSkeleton";
+import SeeMoreButton from "../../../component/ux/seeMoreButton";
+import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
+
+const INITIAL_COUNT = 4;
+const LOAD_MORE_COUNT = 6;
+
 const ActivitiesGrid = ({ CategoryContent }) => {
-  const {lang} = useParams();
-  // Safely access the categories array
+  const { lang } = useParams();
+  const { t } = useTranslation();
+
   const categories = Array.isArray(CategoryContent)
     ? CategoryContent
     : CategoryContent?.data || [];
 
-  // Active category index (default: first one)
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(false); // category switch loader
+  const [loadingMore, setLoadingMore] = useState(false); // see-more loader
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+  // When category changes → reset visible count + show skeleton
+  useEffect(() => {
+    setLoading(true);
+    setVisibleCount(INITIAL_COUNT);
+
+    const timer = setTimeout(() => setLoading(false), 700); // simulate fetch
+    return () => clearTimeout(timer);
+  }, [activeIndex]);
 
   if (!categories.length) return null;
 
   const activeCategory = categories[activeIndex];
   const activities = activeCategory?.activities || [];
 
-  // Format date from ISO string (e.g. "2026-03-16T00:00:00.000000Z" → "16-03-2026")
+  // Reset visibleCount if category has fewer items than current visibleCount
+  useEffect(() => {
+    if (visibleCount > activities.length && activities.length > 0) {
+      setVisibleCount(activities.length);
+    }
+  }, [activities.length, visibleCount]);
+
   const formatDate = (isoDate) => {
     if (!isoDate) return "";
     const d = new Date(isoDate);
@@ -26,6 +52,19 @@ const ActivitiesGrid = ({ CategoryContent }) => {
     const year = d.getFullYear();
     return `${day}-${month}-${year}`;
   };
+
+  const handleSeeMore = () => {
+    setLoadingMore(true);
+    setTimeout(() => {
+      setVisibleCount((prev) =>
+        Math.min(prev + LOAD_MORE_COUNT, activities.length),
+      );
+      setLoadingMore(false);
+    }, 700); // simulate fetch delay
+  };
+
+  const visibleActivities = activities.slice(0, visibleCount);
+  const hasMore = visibleCount < activities.length;
 
   return (
     <div className="mt-8">
@@ -51,44 +90,54 @@ const ActivitiesGrid = ({ CategoryContent }) => {
 
       {/* Activities list */}
       <div>
-        {activities.map((activity) => (
-          <Link to={`/${lang}/Activity/${activity.id}`}>
-            <div
-              key={activity.id}
-              className="mt-[2.5rem] grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]"
-            >
-              {/* Left: text */}
-              <div className="lg:col-span-8 col-span-1">
-                <p className="text-[#000000] text-[0.9rem]">
-                  {formatDate(activity.date)}
-                </p>
-                <h1 className="text-[#000000] mt-[1rem] font-bold text-[1.3rem]">
-                  {activity.title}
-                </h1>
-                <div
-                  className="text-[#666666] text-lg mt-2 w-[95%] whitespace-pre-line"
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(activity.description || ""),
-                  }}
-                />
-              </div>
+        {loading ? (
+          <ActivitiesGridSkeleton count={3} />
+        ) : (
+          <>
+            {visibleActivities.map((activity) => (
+              <Link to={`/${lang}/Activity/${activity.id}`} key={activity.id}>
+                <div className="mt-[2.5rem] grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
+                  {/* Left: text */}
+                  <div className="lg:col-span-8 col-span-1">
+                    <p className="text-[#000000] text-[0.9rem]">
+                      {formatDate(activity.date)}
+                    </p>
+                    <h1 className="text-[#000000] mt-[1rem] font-bold text-[1.3rem]">
+                      {activity.title}
+                    </h1>
+                    <div
+                      className="text-[#666666] text-lg mt-2 w-[95%] whitespace-pre-line"
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(activity.description || ""),
+                      }}
+                    />
+                  </div>
 
-              {/* Right: image */}
-              <div className="lg:col-span-4 col-span-1">
-                <img
-                  className="w-full h-[15rem] object-cover rounded-3xl cursor-pointer hover:opacity-90 transition-opacity"
-                  src={activity.banner}
-                  alt={activity.title}
-                />
-              </div>
-            </div>
-          </Link>
-        ))}
+                  {/* Right: image */}
+                  <div className="lg:col-span-4 col-span-1">
+                    <img
+                      className="w-full h-[15rem] object-cover rounded-3xl cursor-pointer hover:opacity-90 transition-opacity"
+                      src={activity.banner}
+                      alt={activity.title}
+                    />
+                  </div>
+                </div>
+              </Link>
+            ))}
 
-        {!activities.length && (
-          <p className="text-center text-[#666] mt-[2rem]">
-            لا توجد عناصر في هذا القسم.
-          </p>
+            {/* Loading more skeleton */}
+            {loadingMore && <ActivitiesGridSkeleton count={3} />}
+
+            {/* See more button (extracted component) */}
+            {hasMore && !loadingMore && (
+              <SeeMoreButton onClick={handleSeeMore} />
+            )}
+
+            {/* Empty state (reusable component) */}
+            {!activities.length && (
+              <EmptyState message={t("Activities.noActivities")} />
+            )}
+          </>
         )}
       </div>
     </div>
