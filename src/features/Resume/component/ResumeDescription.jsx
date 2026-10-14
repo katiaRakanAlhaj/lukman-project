@@ -11,7 +11,7 @@ const ResumeDescription = ({ ProfissionalExperiencesData }) => {
 
   return (
     <div className="flex flex-col space-y-3">
-      <h1 className="font-bold text-primary text-[1.8rem] mt-[1.3rem]">
+      <h1 className="font-bold text-primary lg:text-[1.8rem] text-[1.5rem] mt-[1.3rem]">
         {i18next.t("lukman_title")}
       </h1>
 

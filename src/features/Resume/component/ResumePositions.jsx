@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import i18next from "i18next";
+import { ResumeTitle } from "../../../component/ux/ResumeTitle";
 const ResumePositions = ({ PositionsData }) => {
   // Safely access the array (works with both { data: [...] } and raw array)
   const positions = Array.isArray(PositionsData)
@@ -10,10 +11,8 @@ const ResumePositions = ({ PositionsData }) => {
 
   return (
     <div className="mt-[3.5rem]">
-      <h1 className="text-primary mb-2 text-[1.8rem] font-bold">
-        {i18next.t("resumePage.postions")}
-      </h1>
-
+      <ResumeTitle title={i18next.t("resumePage.postions")} />
+     
       <div>
         <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[4em] gap-y-[2rem]">
           <div className="lg:col-span-12 col-span-1 space-y-[1em]">
@@ -24,10 +23,10 @@ const ResumePositions = ({ PositionsData }) => {
                 style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
               >
                 <div className="lg:flex justify-between">
-                  <h1 className="text-secondary lg:text-[1.3em] text-[1rem] font-bold lg:font-[500]">
+                  <h1 className="text-secondary text-[1.3em] font-bold lg:font-[500]">
                     {position.title}
                   </h1>
-                  <p className="text-secondary lg:text-[1.2em] text-[0.9rem]">
+                  <p className="text-secondary lg:text-[1.2em] text-[1rem] lg:mt-0 mt-2">
                     {position.date}
                   </p>
                 </div>

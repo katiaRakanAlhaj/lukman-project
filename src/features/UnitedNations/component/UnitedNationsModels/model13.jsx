@@ -3,7 +3,7 @@ const Model13 = ({ data }) => {
   const cards = data.content || [];
   return (
     <div className="flex flex-col space-y-2">
-      <h1 className="text-secondary font-bold text-[1.5rem]">{data.title}</h1>
+      <h1 className="text-secondary font-bold text-[1.3rem] lg:text-[1.5rem]">{data.title}</h1>
 
       <p
         dangerouslySetInnerHTML={{

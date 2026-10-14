@@ -58,11 +58,27 @@ const Navbar = ({ contactData }) => {
   const { t } = useTranslation();
 
   const socials = [
-    { href: contactData?.data?.linkedin, icon: linkedin, alt: t("navbar.linkedin") },
-    { href: contactData?.data?.instagram, icon: instgram, alt: t("navbar.instagram") },
+    {
+      href: contactData?.data?.linkedin,
+      icon: linkedin,
+      alt: t("navbar.linkedin"),
+    },
+    {
+      href: contactData?.data?.instagram,
+      icon: instgram,
+      alt: t("navbar.instagram"),
+    },
     { href: contactData?.data?.x, icon: twitter, alt: t("navbar.twitter") },
-    { href: contactData?.data?.facebook, icon: facebook, alt: t("navbar.facebook") },
-    { href: contactData?.data?.youtube, icon: youtube, alt: t("navbar.youtube") },
+    {
+      href: contactData?.data?.facebook,
+      icon: facebook,
+      alt: t("navbar.facebook"),
+    },
+    {
+      href: contactData?.data?.youtube,
+      icon: youtube,
+      alt: t("navbar.youtube"),
+    },
   ].filter((s) => isValidSocialLink(s.href));
 
   const { lang } = useParams();
@@ -91,6 +107,7 @@ const Navbar = ({ contactData }) => {
     i18n.changeLanguage(otherLang);
     localStorage.setItem("language", otherLang);
     navigate(newPath, { replace: true });
+    window.location.reload();
   };
 
   return (
@@ -168,7 +185,7 @@ const Navbar = ({ contactData }) => {
                   {active && (
                     <span
                       className="absolute left-0 right-0 -bottom-[2rem] bg-negative"
-                      style={{ height: "2.2rem", width: "100%"}}
+                      style={{ height: "2.2rem", width: "100%" }}
                     />
                   )}
                 </Link>
@@ -180,6 +197,11 @@ const Navbar = ({ contactData }) => {
             type="button"
             onClick={handleSwitchLanguage}
             className="cursor-pointer text-primary font-semibold"
+            style={
+              otherLang === "ar"
+                ? { fontFamily: "'ShamelSansOne', sans-serif" }
+                : { fontFamily: "'Lufga', sans-serif" }
+            }
           >
             <p className="text-[1.1rem]">
               {otherLang === "en" ? t("navbar.english") : t("navbar.arabic")}

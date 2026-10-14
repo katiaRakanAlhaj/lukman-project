@@ -105,7 +105,7 @@ const HighlightsGrid = ({
                         dangerouslySetInnerHTML={{
                           __html: DOMPurify.sanitize(item.description),
                         }}
-                        className="text-[1rem] text-[#333333] flex text-justify"
+                        className="text-[1rem] text-[#333333] flex text-justify lg:mt-0 mt-2"
                       />
                     </div>
                   </div>

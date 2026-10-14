@@ -3,7 +3,7 @@ const Model16 = ({ data }) => {
   const items = data.content || [];
   return (
     <div>
-      <h1 className="font-bold text-secondary text-[1.5rem]">{data.title}</h1>
+      <h1 className="font-bold text-secondary text-[1.3rem] lg:text-[1.5rem]">{data.title}</h1>
 
       <div className="grid md:grid-cols-2 gap-[2rem] mt-[1rem]">
         {items.map((item, index) => (

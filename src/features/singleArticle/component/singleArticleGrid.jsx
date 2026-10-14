@@ -7,8 +7,8 @@ const SingleArticleContent = ({ articleByIdData }) => {
   return (
     <div className="lg:col-span-8 col-span-1">
       <div className="mb-[2rem]">
-        <div className="lg:flex justify-between items-center">
-          <h1 className="font-bold text-[#333333] text-[1.6rem]">
+        <div className="lg:flex space-y-2 justify-between items-center">
+          <h1 className="font-bold text-[#333333] lg:text-[1.6rem] text-[1.2rem]">
             {article.title}
           </h1>
           <p className="text-[#666666]">{formatDate(article.date)}</p>

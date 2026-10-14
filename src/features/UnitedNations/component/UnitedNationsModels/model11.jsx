@@ -2,7 +2,7 @@ import DOMPurify from "dompurify";
 const Model11 = ({ data }) => {
   return (
     <div className="flex flex-col space-y-2">
-      <h1 className="font-bold text-[1.5rem] text-secondary">{data.title}</h1>
+      <h1 className="font-bold lg:text-[1.5rem] text-[1.3rem] text-secondary">{data.title}</h1>
       <p
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(data.description),

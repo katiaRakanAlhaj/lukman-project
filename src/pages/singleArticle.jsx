@@ -33,7 +33,7 @@ const SingleArticle = () => {
       <ScrollToTop />
       <div className="container4 mx-auto">
         <SingleArticleBanner articleByIdData={articleByIdData} />
-        <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[3rem] mt-[2rem]">
+        <div className="grid lg:grid-cols-12 grid-cols-1 gap-y-[2rem] gap-x-[3rem] mt-[2rem]">
           <div className="lg:col-span-8 col-span-1">
             <SingleArticleContent articleByIdData={articleByIdData} />
           </div>

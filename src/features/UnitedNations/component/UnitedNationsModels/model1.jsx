@@ -13,7 +13,7 @@ const Model1 = ({ data }) => {
       <div
         className={`mt-[2rem] lg:mt-0 absolute bottom-[3rem] ${i18next.language == "ar" ? "right-[2rem]" : "left-[2rem]"}`}
       >
-        <p className="text-white font-[700] lg:text-[2.8rem] text-[1.7rem]">
+        <p className="text-white font-[700] lg:text-[2.8rem] text-[1.5rem]">
           {data?.title}
         </p>
       </div>

@@ -1,5 +1,6 @@
-import i18next from 'i18next';
-import React from 'react';
+import i18next from "i18next";
+import React from "react";
+import { ResumeTitle } from "../../../component/ux/ResumeTitle";
 
 const ResumeLanguages = ({ LanguagesData }) => {
   // Safely access the languages array
@@ -9,15 +10,14 @@ const ResumeLanguages = ({ LanguagesData }) => {
 
   return (
     <div className="mt-[3.5rem]">
-      <h1 className="text-[1.8rem] font-bold text-primary mb-2">{i18next.t("resumePage.Lang")}</h1>
-
+      <ResumeTitle title={i18next.t("resumePage.Lang")} />
       <div className="grid grid-cols-4 gap-6">
         <div className="lg:col-span-4 col-span-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
           {languages.map((language) => (
             <div
               key={language.id}
               className="w-full rounded-lg flex justify-start items-center gap-x-4 px-4 h-[5rem]"
-              style={{ boxShadow: 'rgba(0, 0, 0, 0.25) 0px 0px 4px 0px' }}
+              style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
             >
               <img
                 className="w-12 h-9"

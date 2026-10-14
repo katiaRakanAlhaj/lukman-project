@@ -9,7 +9,7 @@ const LinksGrid = ({ LinksData }) => {
       {links.map((link) => (
         <div
           key={link.id}
-          className="w-full h-[18rem] rounded-3xl border border-gray-200 relative"
+          className="w-full lg:h-[18rem] h-[20rem] rounded-3xl border border-gray-200 relative"
         >
           <a
             href={link.website}

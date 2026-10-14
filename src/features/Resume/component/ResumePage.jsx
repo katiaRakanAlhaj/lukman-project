@@ -47,7 +47,7 @@ const ResumePage = ({ resumePageData }) => {
 
         <button
           disabled={isLoading}
-          className={`absolute flex items-center justify-center gap-x-2 bottom-[2.5rem] w-[20rem] h-[3rem] rounded-full transform lg:translate-x-1/3 lg:left-1/3 transition-all
+          className={`absolute flex items-center justify-center gap-x-2 bottom-[2.5rem] w-[20rem] h-[3rem] rounded-full transform lg:translate-x-1/3 lg:left-1/3  transition-all
             ${isLoading ? "bg-primary cursor-wait disabled:opacity-100" : "bg-negative cursor-pointer"}`}
           onClick={handleDownload}
         >

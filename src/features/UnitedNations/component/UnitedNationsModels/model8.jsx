@@ -2,7 +2,7 @@ import DOMPurify from "dompurify";
 const Model8 = ({ data }) => {
   return (
     <div>
-      <h1 className="font-bold text-[#333333] text-[1.5rem]">{data.title}</h1>
+      <h1 className="font-bold text-[#333333] lg:text-[1.5rem] text-[1.3rem]">{data.title}</h1>
       <p
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(data.description),

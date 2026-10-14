@@ -13,7 +13,7 @@ const Model14 = ({ data }) => {
 
   return (
     <div>
-      <h1 className="font-bold text-secondary text-[1.5rem]">{data.title}</h1>
+      <h1 className="font-bold text-secondary text-[1.3rem] lg:text-[1.5rem]">{data.title}</h1>
       <div className="mt-4 flex flex-col gap-4">
         {data.content?.map((item, index) => {
           const isOpen = openIndex === index;

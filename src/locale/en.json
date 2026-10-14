@@ -152,5 +152,6 @@
     "errorMessage": "Something went wrong with the network connection.",
     "errorRetryButton": "Retry"
   },
-  "load_more": "Load More"
+  "load_more": "Load More",
+  "sections":"Sections"
 }

@@ -17,7 +17,7 @@ const VissionBanner = ({ vissionpageData }) => {
         </div>
       </div>
       <div
-        className={`absolute bottom-[4rem] ${i18next.language == "ar" ? "right-[4rem]" : "left-[4rem]"} text-[2.5rem] font-bold text-white`}
+        className={`absolute bottom-[4rem] ${i18next.language == "ar" ? "right-[4rem] right-[2rem]" : "left-[4rem] left-[2rem]"} lg:text-[2.5rem] text-[1.5rem] font-bold text-white`}
       >
         {i18next.t("Vision.vission_and_principles")}
       </div>

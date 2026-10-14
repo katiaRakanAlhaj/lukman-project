@@ -83,8 +83,7 @@ const Resume = () => {
           title={resumePageData?.data?.meta_title}
           description={resumePageData?.data?.meta_description}
         />
-       <div className="lg:block hidden">
-         <div className="container4 mx-auto">
+        <div className="container4 mx-auto">
           <ResumePage resumePageData={resumePageData} />
           <ResumeGrid homePageData={homePageData} degreesData={degreesData} />
           <ResumeDescription
@@ -94,19 +93,6 @@ const Resume = () => {
           <ResumeLanguages LanguagesData={LanguagesData} />
           <ResumeSkills SkillsData={SkillsData} />
         </div>
-       </div>
-       <div className="lg:hidden block">
-         <div>
-          <ResumePage resumePageData={resumePageData} />
-          <ResumeGrid homePageData={homePageData} degreesData={degreesData} />
-          <ResumeDescription
-            ProfissionalExperiencesData={ProfissionalExperiencesData}
-          />
-          <ResumePositions PositionsData={PositionsData} />
-          <ResumeLanguages LanguagesData={LanguagesData} />
-          <ResumeSkills SkillsData={SkillsData} />
-        </div>
-       </div>
       </HelmetProvider>
     </div>
   );

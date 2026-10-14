@@ -2,7 +2,7 @@ import DOMPurify from "dompurify";
 const Model7 = ({ data }) => {
   return (
     <div>
-      <h1 className="text-secondary text-[1.5rem] font-bold">{data.title}</h1>
+      <h1 className="text-secondary lg:text-[1.5rem] text-[1.3rem] font-bold">{data.title}</h1>
       <div
         className="w-full bg-white rounded-2xl mt-2 p-[2rem] h-[100%]"
         style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 2px 0px" }}

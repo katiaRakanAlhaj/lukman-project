@@ -92,7 +92,7 @@ const ActivitiesGrid = ({ CategoryContent }) => {
                     <p className="text-[#000000] text-[0.9rem]">
                       {formatDate(activity.date)}
                     </p>
-                    <h1 className="text-[#000000] mt-[1rem] font-bold text-[1.3rem]">
+                    <h1 className="text-[#000000] mt-[1rem] font-bold lg:text-[1.3rem] text-[1.2rem]">
                       {activity.title}
                     </h1>
                     <div

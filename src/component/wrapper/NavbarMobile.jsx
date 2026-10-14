@@ -49,6 +49,7 @@ const NavbarMobile = () => {
     i18n.changeLanguage(otherLang);
     localStorage.setItem("language", otherLang);
     navigate(newPath, { replace: true });
+    window.location.reload();
   };
 
   const closeMenu = () => setIsOpen(false);

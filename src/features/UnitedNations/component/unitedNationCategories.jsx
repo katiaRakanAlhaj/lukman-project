@@ -1,9 +1,17 @@
-const UnitedNationCategories = ({ unitedNationCategoryData, activeId, onSelect }) => {
+import i18next from "i18next";
+
+const UnitedNationCategories = ({
+  unitedNationCategoryData,
+  activeId,
+  onSelect,
+}) => {
   if (!unitedNationCategoryData?.data) return null;
 
   return (
     <div className="w-full h-auto bg-white rounded-2xl py-[1rem] px-[2rem]">
-      <p className="text-[#333333] font-bold text-[1.2rem] p-2">الأقسام</p>
+      <p className="text-[#333333] font-bold text-[1.2rem] p-2">
+        {i18next.t("sections")}
+      </p>
       <div className="w-full h-[0.01rem] bg-[#C4C4C4] mt-[1rem]"></div>
       <div className="-mx-[2rem]">
         {unitedNationCategoryData.data.map((category, index) => {
@@ -31,7 +39,9 @@ const UnitedNationCategories = ({ unitedNationCategoryData, activeId, onSelect }
                     : "none",
                 }}
               />
-              <p className={`text-[1.2rem] mt-1 ${isActive ? "text-[#099EC8]" : "text-[#002F3C]"}`}>
+              <p
+                className={`text-[1.2rem] mt-1 ${isActive ? "text-[#099EC8]" : "text-[#002F3C]"}`}
+              >
                 {category.name}
               </p>
             </div>

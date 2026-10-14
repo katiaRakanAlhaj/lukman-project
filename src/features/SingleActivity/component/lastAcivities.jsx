@@ -36,7 +36,7 @@ const LastAcivities = ({ activityContent }) => {
                 </p>
               </div>
               <div
-                className="text-[#666666] text-[0.9rem] mt-1 whitespace-pre-line"
+                className="text-[#666666] text-[1rem] mt-1 whitespace-pre-line"
                 dangerouslySetInnerHTML={{ __html: activity.description }}
               />
             </div>

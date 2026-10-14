@@ -2,7 +2,7 @@ import DOMPurify from "dompurify";
 const Model10 = ({ data }) => {
   return (
     <div>
-      <h1 className="text-secondary text-[1.5rem] font-bold">{data.title}</h1>
+      <h1 className="text-secondary lg:text-[1.5rem] text-[1.3rem] font-bold">{data.title}</h1>
       <p
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(data.description),
@@ -12,8 +12,8 @@ const Model10 = ({ data }) => {
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem] mt-[1.5rem]">
         {data.content.map((item, index) => (
           <div key={index} className="flex flex-col space-y-2">
-            <div className="w-[4rem] h-[4rem] rounded-full bg-[#099EC8] flex justify-center items-center">
-              <p className="text-[2rem] font-bold text-white mt-3 whitespace-pre-line">
+            <div className="lg:w-[4rem] lg:h-[4rem] w-[3rem] h-[3rem] rounded-full bg-[#099EC8] flex justify-center items-center">
+              <p className="lg:text-[2rem] text-[1.5rem] font-bold text-white mt-3 whitespace-pre-line">
                 {index + 1}
               </p>
             </div>

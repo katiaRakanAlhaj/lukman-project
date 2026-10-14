@@ -5,7 +5,7 @@ const LinksHeader = ({ LinksDataPage }) => {
 
   return (
     <div className="lg:mt-[3rem]">
-      <div className="w-full relative flex items-center justify-center text-center lg:h-[27rem] h-[20rem]">
+      <div className="w-full relative flex items-center justify-center text-center lg:h-[27rem] h-[22rem]">
         <div
           className="absolute lg:rounded-3xl w-full h-full bg-cover -z-10 transition-all duration-700"
           style={{
@@ -14,7 +14,7 @@ const LinksHeader = ({ LinksDataPage }) => {
           }}
         />
         <div className="mt-[2rem] lg:mt-0 w-[60%]">
-          <p className="text-white font-[700] text-[2.8rem]">{title}</p>
+          <p className="text-white font-[700] lg:text-[2.8rem] text-[1.5rem]">{title}</p>
           <div
             className="text-white font-[400] text-[1.2rem] lg:line-clamp-none line-clamp-3 px-[2rem]"
             dangerouslySetInnerHTML={{

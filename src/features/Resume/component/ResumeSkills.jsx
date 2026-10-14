@@ -1,4 +1,5 @@
 import i18next from "i18next";
+import { ResumeTitle } from "../../../component/ux/ResumeTitle";
 const ResumeSkills = ({ SkillsData }) => {
   // Safely access the skills array (works with both { data: [...] } and raw array)
   const skills = Array.isArray(SkillsData)
@@ -9,10 +10,7 @@ const ResumeSkills = ({ SkillsData }) => {
 
   return (
     <div className="mt-[3.5rem]">
-      <h1 className="text-[1.8rem] font-bold text-primary mb-2">
-        {i18next.t("resumePage.skills")}
-      </h1>
-
+      <ResumeTitle title={i18next.t("resumePage.skills")} />
       <div className="grid lg:grid-cols-5 md:grid-cols-2 lg:gap-y-[1.5rem] gap-y-[2rem] gap-x-[1.5rem]">
         {skills.map((skill) => (
           <div

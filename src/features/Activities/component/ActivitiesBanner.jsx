@@ -19,7 +19,7 @@ const ActivitiesBanner = ({ ActivitiesData }) => {
         className="text-[1rem] text-[#666666]"
       />
       <div className="lg:mt-[4rem] mt-[2rem] relative">
-        <div className="w-full relative flex items-center justify-center text-center h-[30rem]">
+        <div className="w-full relative flex items-center justify-center text-center lg:h-[30rem] h-[20rem]">
           {/* Background banner image with gradient overlay */}
           <div
             className="absolute lg:rounded-3xl w-full h-full bg-cover -z-10 transition-all duration-700"

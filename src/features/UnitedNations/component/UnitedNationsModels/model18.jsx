@@ -35,7 +35,7 @@ const Model18 = ({ data }) => {
 
   return (
     <div>
-      <h1 className="text-[1.5rem] text-secondary font-bold">{data.title}</h1>
+      <h1 className="lg:text-[1.5rem] text-[1.3rem] text-secondary font-bold">{data.title}</h1>
 
       <div className="grid md:grid-cols-2 grid-cols-1 gap-[2rem] mt-[1rem]">
         {items.map((item, index) => {

@@ -1,22 +1,26 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
+
 const Model12 = ({ data }) => {
   const [activeTab, setActiveTab] = useState(0);
   if (!data) return null;
   const tabs = data.content || [];
   const activeItem = tabs[activeTab];
+
   return (
     <div>
-      <h1 className="font-bold text-secondary text-[1.5rem]">{data.title}</h1>
+      <h1 className="font-bold text-secondary text-[1.3rem] lg:text-[1.5rem]">
+        {data.title}
+      </h1>
 
-      <div className="w-full h-auto mt-[1rem] rounded-2xl bg-white px-[1rem] py-[1.5rem]">
-        {/* Tabs */}
-        <div className="flex scrollbar-hide gap-x-[4rem] border-b border-b-[#C4C4C4] px-[3rem]">
+      <div className="w-full h-auto mt-[1rem] rounded-2xl bg-white px-[0.75rem] sm:px-[1rem] py-[1rem] sm:py-[1.5rem]">
+        {/* Tabs - horizontally scrollable on mobile */}
+        <div className="flex scrollbar-hide gap-x-[1.5rem] sm:gap-x-[4rem] border-b border-b-[#C4C4C4] px-[0.5rem] sm:px-[3rem] overflow-x-auto">
           {tabs.map((tab, index) => (
             <button
               key={index}
               onClick={() => setActiveTab(index)}
-              className={`text-[1rem] ${
+              className={`text-[0.875rem] sm:text-[1rem] whitespace-nowrap pb-[0.5rem] transition-colors ${
                 activeTab === index
                   ? "text-negative font-bold border-b-2 border-negative"
                   : "text-[#959595]"
@@ -29,7 +33,7 @@ const Model12 = ({ data }) => {
 
         {/* Content */}
         {activeItem && (
-          <div className="space-y-2 mt-4 px-4">
+          <div className="space-y-2 mt-4 px-[0.5rem] sm:px-4">
             <h1 className="text-[1.2rem] text-black font-bold">
               {activeItem.title}
             </h1>

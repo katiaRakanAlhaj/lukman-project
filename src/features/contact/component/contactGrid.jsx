@@ -40,7 +40,7 @@ const ContactGrid = ({ contactDataPage }) => {
         <div className="container2 mx-auto grid lg:grid-cols-2 grid-cols-1 h-full gap-x-[2rem]">
           {/* Left Column — Info */}
           <div className="flex flex-col justify-center h-full">
-            <p className="text-[1.6rem] font-bold text-[#000000]">
+            <p className="lg:text-[1.6rem] text-[1.2rem] font-bold text-[#000000]">
              {i18next.t("contact.contact_description")}
             </p>
 

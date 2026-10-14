@@ -10,10 +10,10 @@ import linkedin from "../../assets/images/linkedin.svg";
 
 /* ── Quick links (keys only, translated via t()) ─── */
 const quickLinksCol1 = [
-  { to: "/resume", key: "resume" },
-  { to: "/activities", key: "activities" },
-  { to: "/articles", key: "articles" },
-  { to: "/media", key: "media" },
+  { to: "/Resume", key: "resume" },
+  { to: "/Activities", key: "activities" },
+  { to: "/Articles", key: "articles" },
+  { to: "/Media", key: "media" },
   { to: "/Contact", key: "contact" },
 ];
 

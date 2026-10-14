@@ -51,7 +51,7 @@ const BooksGrid = ({ booksData }) => {
           return (
             <div
               key={book.id}
-              className="relative w-full h-[20rem] rounded-b-3xl shadow-[0_0_4px_0_#00000040] md:flex"
+              className="relative w-full lg:h-[20rem] h-[22rem] rounded-b-3xl shadow-[0_0_4px_0_#00000040] md:flex"
             >
               <img
                 className="md:h-[17rem] md:w-[15rem] w-[10rem] h-[10rem] mt-[-6rem] mr-[1.5rem] object-cover rounded-lg shadow-[0_4px_4px_0_#00000040]"

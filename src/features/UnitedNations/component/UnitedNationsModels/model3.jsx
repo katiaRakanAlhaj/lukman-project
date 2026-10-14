@@ -10,7 +10,7 @@ const Model3 = ({ data }) => {
         }}
       />
       <div className="mt-[2rem] lg:mt-0 absolute bottom-[4rem] px-[2rem]">
-        <p className="text-white font-[700] lg:text-[2.8rem] text-[1.7rem]">
+        <p className="text-white font-[700] lg:text-[2.8rem] text-[1.5rem]">
           {data?.title}
         </p>
         <p
