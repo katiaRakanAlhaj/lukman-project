@@ -28,6 +28,7 @@ import SingleArticle from "./pages/singleArticle";
 import SingleActivity from "./pages/singleActivity";
 import Media from "./pages/Media";
 import UnitedNations from "./pages/UnitedNations";
+import Milestone from "./pages/Milestone";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -106,6 +107,7 @@ function App() {
           <Route path="Activity/:id" element={<SingleActivity />} />
           <Route path="Media" element={<Media />} />
           <Route path="united_nation" element={<UnitedNations />} />
+          <Route path="Milestone" element={<Milestone />} />
 
           {/* 404 route */}
           {/* <Route path="*" element={<NotFound />} /> */}

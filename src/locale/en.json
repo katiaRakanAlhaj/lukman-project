@@ -40,11 +40,12 @@
     "twitter": "X (Twitter)",
     "facebook": "Facebook",
     "youtube": "YouTube",
-      "vision": "Vision & Principles",
+    "vision": "Vision & Principles",
     "united": "United Nations",
     "books": "Books & Research",
     "highlights": "Highlights",
-    "links": "Important Links"
+    "links": "Important Links",
+    "milestone": "Milestone"
   },
   "footer": {
     "tagline": "Diplomat · Politician · Writer",
@@ -108,7 +109,7 @@
   },
   "Vision": {
     "vission_and_principles": "Vision and Principles",
-    "no_content":"There is no content available for this category at the moment."
+    "no_content": "There is no content available for this category at the moment."
   },
   "loading": "Loading...",
   "Highlights": {
@@ -153,6 +154,20 @@
     "errorRetryButton": "Retry"
   },
   "load_more": "Load More",
-  "sections":"Sections",
-  "why_website":"Why The Website?"
+  "sections": "Sections",
+  "why_website": "Why The Website?",
+  "Milestone":{
+    "milestone": "Milestone",
+        "searchPlaceholder": "Search for a milestone",
+    "searchButton": "Search",
+    "filterAndSort": "Filter & Sort",
+    "categoryLabel": "Milestone Categories",
+    "all": "All",
+    "sortBy": "Sort by",
+    "chooseSort": "Choose sort order",
+    "sortTitle": "Title",
+    "sortOldest": "Oldest first",
+    "sortNewest": "Newest first",
+    "reset": "Reset"
+  }
 }

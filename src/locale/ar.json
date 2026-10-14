@@ -40,11 +40,12 @@
     "twitter": "إكس (تويتر)",
     "facebook": "فيسبوك",
     "youtube": "يوتيوب",
-     "vision": "الرؤية والمبادئ",
+    "vision": "الرؤية والمبادئ",
     "united": "الأمم المتحدة",
     "books": "الكتب والأبحاث",
     "highlights": "مقتطفات",
-    "links": "روابط مهمة"
+    "links": "روابط مهمة",
+    "milestone": "المحطات"
   },
   "footer": {
     "tagline": "دبلوماسي . سياسي . كاتب",
@@ -108,7 +109,7 @@
   },
   "Vision": {
     "vission_and_principles": "الرؤية والمبادئ",
-    "no_content":"لا يوجد محتوى متاح لهذا التصنيف حالياً."
+    "no_content": "لا يوجد محتوى متاح لهذا التصنيف حالياً."
   },
   "loading": "جاري التحميل ...",
   "Highlights": {
@@ -153,6 +154,20 @@
     "errorRetryButton": "إعادة المحاولة"
   },
   "load_more": "تحميل المزيد",
-  "sections":"الأقسام",
-  "why_website":"لماذا هذا الموقع؟"
+  "sections": "الأقسام",
+  "why_website": "لماذا هذا الموقع؟",
+  "Milestone": {
+    "milestone": "المحطات",
+    "searchPlaceholder": "ابحث عن محطة",
+    "searchButton": "بحث",
+    "filterAndSort": "تصفية و ترتيب",
+    "categoryLabel": "تصنيف المحطات",
+    "all": "الكل",
+    "sortBy": "رتب حسب",
+    "chooseSort": "اختر ترتيب الفرز",
+    "sortTitle": "العنوان",
+    "sortOldest": "الأقدم أولاً",
+    "sortNewest": "الأحدث أولاً",
+    "reset": "إعادة تعيين"
+  }
 }

@@ -2,12 +2,7 @@ import i18next from "i18next";
 import DOMPurify from "dompurify";
 
 const WhyTheWebsite = ({ homePageData }) => {
-  if (!homePageData) return null;
-
   const { Why_the_website_image, Why_the_website } = homePageData?.data;
-
-  if (!Why_the_website) return null;
-
   return (
     <section className="mt-[4rem] py-16 md:py-24 bg-gradient-to-br from-slate-50 to-white overflow-hidden relative">
       {/* Decorative background elements */}
