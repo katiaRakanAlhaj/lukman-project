@@ -267,3 +267,35 @@ div ol {
     background: #b91c1c; /* red — replace with your "negative" color */
     width: 28px;          /* pill shape for active */
 }
+/* Ultra-thin and short custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px; /* Very thin width */
+}
+
+/* The track (background) of the scrollbar */
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* Invisible track */
+    margin: 20px 0; /* Shortens the visible track area */
+}
+
+/* The thumb (the draggable part) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* Light gray */
+    border-radius: 10px;
+    /* THIS IS THE KEY: Transparent border makes the thumb visually shorter */
+    border: 20px solid transparent; 
+    background-clip: padding-box; 
+}
+
+/* Hover effect */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* Darker gray */
+    border: 20px solid transparent;
+    background-clip: padding-box;
+}
+
+/* Firefox support */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #005770 transparent;
+}

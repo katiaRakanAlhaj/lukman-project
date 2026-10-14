@@ -8,6 +8,7 @@ import HomeImage from "../features/home/component/homeImage";
 import { useFetchHomePage } from "../features/home/hook/useFetchHome";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
 import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
+import WhyTheWebsite from "../features/home/component/whyTheWebsite";
 
 const Home = () => {
   const {
@@ -38,6 +39,7 @@ const Home = () => {
           description={homePageData?.data?.meta_description}
         />
         <HomeImage banner={homePageData?.data?.banner} />
+        <WhyTheWebsite homePageData = {homePageData}/>
         <ContactSection contactdata={contactdata} />
       </HelmetProvider>
     </div>

@@ -56,7 +56,7 @@ const ContactSection = ({ contactdata }) => {
   return (
     <>
       <ToastProvider />
-      <div className="container3 mx-auto lg:mt-[12em] mt-[2rem]">
+      <div className="container3 mx-auto lg:mt-[6em] mt-[2rem]">
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-y-[2.5rem] gap-x-24">
           {/* Left column (unchanged) */}
           <div>

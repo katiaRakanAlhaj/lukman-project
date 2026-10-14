@@ -33,7 +33,7 @@ const isValidSocialLink = (href) => {
   return true;
 };
 
-const Footer = ({ contactData }) => {
+const Footer = ({ contactData, footerData }) => {
   const { t } = useTranslation();
   const { lang } = useParams();
   const location = useLocation();
@@ -74,29 +74,33 @@ const Footer = ({ contactData }) => {
   const socials = allSocials.filter(({ href }) => isValidSocialLink(href));
 
   return (
-    <div className="w-full lg:h-[35em] overflow-hidden bg-[#00161C] mt-[5rem]">
+    <div className="w-full lg:h-[37em] overflow-hidden bg-[#00161C] mt-[5rem]">
       <div className="container2 mx-auto py-[3rem]">
         <div className="flex flex-col space-y-[3em]">
           {/* ── Logo + tagline ─────────────────────── */}
-          <div className="md:flex lg:space-y-0 space-y-[1rem] justify-between">
-            <div>
-              <Link to={`/${currentLang}/`}>
-                <img
-                  src={logo}
-                  alt="Logo"
-                  style={{
-                    width: "11.9rem",
-                    filter: "brightness(0) invert(1)",
-                  }}
-                />
-              </Link>
-              <p className="text-[#FFFFFF] mt-1" style={{ fontSize: "1rem" }}>
-                {t("footer.tagline")}
-              </p>
+          <div className="lg:flex gap-x-[4rem] items-center">
+            <div className="md:flex lg:space-y-0 space-y-[1rem] justify-between">
+              <div>
+                <Link to={`/${currentLang}/`}>
+                  <img
+                    src={logo}
+                    alt="Logo"
+                    style={{
+                      width: "11.9rem",
+                      filter: "brightness(0) invert(1)",
+                    }}
+                  />
+                </Link>
+                <p className="text-[#FFFFFF] mt-1" style={{ fontSize: "1rem" }}>
+                  {t("footer.tagline")}
+                </p>
+              </div>
+              <div className="relative flex justify-center items-center" />
             </div>
-            <div className="relative flex justify-center items-center" />
+            <p className="font-medium text-white text-lg lg:text-xl">
+              {footerData?.data?.description}
+            </p>
           </div>
-
           {/* ── Divider ────────────────────────────── */}
           <div className="w-full h-[0.1em] bg-[#C1C7CD]" />
 
@@ -196,9 +200,11 @@ const Footer = ({ contactData }) => {
           <div className="w-full h-[0.1em] bg-[#C1C7CD]" />
 
           {/* ── Copyright ──────────────────────────── */}
-          <div className="flex justify-center items-center">
-            <p className="text-white text-center">{t("footer.rights")}</p>
-          </div>
+        </div>
+        <div className="flex justify-center items-center mt-[2rem] pb-[2rem]">
+          <p className="text-white text-center font-bold">
+            {footerData?.data?.copyright}
+          </p>
         </div>
       </div>
     </div>

@@ -3,12 +3,15 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useFetchContactInfo } from "../../features/contact/hook/useFetchContactInfo";
 import NavbarMobile from "./NavbarMobile";
+import { useFetchFooter } from "./hook/fetchFooter";
 
 function Wrapper() {
   const {
     data: contactData,
   } = useFetchContactInfo();
-
+  const {
+    data: footerData,
+  } = useFetchFooter();
   return (
     <div className="size-full relative">
       {/* <ScrollToTop /> */}
@@ -23,7 +26,7 @@ function Wrapper() {
       <div className="min-h-screen">
         <Outlet />
       </div>
-      <Footer contactData = {contactData}/>
+      <Footer footerData = {footerData} contactData = {contactData}/>
     </div>
   );
 }

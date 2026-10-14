@@ -76,8 +76,12 @@ const NavbarMobile = () => {
               className="cursor-pointer font-semibold text-primary"
             >
               <p
+                style={
+                  otherLang === "ar"
+                    ? { fontFamily: "'ShamelSansOne', sans-serif" }
+                    : { fontFamily: "'Lufga', sans-serif" }
+                }
                 className="text-[1.1rem]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
               >
                 {otherLang === "en" ? t("navbar.english") : t("navbar.arabic")}
               </p>
