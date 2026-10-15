@@ -9,6 +9,8 @@ import SeeMoreButton from "../../../component/ux/seeMoreButton";
 import ArticlesGridSkeleton from "./ArticleCardSkeleton ";
 import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
 import formatDate from "../../../component/ux/formatDate";
+import CategoryCard from "../../../component/ux/CategoryCard";
+import ContentCard from "../../../component/ux/ContentCard";
 
 // --- Inline SVG Components ---
 const SearchIcon = ({ className }) => (
@@ -192,31 +194,20 @@ const ArticlesGrid = ({
               </p>
 
               <div className="flex flex-row flex-wrap gap-x-[0.5rem] gap-y-[1rem] mt-4">
-                <button
-                  type="button"
-                  className={`w-full h-[2.2rem] px-[1rem] rounded-full flex justify-center items-center text-[1.1rem] ${
-                    category === "all"
-                      ? "bg-negative text-white"
-                      : "bg-[#E7EDF3] text-primary"
-                  }`}
+                <CategoryCard
+                  label={t("ArticlesGrid.categoryAll")}
+                  isActive={category === "all"}
                   onClick={() => setCategory("all")}
-                >
-                  {t("ArticlesGrid.categoryAll")}
-                </button>
+                  fullWidth
+                />
 
                 {categories.map((cat) => (
-                  <button
+                  <CategoryCard
                     key={cat.id}
-                    type="button"
-                    className={`w-auto h-[2.2rem] px-[1rem] rounded-full flex justify-center items-center text-[1.1rem] ${
-                      category === cat.name
-                        ? "bg-negative text-white"
-                        : "bg-[#E7EDF3] text-primary"
-                    }`}
+                    label={cat.name}
+                    isActive={category === cat.name}
                     onClick={() => setCategory(cat.name)}
-                  >
-                    {cat.name}
-                  </button>
+                  />
                 ))}
               </div>
 
@@ -270,44 +261,14 @@ const ArticlesGrid = ({
             ) : (
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem]">
                 {visibleArticles.map((article) => (
-                  <Link to={`/${lang}/Article/${article.id}`} key={article.id}>
-                    <div
-                      className="h-[28rem] w-full object-cover relative rounded-3xl"
-                      style={{
-                        boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",
-                      }}
-                    >
-                      <img
-                        className="w-full h-[13rem] object-cover rounded-t-3xl"
-                        src={article.banner}
-                        alt={article.title}
-                      />
-
-                      <div className="mt-[1rem] px-[1rem]">
-                        <h1 className="text-[1.2rem] font-bold text-secondary line-clamp-2">
-                          {article.title}
-                        </h1>
-
-                        <div className="flex gap-x-2 mt-2 items-center">
-                          <img src={date} alt="date" />
-                          <p className="text-secondary text-[0.9em]">
-                            {formatDate(article.date)}
-                          </p>
-                        </div>
-
-                        <div
-                          className="text-[1rem] text-[#666666] mt-1 line-clamp-3 whitespace-pre-line"
-                          dangerouslySetInnerHTML={{
-                            __html: article.description,
-                          }}
-                        />
-                      </div>
-
-                      <button className="w-full h-[2.5em] right-0 bg-negative rounded-b-3xl text-white font-bold text-[1.1em] flex items-center justify-center cursor-pointer absolute bottom-0 hover:bg-red-700 transition-colors">
-                        {t("ArticlesGrid.readMore")}
-                      </button>
-                    </div>
-                  </Link>
+                  <ContentCard
+                    key={article.id}
+                    id={article.id}
+                    banner={article.banner}
+                    title={article.title}
+                    date={article.date}
+                    description={article.description}
+                  />
                 ))}
               </div>
             )}

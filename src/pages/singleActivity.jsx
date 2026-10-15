@@ -27,22 +27,29 @@ const SingleActivity = () => {
   const currentCategoryName =
     singleActivityData?.category?.name || "Participations";
   const combinedLoading = singleActivityDataLoading || activityContentLoading;
+
   if (combinedLoading) {
     return <Loader />;
   }
   if (singleActivityDataError || activityContentError) {
     return <ErrorMessageNetwork />;
   }
+
   return (
     <div>
       <ScrollToTop />
       <div className="container4 mx-auto">
         <SingleActivityBanner singleActivityData={singleActivityData} />
-        <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[3rem] mt-[2rem]">
+
+        {/* Grid layout with items-start for independent column scrolling */}
+        <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[3rem] mt-[2rem] items-start">
+          {/* Main Activity Content */}
           <div className="lg:col-span-8 col-span-1 space-y-[2rem]">
             <SingleActivityContent singleActivityData={singleActivityData} />
           </div>
-          <div className="lg:col-span-4 col-span-1">
+
+          {/* Sticky Sidebar with Hidden Scrollbar */}
+          <div className="lg:col-span-4 col-span-1 lg:sticky lg:top-[2rem] max-h-[calc(100vh-4rem)] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <LastAcivities
               activityContent={activityContent}
               categoryName={currentCategoryName}

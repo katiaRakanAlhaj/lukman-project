@@ -13,6 +13,7 @@ const quickLinksCol1 = [
   { to: "/Resume", key: "resume" },
   { to: "/Activities", key: "activities" },
   { to: "/Articles", key: "articles" },
+  { to: "/Milestone", key: "milestone" },
   { to: "/Media", key: "media" },
   { to: "/Contact", key: "contact" },
 ];

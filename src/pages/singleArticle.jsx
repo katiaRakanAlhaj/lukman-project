@@ -9,6 +9,7 @@ import LastArticles from "../features/singleArticle/component/LastArticles";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
+
 const SingleArticle = () => {
   const { id } = useParams();
   const {
@@ -16,28 +17,38 @@ const SingleArticle = () => {
     isLoading: articleByIdDataLoading,
     error: articleByIdDataError,
   } = useFetchArticleById(id);
+
   const {
     data: articlesData,
     isLoading: articlesDataLoading,
     error: articlesDataError,
   } = useFetchArticles();
+
   const combinedLoading = articleByIdDataLoading || articlesDataLoading;
+
   if (combinedLoading) {
     return <Loader />;
   }
+
   if (articleByIdDataError || articlesDataError) {
     return <ErrorMessageNetwork />;
   }
+
   return (
     <div>
       <ScrollToTop />
       <div className="container4 mx-auto">
         <SingleArticleBanner articleByIdData={articleByIdData} />
-        <div className="grid lg:grid-cols-12 grid-cols-1 gap-y-[2rem] gap-x-[3rem] mt-[2rem]">
+
+        {/* Grid layout with items-start for independent column sizing */}
+        <div className="grid lg:grid-cols-12 grid-cols-1 gap-y-[2rem] gap-x-[3rem] mt-[2rem] items-start">
+          {/* Main Article Content */}
           <div className="lg:col-span-8 col-span-1">
             <SingleArticleContent articleByIdData={articleByIdData} />
           </div>
-          <div className="lg:col-span-4 col-span-1">
+
+          {/* Sticky Sidebar with Hidden Scrollbar */}
+          <div className="lg:col-span-4 col-span-1 lg:sticky lg:top-[2rem] max-h-[calc(100vh-4rem)] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <LastArticles articlesData={articlesData} />
           </div>
         </div>
@@ -45,4 +56,5 @@ const SingleArticle = () => {
     </div>
   );
 };
+
 export default SingleArticle;

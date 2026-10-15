@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import i18next from "i18next";
+import CategoryCard from "../../../component/ux/CategoryCard";
 
 const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
   // ===== Data: handle { data: [...] } OR [...] =====
@@ -96,29 +97,19 @@ const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
           {i18next.t("media.interview_category")}
         </p>
         <div className="flex flex-row flex-wrap gap-x-[0.5rem] gap-y-[1rem] mt-4">
-          <button
+          <CategoryCard
+            label={i18next.t("media.all")}
+            isActive={selectedCategory === "all"}
             onClick={() => setSelectedCategory("all")}
-            className={`w-auto h-[2.2rem] px-[1rem] rounded-full flex justify-center items-center text-[1rem] transition-colors ${
-              selectedCategory === "all"
-                ? "bg-negative text-white font-bold"
-                : "bg-[#E7EDF3] text-primary hover:bg-gray-200"
-            }`}
-          >
-            {i18next.t("media.all")}
-          </button>
+          />
 
           {categories.map((cat) => (
-            <button
+            <CategoryCard
               key={cat.id || cat.name}
+              label={cat.name}
+              isActive={selectedCategory === cat.name}
               onClick={() => setSelectedCategory(cat.name)}
-              className={`w-auto h-[2.2rem] px-[1rem] rounded-full flex justify-center items-center text-[1rem] transition-colors ${
-                selectedCategory === cat.name
-                  ? "bg-negative text-white font-bold"
-                  : "bg-[#E7EDF3] text-primary hover:bg-gray-200"
-              }`}
-            >
-              {cat.name}
-            </button>
+            />
           ))}
         </div>
 

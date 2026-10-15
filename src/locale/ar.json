@@ -66,7 +66,8 @@
     "facebook": "فيسبوك",
     "youtube": "يوتيوب",
     "highlights": "مقتطفات",
-    "contact": "اتصل بنا"
+    "contact": "اتصل بنا",
+    "milestone":"المحطات"
   },
   "homeImage": {
     "vision": "الرؤية والمبادئ",
@@ -168,6 +169,11 @@
     "sortTitle": "العنوان",
     "sortOldest": "الأقدم أولاً",
     "sortNewest": "الأحدث أولاً",
-    "reset": "إعادة تعيين"
-  }
+    "reset": "إعادة تعيين",
+    "noMilestones": "لا يوجد محتوى متاح لهذه المحطة في الوقت الحالي"
+  },
+  "Card": {
+    "readMore": "قراءة المزيد"
+  },
+  "last-milestones": "آخر المحطات"
 }

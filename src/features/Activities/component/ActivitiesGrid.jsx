@@ -4,8 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ActivitiesGridSkeleton from "./ActivitiesGridSkeleton";
 import SeeMoreButton from "../../../component/ux/seeMoreButton";
-import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
 import formatDate from "../../../component/ux/formatDate";
+import EmptyState from "../../../component/ux/emptyState";
 
 const INITIAL_COUNT = 4;
 const LOAD_MORE_COUNT = 6;

@@ -9,6 +9,7 @@ const navLinks = [
   { path: "/resume", key: "resume" },
   { path: "/activities", key: "activities" },
   { path: "/articles", key: "articles" },
+  { path: "/Milestone", key: "milestone" },
   { path: "/media", key: "media" },
   { path: "/contact", key: "contact" },
   { path: "/Vision", key: "vision" },

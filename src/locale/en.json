@@ -66,7 +66,8 @@
     "facebook": "Facebook",
     "youtube": "YouTube",
     "highlights": "Highlights",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "milestone":"Milestone"
   },
   "homeImage": {
     "vision": "Vision & Principles",
@@ -156,9 +157,9 @@
   "load_more": "Load More",
   "sections": "Sections",
   "why_website": "Why The Website?",
-  "Milestone":{
+  "Milestone": {
     "milestone": "Milestone",
-        "searchPlaceholder": "Search for a milestone",
+    "searchPlaceholder": "Search for a milestone",
     "searchButton": "Search",
     "filterAndSort": "Filter & Sort",
     "categoryLabel": "Milestone Categories",
@@ -168,6 +169,11 @@
     "sortTitle": "Title",
     "sortOldest": "Oldest first",
     "sortNewest": "Newest first",
-    "reset": "Reset"
-  }
+    "reset": "Reset",
+    "noMilestones": "No content available for this milestone at the moment"
+  },
+  "Card": {
+    "readMore": "Read more"
+  },
+  "last-milestones": "Last Milestones"
 }
