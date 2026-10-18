@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import DOMPurify from "dompurify";
 import i18next from "i18next";
-import autoPlay from "../../../assets/images/autoPlay.svg";
-import SeeMoreButton from "../../../component/ux/seeMoreButton";
-import MediaSkeleton from "./MediaSkeleton";
-import EmptyState from "../../../component/ux/EmptyState"; // 👈 new import
-import formatDate from "../../../component/ux/formatDate";
+import autoPlay from "../../../../assets/images/autoPlay.svg";
+import SeeMoreButton from "../../../../component/ux/seeMoreButton";
+import formatDate from "../../../../component/ux/formatDate";
+import EmptyState from "../../../../component/ux/emptyState";
+import VidoesSkeleton from "./VidoesSkeleton";
 
-const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
+const VideoGrid = ({ videosData, homePageData, isFiltering = false }) => {
   const [activeVideo, setActiveVideo] = useState(null);
   const [rect, setRect] = useState(null);
   const [visibleCount, setVisibleCount] = useState(8); // show first 8
@@ -44,7 +44,6 @@ const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
       setIsLoadingMore(false);
     }, 1200);
   };
-
 
   // ===== Lock body scroll while modal is open =====
   useEffect(() => {
@@ -154,7 +153,7 @@ const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
       {/* ===== Filtering: show skeleton grid ===== */}
       {isFiltering ? (
         <div className="grid md:grid-cols-2 grid-cols-1 gap-x-[3rem] gap-y-[2rem] mt-[2rem]">
-          <MediaSkeleton count={6} />
+          <VidoesSkeleton count={6} />
         </div>
       ) : videos.length === 0 ? (
         /* ---- Empty state (reusable component) ---- */
@@ -216,7 +215,7 @@ const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
             ))}
 
             {/* Skeleton cards while loading more */}
-            {isLoadingMore && <MediaSkeleton count={6} />}
+            {isLoadingMore && <VidoesSkeleton count={6} />}
           </div>
 
           {/* ===== See More Button ===== */}
@@ -261,4 +260,4 @@ const MediaGrid = ({ videosData, homePageData, isFiltering = false }) => {
   );
 };
 
-export default MediaGrid;
+export default VideoGrid;

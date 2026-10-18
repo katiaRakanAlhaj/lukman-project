@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import i18next from "i18next";
-import CategoryCard from "../../../component/ux/CategoryCard";
+import CategoryCard from "../../../../component/ux/CategoryCard";
 
-const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
+const VideosCategory = ({ videoCategoryData, onApplyFilters }) => {
   // ===== Data: handle { data: [...] } OR [...] =====
   const categories = Array.isArray(videoCategoryData)
     ? videoCategoryData
@@ -31,7 +31,6 @@ const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
     }
 
     const filters = { language, category: selectedCategory, sort: finalSort };
-    console.log("Applied filters:", filters);
 
     if (onApplyFilters) {
       await Promise.resolve(onApplyFilters(filters));
@@ -163,4 +162,4 @@ const MediaCategory = ({ videoCategoryData, onApplyFilters }) => {
   );
 };
 
-export default MediaCategory;
+export default VideosCategory;

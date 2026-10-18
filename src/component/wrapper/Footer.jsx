@@ -14,8 +14,8 @@ const quickLinksCol1 = [
   { to: "/Activities", key: "activities" },
   { to: "/Articles", key: "articles" },
   { to: "/Milestone", key: "milestone" },
-  { to: "/Media", key: "media" },
-  { to: "/Contact", key: "contact" },
+  { to: "/Media/Videos", key: "videos" },
+  { to: "/Media/Images", key: "images" },
 ];
 
 const quickLinksCol2 = [
@@ -24,6 +24,7 @@ const quickLinksCol2 = [
   { to: "/united_nation", key: "unitedNations" },
   { to: "/Books", key: "booksAndResearch" },
   { to: "/Highlights", key: "highlights" },
+  { to: "/Contact", key: "contact" },
 ];
 
 /* ── Helper: check if a social link is valid ─────── */
@@ -173,7 +174,7 @@ const Footer = ({ contactData, footerData }) => {
                 </p>
                 {socials.length > 0 && (
                   <div className="flex justify-between mt-3">
-                    <div className="flex gap-[5.5rem]">
+                    <div className="flex lg:gap-[5.5rem] gap-[3rem]">
                       {socials.map(({ href, icon, alt }) => (
                         <a
                           key={alt}

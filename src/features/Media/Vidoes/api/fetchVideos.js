@@ -1,4 +1,4 @@
-import client from "../../../api/client";
+import client from "../../../../api/client";
 export const fetchVideos = async (filters = {}) => {
   const params = {};
   if (filters.language) params.language = filters.language;

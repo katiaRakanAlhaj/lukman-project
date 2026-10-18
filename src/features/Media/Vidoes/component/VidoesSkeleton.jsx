@@ -1,4 +1,4 @@
-const MediaSkeleton = ({ count = 6 }) => {
+const VidoesSkeleton = ({ count = 6 }) => {
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
@@ -21,4 +21,4 @@ const MediaSkeleton = ({ count = 6 }) => {
   );
 };
 
-export default MediaSkeleton;
+export default VidoesSkeleton;

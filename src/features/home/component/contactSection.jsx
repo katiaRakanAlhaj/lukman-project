@@ -1,3 +1,4 @@
+import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import youtube from "../../../assets/images/youtube.svg";
 import facebook from "../../../assets/images/facebook.svg";
@@ -7,6 +8,11 @@ import linkedin from "../../../assets/images/linkedin.svg";
 import Spinner from "../../../component/ux/spinner";
 import { useContactForm } from "../../contact/hook/useContactForm";
 import ToastProvider from "../../../component/ux/Toaster";
+import i18next from "i18next";
+import toast from "react-hot-toast";
+
+/* ── reCAPTCHA v3 Site Key ───────────────────────────── */
+const RECAPTCHA_SITE_KEY = "6Lce--EtAAAAAFbtaN4oOQTO5IyuVpFGE5r2COaG";
 
 /* ── Styles ──────────────────────────────────────────── */
 const inputClass =
@@ -28,6 +34,103 @@ const ContactSection = ({ contactdata }) => {
 
   const { register, handleSubmit, errors, onSubmit, onError, isPending } =
     useContactForm();
+
+  /* ── reCAPTCHA state ─────────────────────────────── */
+  const [isRecaptchaLoaded, setIsRecaptchaLoaded] = useState(false);
+  const [recaptchaError, setRecaptchaError] = useState("");
+  const isSubmittingRef = useRef(false);
+
+  /* ── Load reCAPTCHA v3 script once ───────────────── */
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      // Script already injected — just wait for ready
+      if (document.getElementById("recaptcha-script")) {
+        const waitForReady = () => {
+          if (window.grecaptcha?.ready) {
+            window.grecaptcha.ready(() => setIsRecaptchaLoaded(true));
+          } else {
+            setTimeout(waitForReady, 100);
+          }
+        };
+        waitForReady();
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.id = "recaptcha-script";
+      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+      script.async = true;
+      script.defer = true;
+
+      script.onload = () => {
+        if (window.grecaptcha?.ready) {
+          window.grecaptcha.ready(() => setIsRecaptchaLoaded(true));
+        }
+      };
+
+      script.onerror = () => {
+        setRecaptchaError(i18next.t("contact.recaptcha_error"));
+      };
+
+      document.body.appendChild(script);
+    };
+
+    loadRecaptcha();
+    // NOTE: do not remove the script on cleanup — reCAPTCHA must persist
+  }, []);
+
+  /* ── Get reCAPTCHA token ─────────────────────────── */
+  const getRecaptchaToken = async () => {
+    if (!window.grecaptcha?.ready) return "";
+
+    try {
+      await new Promise((r) => window.grecaptcha.ready(r));
+      const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
+        action: "submit",
+      });
+      return token || "";
+    } catch {
+      return "";
+    }
+  };
+
+  /* ── Wrapped submit handler ──────────────────────── */
+  const handleFormSubmit = async (formData) => {
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
+    setRecaptchaError("");
+
+    // reCAPTCHA not loaded yet
+    if (!isRecaptchaLoaded) {
+      const msg = i18next.t("contact.recaptcha_loading");
+      setRecaptchaError(msg);
+      toast.error(msg);
+      isSubmittingRef.current = false;
+      return;
+    }
+
+    // Fetch token
+    const token = await getRecaptchaToken();
+    if (!token) {
+      const msg = i18next.t("contact.recaptcha_error");
+      setRecaptchaError(msg);
+      toast.error(msg);
+      isSubmittingRef.current = false;
+      return;
+    }
+
+    // Build payload — include token under both common backend keys
+    const payload = {
+      ...formData,
+      "g-recaptcha-response": token,
+    };
+
+    // Release the lock before handing off — hook's isPending drives the UI
+    isSubmittingRef.current = false;
+
+    // Call your existing mutation
+    onSubmit(payload);
+  };
 
   const socials = [
     {
@@ -58,7 +161,7 @@ const ContactSection = ({ contactdata }) => {
       <ToastProvider />
       <div className="container3 mx-auto lg:mt-[6em] mt-[2rem]">
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-y-[2.5rem] gap-x-24">
-          {/* Left column (unchanged) */}
+          {/* Left column */}
           <div>
             <h1 className="text-[2em] text-secondary font-extrabold">
               {t("contact.contactUs")}
@@ -107,7 +210,7 @@ const ContactSection = ({ contactdata }) => {
           {/* Right column: form */}
           <form
             className="space-y-4 mt-4"
-            onSubmit={handleSubmit(onSubmit, onError)}
+            onSubmit={handleSubmit(handleFormSubmit, onError)}
             noValidate
           >
             <div className="relative">
@@ -143,6 +246,11 @@ const ContactSection = ({ contactdata }) => {
                 <p className={errorClass}>{errors.message.message}</p>
               )}
             </div>
+
+            {/* reCAPTCHA error line */}
+            {recaptchaError && (
+              <p className="text-red-500 text-sm">{recaptchaError}</p>
+            )}
 
             <div className="flex justify-start">
               <button

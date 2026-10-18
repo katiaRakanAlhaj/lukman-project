@@ -3,7 +3,6 @@ import i18next from "i18next";
 const ResumeDescription = ({ ProfissionalExperiencesData }) => {
   // Safely access the data array
   const experiences = ProfissionalExperiencesData?.data || [];
-  console.log("experiences", experiences);
   if (!experiences.length) return null;
 
   // We render the first item (the professional experience entry)

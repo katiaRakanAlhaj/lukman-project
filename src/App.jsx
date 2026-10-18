@@ -26,10 +26,11 @@ import Highlights from "./pages/Highlights";
 import Links from "./pages/Links";
 import SingleArticle from "./pages/singleArticle";
 import SingleActivity from "./pages/singleActivity";
-import Media from "./pages/Media";
 import UnitedNations from "./pages/UnitedNations";
 import Milestone from "./pages/Milestone";
 import SingleMilestone from "./pages/singleMilestone";
+import Videos from "./pages/Vidoes";
+import Images from "./pages/Images";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,8 +51,6 @@ function LanguageHandler() {
   const location = useLocation();
 
   useEffect(() => {
-    console.log("📍 Current lang:", lang);
-    console.log("📍 Current path:", location.pathname);
 
     let languageToUse = lang;
 
@@ -106,7 +105,8 @@ function App() {
           <Route path="Links" element={<Links />} />
           <Route path="Article/:id" element={<SingleArticle />} />
           <Route path="Activity/:id" element={<SingleActivity />} />
-          <Route path="Media" element={<Media />} />
+          <Route path="Media/Videos" element={<Videos />} />
+          <Route path="Media/Images" element={<Images />} />
           <Route path="united_nation" element={<UnitedNations />} />
           <Route path="Milestone" element={<Milestone />} />
           <Route path="Milestone/:id" element={<SingleMilestone />} />

@@ -23,7 +23,6 @@ const ResumePage = ({ resumePageData }) => {
       // Keep loader visible briefly for UX (optional)
       setTimeout(() => setIsLoading(false), 1500);
     } catch (error) {
-      console.error("Download failed:", error);
       setIsLoading(false);
     }
   };

@@ -1,19 +1,19 @@
 import React, { useState, useRef } from "react";
 import { useFetchHomePage } from "../features/home/hook/useFetchHome";
-import MediaCategory from "../features/Media/component/mediaCategory";
-import MediaGrid from "../features/Media/component/mediaGrid";
 import {
   useFetchVideoCategory,
   useFetchVideos,
   useFetchVideosPage,
-} from "../features/Media/hook/useFetchVideos";
+} from "../features/Media/Vidoes/hook/useFetchVideos";
 import Loader from "../component/loader/loader";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
 import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
+import VideosCategory from "../features/Media/Vidoes/component/vidoesCategory";
+import VideoGrid from "../features/Media/Vidoes/component/videoGrid";
 
-const Media = () => {
+const Videos = () => {
   const [filters, setFilters] = useState({
     language: "ar",
     category: "all",
@@ -90,13 +90,13 @@ const Media = () => {
         <div className="container4 mx-auto lg:mt-[4rem]">
           <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
             <div className="lg:col-span-3 col-span-full">
-              <MediaCategory
+              <VideosCategory
                 videoCategoryData={videoCategoryData}
                 onApplyFilters={(newFilters) => setFilters(newFilters)}
               />
             </div>
             <div className="lg:col-span-9 col-span-1">
-              <MediaGrid
+              <VideoGrid
                 homePageData={homePageData}
                 videosData={videosData}
                 isFiltering={isFiltering} // 👈 pass it down
@@ -109,4 +109,4 @@ const Media = () => {
   );
 };
 
-export default Media;
+export default Videos;

@@ -45,7 +45,9 @@
     "books": "Books & Research",
     "highlights": "Highlights",
     "links": "Important Links",
-    "milestone": "Milestone"
+    "milestone": "Milestone",
+    "videos": "Videos",
+    "images": "Images"
   },
   "footer": {
     "tagline": "Diplomat · Politician · Writer",
@@ -67,7 +69,9 @@
     "youtube": "YouTube",
     "highlights": "Highlights",
     "contact": "Contact Us",
-    "milestone":"Milestone"
+    "milestone": "Milestone",
+    "videos": "Videos",
+    "images": "Images"
   },
   "homeImage": {
     "vision": "Vision & Principles",
@@ -131,6 +135,7 @@
     "no_video": "No videos at the moment",
     "interview_language": "Interview language",
     "interview_category": "Interview category",
+    "images_category": "Images category",
     "all": "All",
     "sort_by": "Sort by",
     "choose_sort_order": "Choose sort order",
@@ -156,7 +161,7 @@
   },
   "load_more": "Load More",
   "sections": "Sections",
-  "why_website": "Why The Website?",
+  "platform_message": "Platform Message",
   "Milestone": {
     "milestone": "Milestone",
     "searchPlaceholder": "Search for a milestone",
@@ -175,5 +180,10 @@
   "Card": {
     "readMore": "Read more"
   },
-  "last-milestones": "Last Milestones"
+  "last-milestones": "Last Milestones",
+  "images": {
+    "no_images": "No images in this category."
+  },
+  "read_more":"Read More",
+  "read_less":"Read Less"
 }

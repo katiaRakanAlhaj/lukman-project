@@ -45,7 +45,9 @@
     "books": "الكتب والأبحاث",
     "highlights": "مقتطفات",
     "links": "روابط مهمة",
-    "milestone": "المحطات"
+    "milestone": "المحطات",
+    "videos": "فيديوهات",
+    "images": "صور"
   },
   "footer": {
     "tagline": "دبلوماسي . سياسي . كاتب",
@@ -67,7 +69,9 @@
     "youtube": "يوتيوب",
     "highlights": "مقتطفات",
     "contact": "اتصل بنا",
-    "milestone":"المحطات"
+    "milestone": "المحطات",
+    "videos": "فيديوهات",
+    "images": "صور"
   },
   "homeImage": {
     "vision": "الرؤية والمبادئ",
@@ -131,6 +135,7 @@
     "no_video": "لا توجد فيديوهات حالياً",
     "interview_language": "لغة المقابلة",
     "interview_category": "تصنيف المقابلة",
+    "images_category": "تصنيف الصور",
     "all": "الكل",
     "sort_by": "رتب حسب",
     "choose_sort_order": "اختر ترتيب الفرز",
@@ -156,7 +161,7 @@
   },
   "load_more": "تحميل المزيد",
   "sections": "الأقسام",
-  "why_website": "لماذا هذا الموقع؟",
+  "platform_message": "رسالة المنصة",
   "Milestone": {
     "milestone": "المحطات",
     "searchPlaceholder": "ابحث عن محطة",
@@ -175,5 +180,10 @@
   "Card": {
     "readMore": "قراءة المزيد"
   },
-  "last-milestones": "آخر المحطات"
+  "last-milestones": "آخر المحطات",
+  "images": {
+    "no_images": "لا توجد صور في هذا التصنيف."
+  },
+  "read_more":"قراءة المزيد",
+  "read_less":"قراءة الأقل"
 }

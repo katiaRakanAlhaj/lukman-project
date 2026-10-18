@@ -16,6 +16,8 @@ import { useFetchResumePage } from "../features/Resume/hook/usefetchResumePage";
 import { useFetchSkills } from "../features/Resume/hook/useFetchSkills";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
 import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
+import ResumeExtraTabs from "../features/Resume/component/ResumeExtraTabs";
+import { useFetchExtraTabs } from "../features/Resume/hook/useFetchExtraTabs";
 
 const Resume = () => {
   const {
@@ -48,6 +50,11 @@ const Resume = () => {
     isLoading: SkillsDataLoading,
     error: SkillsDataError,
   } = useFetchSkills();
+    const {
+    data: ExtraTabsData,
+    isLoading: ExtraTabsDataLoading,
+    error: ExtraTabsDataError,
+  } = useFetchExtraTabs();
   const {
     data: PositionsData,
     isLoading: PositionsDataLoading,
@@ -59,7 +66,7 @@ const Resume = () => {
     degreesDataLoading ||
     ProfissionalExperiencesDataLoading ||
     LanguagesDataLoading ||
-    SkillsDataLoading ||
+    ExtraTabsDataLoading ||
     PositionsDataLoading;
   const combinedError =
     resumePageDataError ||
@@ -67,7 +74,7 @@ const Resume = () => {
     degreesDataError ||
     ProfissionalExperiencesDataError ||
     LanguagesDataError ||
-    SkillsDataError ||
+    ExtraTabsDataError ||
     PositionsDataError;
   if (combinedError) {
     return <ErrorMessageNetwork />;
@@ -92,6 +99,7 @@ const Resume = () => {
           <ResumePositions PositionsData={PositionsData} />
           <ResumeLanguages LanguagesData={LanguagesData} />
           <ResumeSkills SkillsData={SkillsData} />
+          <ResumeExtraTabs ExtraTabsData={ExtraTabsData} />
         </div>
       </HelmetProvider>
     </div>

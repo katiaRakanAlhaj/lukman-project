@@ -1,3 +1,4 @@
+import { useEffect, useState, useRef } from "react";
 import DOMPurify from "dompurify";
 import { useTranslation } from "react-i18next";
 import youtube from "../../../assets/images/youtube.svg";
@@ -9,6 +10,10 @@ import Spinner from "../../../component/ux/spinner";
 import { useContactForm } from "../hook/useContactForm";
 import ToastProvider from "../../../component/ux/Toaster";
 import i18next from "i18next";
+import toast from "react-hot-toast";
+
+/* ── reCAPTCHA v3 Site Key ───────────────────────────── */
+const RECAPTCHA_SITE_KEY = "6Lce--EtAAAAAFbtaN4oOQTO5IyuVpFGE5r2COaG";
 
 /* ── Helper ──────────────────────────────────────────── */
 const isValidSocialLink = (href) => {
@@ -24,6 +29,103 @@ const ContactGrid = ({ contactDataPage }) => {
 
   const { register, handleSubmit, errors, onSubmit, onError, isPending } =
     useContactForm();
+
+  /* ── reCAPTCHA state ─────────────────────────────── */
+  const [isRecaptchaLoaded, setIsRecaptchaLoaded] = useState(false);
+  const [recaptchaError, setRecaptchaError] = useState("");
+  const isSubmittingRef = useRef(false);
+
+  /* ── Load reCAPTCHA v3 script once ───────────────── */
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      // Already injected — just wait for it to be ready
+      if (document.getElementById("recaptcha-script")) {
+        const waitForReady = () => {
+          if (window.grecaptcha?.ready) {
+            window.grecaptcha.ready(() => setIsRecaptchaLoaded(true));
+          } else {
+            setTimeout(waitForReady, 100);
+          }
+        };
+        waitForReady();
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.id = "recaptcha-script";
+      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+      script.async = true;
+      script.defer = true;
+
+      script.onload = () => {
+        if (window.grecaptcha?.ready) {
+          window.grecaptcha.ready(() => setIsRecaptchaLoaded(true));
+        }
+      };
+
+      script.onerror = () => {
+        setRecaptchaError(i18next.t("contact.recaptcha_error"));
+      };
+
+      document.body.appendChild(script);
+    };
+
+    loadRecaptcha();
+    // NOTE: do not remove the script on cleanup — reCAPTCHA must persist
+  }, []);
+
+  /* ── Get reCAPTCHA token ─────────────────────────── */
+  const getRecaptchaToken = async () => {
+    if (!window.grecaptcha?.ready) return "";
+
+    try {
+      await new Promise((r) => window.grecaptcha.ready(r));
+      const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
+        action: "submit",
+      });
+      return token || "";
+    } catch {
+      return "";
+    }
+  };
+
+  /* ── Wrapped submit handler ──────────────────────── */
+  const handleFormSubmit = async (formData) => {
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
+    setRecaptchaError("");
+
+    // reCAPTCHA not loaded yet
+    if (!isRecaptchaLoaded) {
+      const msg = i18next.t("contact.recaptcha_loading");
+      setRecaptchaError(msg);
+      toast.error(msg);
+      isSubmittingRef.current = false;
+      return;
+    }
+
+    // Fetch token
+    const token = await getRecaptchaToken();
+    if (!token) {
+      const msg = i18next.t("contact.recaptcha_error");
+      setRecaptchaError(msg);
+      toast.error(msg);
+      isSubmittingRef.current = false;
+      return;
+    }
+
+    // Build payload — include token in both common formats
+    const payload = {
+      ...formData,
+      "g-recaptcha-response": token,
+    };
+
+    // Release the lock right before handing off — onSubmit may call onSuccess/onError
+    isSubmittingRef.current = false;
+
+    // Call your existing mutation
+    onSubmit(payload);
+  };
 
   const socials = [
     { href: data.youtube, icon: youtube, alt: "YouTube" },
@@ -41,7 +143,7 @@ const ContactGrid = ({ contactDataPage }) => {
           {/* Left Column — Info */}
           <div className="flex flex-col justify-center h-full">
             <p className="lg:text-[1.6rem] text-[1.2rem] font-bold text-[#000000]">
-             {i18next.t("contact.contact_description")}
+              {i18next.t("contact.contact_description")}
             </p>
 
             <div
@@ -64,7 +166,8 @@ const ContactGrid = ({ contactDataPage }) => {
               <div className="flex flex-col md:space-y-[4rem] space-y-[2rem] mt-[2rem] md:mt-0">
                 <div className="space-y-1">
                   <h1 className="font-bold text-[#000000] text-[1.2rem]">
-                    {i18next.t("contact.social_media_website")}                  </h1>
+                    {i18next.t("contact.social_media_website")}
+                  </h1>
                   <div className="flex items-center justify-center gap-x-[1.6rem]">
                     {socials.map(({ href, icon, alt }) => (
                       <a
@@ -106,7 +209,7 @@ const ContactGrid = ({ contactDataPage }) => {
 
             <form
               className="space-y-4 mt-4"
-              onSubmit={handleSubmit(onSubmit, onError)}
+              onSubmit={handleSubmit(handleFormSubmit, onError)}
               noValidate
             >
               <div className="relative">
@@ -148,6 +251,11 @@ const ContactGrid = ({ contactDataPage }) => {
                   </p>
                 )}
               </div>
+
+              {/* reCAPTCHA error line */}
+              {recaptchaError && (
+                <p className="text-red-500 text-sm">{recaptchaError}</p>
+              )}
 
               <div className="flex justify-start">
                 <button
