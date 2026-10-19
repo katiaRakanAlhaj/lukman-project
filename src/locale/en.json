@@ -185,5 +185,9 @@
     "no_images": "No images in this category."
   },
   "read_more":"Read More",
-  "read_less":"Read Less"
+  "read_less":"Read Less",
+  "Album":{
+    "back_to_albums":"Back to Albums",
+    "no_images":"No images in this album."
+  }
 }

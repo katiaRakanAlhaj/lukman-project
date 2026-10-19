@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import ImagesCategory from "../features/Media/Images/component/ImagesCategory";
-import ImagesGrid from "../features/Media/Images/component/ImagesGrid";
 import {
   useFetchImagesCategory,
   useFetchImages,
@@ -10,6 +8,11 @@ import ErrorMessageNetwork from "../component/errorMessage/errorMessage";
 import ScrollToTop from "../component/scrollToTop/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import MetaHelmet from "../component/metaHelmet/metaHelmet";
+import AlbumsGrid from "../features/Media/Images/component/AlbumsGrid";
+import AlbumGallery from "../features/Media/Images/component/AlbumGallery";
+import ImageLightbox from "../features/Media/Images/component/ImageLightbox";
+
+
 
 const Images = () => {
   const {
@@ -18,90 +21,90 @@ const Images = () => {
     error: categoryError,
   } = useFetchImagesCategory();
 
-  // Highlighted category in the sidebar UI (doesn't fetch immediately)
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-
-  // Committed category ID used for fetching data
-  const [filters, setFilters] = useState({
-    category: null,
-  });
-
+  const [activeAlbum, setActiveAlbum] = useState(null);
   const [page, setPage] = useState(1);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [hasMore, setHasMore] = useState(false);
 
-  // Auto-select the first category on initial load
-  useEffect(() => {
-    const categories = Array.isArray(imagesCategoryData)
-      ? imagesCategoryData
-      : Array.isArray(imagesCategoryData?.data)
-        ? imagesCategoryData.data
-        : [];
-
-    if (categories.length > 0 && selectedCategoryId === null) {
-      const firstId = categories[0].id;
-      setSelectedCategoryId(firstId);
-      setFilters({ category: firstId });
-    }
-  }, [imagesCategoryData, selectedCategoryId]);
-
-  // Fetch images using only category ID & page
   const {
     data: imagesData,
     isLoading: isImagesLoading,
-    isError: isImagesError,
-    error: imagesError,
     isFetching: isImagesFetching,
   } = useFetchImages({
-    id: filters.category,
+    id: activeAlbum?.id,
     page,
+    enabled: !!activeAlbum,
   });
 
-  // Reset page back to 1 whenever the committed filter changes
   useEffect(() => {
-    setPage(1);
-  }, [filters]);
+    if (!imagesData) return;
+    const list = Array.isArray(imagesData)
+      ? imagesData
+      : imagesData?.data ?? [];
+    const meta = imagesData?.meta;
+    const more =
+      meta?.current_page != null && meta?.last_page != null
+        ? meta.current_page < meta.last_page
+        : list.length >= (meta?.per_page ?? 12);
 
-  const handleApplyFilters = (newFilters) => {
-    setFilters(newFilters);
-  };
+    setHasMore(more);
 
-  if (isCategoryLoading) {
-    return <Loader />;
-  }
-  if (categoryError) {
-    return <ErrorMessageNetwork />;
-  }
+    if (page === 1) {
+      setGalleryImages(list);
+    } else {
+      setGalleryImages((prev) => {
+        const seen = new Set(prev.map((i) => i.id));
+        return [...prev, ...list.filter((i) => !seen.has(i.id))];
+      });
+    }
+  }, [imagesData, page]);
+
+  useEffect(() => {
+    setLightboxIndex(null);
+  }, [activeAlbum]);
+
+  if (isCategoryLoading) return <Loader />;
+  if (categoryError) return <ErrorMessageNetwork />;
 
   return (
     <div>
       <ScrollToTop />
       <HelmetProvider>
-        <MetaHelmet title={"Images"} description={"Images"} />
-        <div className="container4 mx-auto lg:mt-[6rem]">
-          <div className="grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
-            <div className="lg:col-span-3 col-span-full">
-              <ImagesCategory
-                imagesCategoryData={imagesCategoryData}
-                activeCategoryId={selectedCategoryId}
-                onSelectCategory={setSelectedCategoryId}
-                onApplyFilters={handleApplyFilters}
-                isLoading={isCategoryLoading}
-                error={categoryError}
-              />
-            </div>
-            <div className="lg:col-span-9 col-span-1">
-              <ImagesGrid
-                categoryId={filters.category}
-                data={imagesData}
-                isLoading={isImagesLoading}
-                isError={isImagesError}
-                error={imagesError}
-                isFetching={isImagesFetching}
-                page={page}
-                setPage={setPage}
-              />
-            </div>
-          </div>
+        <MetaHelmet title="Albums" description="Photo Albums" />
+        <div className="container4 mx-auto mt-[2rem] lg:mt-[6rem] pb-20">
+          {!activeAlbum && (
+            <AlbumsGrid
+              albums={imagesCategoryData}
+              onOpenAlbum={(album) => {
+                setActiveAlbum(album);
+                setPage(1);
+                setGalleryImages([]);
+              }}
+            />
+          )}
+
+          {activeAlbum && (
+            <AlbumGallery
+              album={activeAlbum}
+              onBack={() => setActiveAlbum(null)}
+              images={galleryImages}
+              isLoading={isImagesLoading && page === 1}
+              isFetching={isImagesFetching}
+              hasMore={hasMore}
+              onLoadMore={() => setPage((p) => p + 1)}
+              onImageClick={(index) => setLightboxIndex(index)}
+            />
+          )}
         </div>
+
+        {lightboxIndex !== null && galleryImages.length > 0 && (
+          <ImageLightbox
+            images={galleryImages}
+            initialIndex={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+          />
+        )}
       </HelmetProvider>
     </div>
   );

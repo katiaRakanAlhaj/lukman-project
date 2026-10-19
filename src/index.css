@@ -299,3 +299,28 @@ div ol {
     scrollbar-width: thin;
     scrollbar-color: #005770 transparent;
 }
+.image-lightbox-swiper .swiper-button-next,
+.image-lightbox-swiper .swiper-button-prev {
+  color: #ffffff !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.image-lightbox-swiper .swiper-button-next:focus,
+.image-lightbox-swiper .swiper-button-prev:focus {
+  outline: none !important;
+}
+
+/* Zoom module adds a border/outline on the zoom container */
+.image-lightbox-swiper .swiper-zoom-container,
+.image-lightbox-swiper .swiper-zoom-container > img {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Kill any default slide border */
+.image-lightbox-swiper .swiper-slide {
+  border: none !important;
+  outline: none !important;
+}
