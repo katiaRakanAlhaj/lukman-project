@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import formatDate from "../../../component/ux/formatDate";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 const SingleArticleContent = ({ articleByIdData }) => {
   const article = articleByIdData?.data || articleByIdData;
   if (!article) return null;
@@ -8,10 +9,10 @@ const SingleArticleContent = ({ articleByIdData }) => {
     <div className="lg:col-span-8 col-span-1">
       <div className="mb-[2rem]">
         <div className="lg:flex space-y-2 justify-between items-center">
-          <h1 className="font-bold text-[#333333] lg:text-[1.6rem] text-[1.2rem]">
+          <h1 className="font-bold text-[#333333] lg:text-[1.4rem] text-[1.2rem]">
             {article.title}
           </h1>
-          <p className="text-[#666666]">{formatDate(article.date)}</p>
+          <p className="text-[#666666] text-lg">{formatDate(article.date)}</p>
         </div>
 
         {/* Replace <p> with <div> — <div> inside <p> is invalid HTML */}
@@ -19,7 +20,7 @@ const SingleArticleContent = ({ articleByIdData }) => {
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(article.description),
           }}
-          className="rich-text text-[#666666] text-justify text-[1rem] leading-[2rem] mt-2 whitespace-pre-line"
+          className={`rich-text text-[#666666] text-justify ${descriptionClasses} leading-[2rem] mt-2`}
         />
       </div>
 

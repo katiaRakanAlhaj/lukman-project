@@ -48,7 +48,7 @@ const ResumeGrid = ({ homePageData, degreesData }) => {
                     {degree.title}
                   </h1>
                   {degree.description && (
-                    <p className="text-primary text-[1.1em] whitespace-pre-line flex text-justify">
+                    <p className="text-primary lg:text-[1.2em] text-lg whitespace-pre-line flex text-justify">
                       {degree.description}
                     </p>
                   )}

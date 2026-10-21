@@ -1,5 +1,6 @@
 import i18next from "i18next";
 import { ResumeTitle } from "../../../component/ux/ResumeTitle";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 const ResumeSkills = ({ SkillsData }) => {
   // Safely access the skills array (works with both { data: [...] } and raw array)
   const skills = Array.isArray(SkillsData)
@@ -23,7 +24,9 @@ const ResumeSkills = ({ SkillsData }) => {
               src={skill.image}
               alt={skill.name}
             />
-            <p className="text-[#333333] text-[1.2rem] mt-2">{skill.name}</p>
+            <p className={`text-[#333333] ${descriptionClasses} mt-2`}>
+              {skill.name}
+            </p>
           </div>
         ))}
       </div>

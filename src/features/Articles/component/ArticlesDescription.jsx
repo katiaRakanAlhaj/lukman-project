@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import i18next from "i18next";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const ArticlesDescription = ({ homePageData }) => {
   return (
@@ -9,7 +10,7 @@ const ArticlesDescription = ({ homePageData }) => {
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(homePageData?.data?.article_description),
         }}
-        className="text-[#666666] text-[1rem] lg:w-[80%] w-[100%] whitespace-pre-line"
+        className={`text-[#666666] ${descriptionClasses} lg:w-[80%] w-[100%]`}
       />
     </div>
   );

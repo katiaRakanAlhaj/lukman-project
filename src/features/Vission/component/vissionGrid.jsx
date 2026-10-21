@@ -3,6 +3,7 @@ import DOMPurify from "dompurify";
 import VissionGridSkeleton from "./VissionGridSkeleton";
 import EmptyState from "../../../component/ux/emptyState";
 import i18next from "i18next";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const VissionGrid = ({ vissionCategoryContent }) => {
   const categories = vissionCategoryContent?.data || [];
@@ -124,12 +125,11 @@ const VissionGrid = ({ vissionCategoryContent }) => {
                       dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(block.description),
                       }}
-                      className="
-                        text-[1rem] sm:text-[1.1rem] lg:text-[1.2rem]
-                        text-secondary
+                      className={` ${descriptionClasses}
+                       text-secondary
                         leading-[1.8rem] lg:leading-[2rem]
-                        whitespace-pre-line text-justify
-                      "
+                        text-justify
+                     `}
                     />
                   </div>
                 </div>
@@ -166,7 +166,7 @@ const VissionGrid = ({ vissionCategoryContent }) => {
                       text-secondary
                       mt-[0.5rem] lg:mt-[0.7rem]
                       leading-[1.8rem] lg:leading-[2rem]
-                      whitespace-pre-line text-justify
+                       text-justify
                     "
                   />
                 </div>

@@ -10,6 +10,7 @@ import { useContactForm } from "../../contact/hook/useContactForm";
 import ToastProvider from "../../../component/ux/Toaster";
 import i18next from "i18next";
 import toast from "react-hot-toast";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 /* ── reCAPTCHA v3 Site Key ───────────────────────────── */
 const RECAPTCHA_SITE_KEY = "6Lce--EtAAAAAFbtaN4oOQTO5IyuVpFGE5r2COaG";
@@ -166,19 +167,19 @@ const ContactSection = ({ contactdata }) => {
             <h1 className="text-[2em] text-secondary font-extrabold">
               {t("contact.contactUs")}
             </h1>
-            <p className="text-[1em] text-secondary mt-2 whitespace-pre-line flex text-justify"></p>
+            <p className={`${descriptionClasses} text-secondary mt-2 whitespace-pre-line flex text-justify`}></p>
             <div className="flex flex-col space-y-2 mt-2"></div>
             <p className="text-[#000000] text-[1.2rem] font-bold mt-6">
               {t("contact.email")}
             </p>
-            <p className="text-[1rem] mt-2 text-[#002F3C]">
+            <p className="lg:text-xl text-lg mt-2 text-[#002F3C]">
               {contactdata?.data?.email}
             </p>
             <div className="flex flex-col space-y-1 mt-4 items-center">
               <p className="text-[2em] mt-[2rem] font-bold text-secondary">
                 {t("contact.followUs")}
               </p>
-              <p className="text-[1em] text-secondary">
+              <p className={`${descriptionClasses} text-secondary`}>
                 {t("contact.stayConnected")}
               </p>
               {socials.length > 0 && (

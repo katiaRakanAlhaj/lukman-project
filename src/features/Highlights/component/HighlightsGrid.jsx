@@ -2,6 +2,7 @@ import i18next from "i18next";
 import DOMPurify from "dompurify";
 import HighlightsContentSkeleton from "./HighlightsContentSkeleton";
 import EmptyState from "../../../component/ux/emptyState";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const HighlightsGrid = ({
   categories = [],
@@ -98,14 +99,14 @@ const HighlightsGrid = ({
                       }`}
                     ></div>
                     <div className="p-[1.5rem]">
-                      <h1 className="font-bold text-[1.2rem] text-[#099EC8]">
+                      <h1 className="font-bold lg:text-[1.3rem] text-[1.2rem] text-[#099EC8]">
                         {item.title}
                       </h1>
                       <div
                         dangerouslySetInnerHTML={{
                           __html: DOMPurify.sanitize(item.description),
                         }}
-                        className="text-[1rem] text-[#333333] flex text-justify lg:mt-0 mt-2"
+                        className={`${descriptionClasses} text-[#333333] flex text-justify mt-2`}
                       />
                     </div>
                   </div>

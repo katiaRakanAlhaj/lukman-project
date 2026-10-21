@@ -1,3 +1,4 @@
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 import { ResumeTitle } from "../../../component/ux/ResumeTitle";
 import DOMPurify from "dompurify";
 
@@ -51,7 +52,7 @@ const ResumeExtraTabs = ({ ExtraTabsData }) => {
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(tab.description),
                   }}
-                  className="extra-tab-description text-[#333333] text-lg leading-[1.9]"
+                  className={`extra-tab-description text-[#333333] ${descriptionClasses} leading-[1.9]`}
                 />
               </div>
             </div>

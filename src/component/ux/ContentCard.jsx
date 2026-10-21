@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import date from "../../assets/images/date.svg";
 import formatDate from "./formatDate";
+import { descriptionClasses } from "./descriptionClasses";
 
 const ContentCard = ({
   id,
@@ -22,7 +23,7 @@ const ContentCard = ({
   return (
     <Link to={linkTo}>
       <div
-        className="h-[28rem] w-full object-cover relative rounded-3xl"
+        className="h-[29rem] w-full object-cover relative rounded-3xl"
         style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
       >
         <img
@@ -32,19 +33,19 @@ const ContentCard = ({
         />
 
         <div className="mt-[1rem] px-[1rem]">
-          <h1 className="text-[1.2rem] font-bold text-secondary line-clamp-2">
+          <h1
+            className={`${descriptionClasses} font-bold text-secondary line-clamp-2`}
+          >
             {title}
           </h1>
 
           <div className="flex gap-x-2 mt-2 items-center">
             <img src={date} alt="date" />
-            <p className="text-secondary text-[0.9em]">
-              {formatDate(cardDate)}
-            </p>
+            <p className="text-secondary text-[1em]">{formatDate(cardDate)}</p>
           </div>
 
           <div
-            className="text-[1rem] text-[#666666] mt-1 line-clamp-3 whitespace-pre-line"
+            className="text-lg text-[#666666] mt-1 line-clamp-3"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>

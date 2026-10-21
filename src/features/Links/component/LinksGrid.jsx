@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import DOMPurify from "dompurify";
 import click from "../../../assets/images/click.svg";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 const LinksGrid = ({ LinksData }) => {
   const links = LinksData?.data || [];
 
@@ -34,14 +35,14 @@ const LinksGrid = ({ LinksData }) => {
               src={link.image}
               alt={link.title}
             />
-            <h1 className="font-bold text-[#000000] text-[1.2rem]">
+            <h1 className="font-bold text-[#000000] lg:text-[1.3rem] text-[1.2rem]">
               {link.title}
             </h1>
             <div
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(link.description),
               }}
-              className="text-[#000000] text-[1.2rem] line-clamp-3 whitespace-pre-line"
+              className={`${descriptionClasses} text-[#000000] text-[1.2rem] line-clamp-3`}
             />
           </div>
         </div>

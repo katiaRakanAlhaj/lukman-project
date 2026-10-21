@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import React from "react";
 import { ResumeTitle } from "../../../component/ux/ResumeTitle";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const ResumeLanguages = ({ LanguagesData }) => {
   // Safely access the languages array
@@ -16,7 +17,7 @@ const ResumeLanguages = ({ LanguagesData }) => {
           {languages.map((language) => (
             <div
               key={language.id}
-              className="w-full rounded-lg flex justify-start items-center gap-x-4 px-4 h-[5rem]"
+              className="w-full rounded-lg flex justify-start items-center gap-x-4 px-4 h-[6rem]"
               style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
             >
               <img
@@ -24,7 +25,11 @@ const ResumeLanguages = ({ LanguagesData }) => {
                 src={language.image}
                 alt={language.name}
               />
-              <p className="text-[#333333] text-[1.1rem]">{language.name}</p>
+              <p
+                className={`text-[#333333] lg:text-xl text-lg ${descriptionClasses}`}
+              >
+                {language.name}
+              </p>
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const BooksHeader = ({ booksPageData }) => {
   return (
@@ -11,7 +12,7 @@ const BooksHeader = ({ booksPageData }) => {
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(booksPageData?.data?.description),
           }}
-          className="text-md text-[#666666] mt-1 whitespace-pre-line flex text-justify"
+          className={`${descriptionClasses} text-[#666666] mt-1  flex text-justify`}
         />
       </div>
     </div>

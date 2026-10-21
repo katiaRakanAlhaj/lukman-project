@@ -3,6 +3,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const SingleActivityContent = ({ singleActivityData }) => {
   const formattedDate = singleActivityData?.date
@@ -32,10 +33,10 @@ const SingleActivityContent = ({ singleActivityData }) => {
     <div className="lg:col-span-8 col-span-1 space-y-[2rem]">
       <div>
         <div className="lg:flex justify-between">
-          <h1 className="font-bold text-[#333333] text-[1.2rem]">
+          <h1 className="font-bold text-[#333333] lg:text-[1.3rem] text-[1.2rem]">
             {singleActivityData?.title}
           </h1>
-          <p className="text-[#666666] whitespace-nowrap mt-2">
+          <p className="text-[#666666] text-lg whitespace-nowrap mt-2">
             {formattedDate}
           </p>
         </div>
@@ -43,7 +44,7 @@ const SingleActivityContent = ({ singleActivityData }) => {
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(singleActivityData?.description),
           }}
-          className="text-[#666666] text-justify text-[1rem] leading-[2rem] mt-2 whitespace-pre-line"
+          className={`text-[#666666] text-justify ${descriptionClasses} leading-[2rem] mt-2`}
         />
       </div>
 

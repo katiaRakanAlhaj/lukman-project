@@ -118,7 +118,7 @@ const MilestoneCategory = ({
           <div className="space-y-2">
             <label
               htmlFor="sort"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-[1.2rem] font-medium text-gray-700"
             >
               {t("Milestone.sortBy")}
             </label>

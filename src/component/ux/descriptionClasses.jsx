@@ -1,0 +1,1 @@
+export const descriptionClasses = "lg:text-xl text-lg";

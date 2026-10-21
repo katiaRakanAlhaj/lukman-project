@@ -6,6 +6,7 @@ import SeeMoreButton from "../../../../component/ux/seeMoreButton";
 import formatDate from "../../../../component/ux/formatDate";
 import EmptyState from "../../../../component/ux/emptyState";
 import VidoesSkeleton from "./VidoesSkeleton";
+import { descriptionClasses } from "../../../../component/ux/descriptionClasses";
 
 const VideoGrid = ({ videosData, homePageData, isFiltering = false }) => {
   const [activeVideo, setActiveVideo] = useState(null);
@@ -146,7 +147,7 @@ const VideoGrid = ({ videosData, homePageData, isFiltering = false }) => {
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(homePageData?.data?.media_description),
           }}
-          className="text-[#666666] text-[1rem] lg:w-[60%] w-[100%] mt-2 whitespace-pre-line"
+          className={`text-[#666666] ${descriptionClasses} lg:w-[90%] w-[100%] mt-2`}
         />
       )}
 
@@ -168,7 +169,7 @@ const VideoGrid = ({ videosData, homePageData, isFiltering = false }) => {
                   <button
                     type="button"
                     onClick={(e) => handleOpen(e, video)}
-                    className="relative block w-full lg:h-[22rem] h-[20rem] rounded-3xl cursor-pointer overflow-hidden text-left"
+                    className="relative block w-full lg:h-[24rem] h-[20rem] rounded-3xl cursor-pointer overflow-hidden text-left"
                   >
                     <img
                       className="w-full h-full object-cover"
@@ -199,12 +200,12 @@ const VideoGrid = ({ videosData, homePageData, isFiltering = false }) => {
                       dir="rtl"
                     >
                       {video.title && (
-                        <h3 className="text-white text-[1rem] font-bold text-right leading-snug flex-1">
+                        <h3 className="text-white text-[1.1rem] font-bold text-right leading-snug flex-1">
                           {video.title}
                         </h3>
                       )}
                       {video.date && (
-                        <p className="text-white text-[0.85rem] opacity-90 whitespace-nowrap">
+                        <p className="text-white text-lg opacity-90 whitespace-nowrap">
                           {formatDate(video.date)}
                         </p>
                       )}

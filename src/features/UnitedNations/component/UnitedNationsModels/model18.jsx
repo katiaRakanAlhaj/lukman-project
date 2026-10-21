@@ -65,7 +65,7 @@ const Model18 = ({ data }) => {
                   <h1 className="text-secondary text-[1.2rem] font-bold">
                     {item.title}
                   </h1>
-                  <p className="text-[#666666] text-[1rem] mt-2 whitespace-pre-line flex text-justify">
+                  <p className="text-[#666666] text-[1.1rem] mt-2  flex text-justify">
                     {item.description}
                   </p>
                 </div>

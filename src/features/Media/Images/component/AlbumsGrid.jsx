@@ -33,7 +33,7 @@ const AlbumsGrid = ({ albums, onOpenAlbum }) => {
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
             </div>
             <div className="mt-4 text-center">
-              <h3 className="text-lg font-bold text-secondary group-hover:text-[#0f172a] transition-colors">
+              <h3 className="lg:text-xl text-lg font-bold text-secondary group-hover:text-[#0f172a] transition-colors">
                 {album.name}
               </h3>
             </div>

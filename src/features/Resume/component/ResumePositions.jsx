@@ -23,7 +23,7 @@ const ResumePositions = ({ PositionsData }) => {
                 style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
               >
                 <div className="lg:flex justify-between">
-                  <h1 className="text-secondary text-[1.3em] font-bold lg:font-[500]">
+                  <h1 className="text-secondary lg:text-xl text-lg font-bold">
                     {position.title}
                   </h1>
                   <p className="text-secondary lg:text-[1.2em] text-[1rem] lg:mt-0 mt-2">
@@ -36,7 +36,7 @@ const ResumePositions = ({ PositionsData }) => {
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(position.description),
                     }}
-                    className="text-[1em] text-secondary mt-2 whitespace-pre-line"
+                    className={`lg:text-xl text-lg text-secondary mt-2`}
                   />
                 )}
               </div>

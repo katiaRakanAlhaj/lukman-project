@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import formatDate from "./formatDate";
+import { descriptionClasses } from "./descriptionClasses";
 
 const LastSingleContent = ({ item, linkPrefix = "/Activity" }) => {
   const { lang } = useParams();
@@ -20,13 +21,13 @@ const LastSingleContent = ({ item, linkPrefix = "/Activity" }) => {
           <h1 className="font-bold text-[#000000] text-[1.2rem] mt-4 line-clamp-2">
             {item.title}
           </h1>
-          <p className="text-[#000000] whitespace-nowrap text-[0.9rem] mt-4">
+          <p className="text-[#000000] whitespace-nowrap text-[1rem] mt-4">
             {formatDate(item.date)}
           </p>
         </div>
 
         <div
-          className="text-[#666666] text-[1rem] mt-1 whitespace-pre-line line-clamp-4"
+          className={`text-[#666666] text-lg mt-1 line-clamp-4`}
           dangerouslySetInnerHTML={{ __html: item.description }}
         />
       </div>

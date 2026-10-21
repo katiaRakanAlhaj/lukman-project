@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import i18next from "i18next";
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const COLLAPSED_LINES = 11;
 
@@ -86,7 +87,7 @@ const WhyTheWebsite = ({ homePageData }) => {
             <div
               ref={contentRef}
               dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
-              className={`text-gray-800 leading-relaxed lg:text-xl text-lg font-medium mt-2 overflow-hidden transition-all duration-300 flex text-justify ${expanded ? "is-expanded" : ""}`}
+              className={`text-gray-800 leading-relaxed ${descriptionClasses} font-medium mt-2 overflow-hidden transition-all duration-300 flex text-justify ${expanded ? "is-expanded" : ""}`}
               style={
                 expanded
                   ? {}

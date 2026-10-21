@@ -38,14 +38,14 @@ const Model7 = ({ data }) => {
                     isLast ? "" : "border-b-[0.14rem] border-b-[#C4C4C4]"
                   }`}
                 >
-                  <h1 className="text-secondary text-[1.1rem] font-bold">
+                  <h1 className="text-secondary text-[1.2rem] font-bold">
                     {item.title}
                   </h1>
                   <p
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(item.description),
                     }}
-                    className="text-[1rem] text-[#666666] mt-2 mb-4 whitespace-pre-line flex text-justify"
+                    className="text-[1.1rem] text-[#666666] mt-2 mb-4 whitespace-pre-line flex text-justify"
                   />
                 </div>
               );

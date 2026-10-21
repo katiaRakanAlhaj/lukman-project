@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../../component/ux/descriptionClasses";
 const Model5 = ({ data }) => {
   return (
     <div>
@@ -7,7 +8,7 @@ const Model5 = ({ data }) => {
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(data.description),
         }}
-        className="text-[#333333] text-[1.1rem] leading-[2rem] mt-2 flex text-justify whitespace-pre-line"
+        className={`text-[#333333] ${descriptionClasses} flex text-justify whitespace-pre-line mt-2`}
       />
       {data.image && (
         <img

@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../../component/ux/descriptionClasses";
 const Model16 = ({ data }) => {
   const items = data.content || [];
   return (
@@ -10,14 +11,14 @@ const Model16 = ({ data }) => {
           <div key={index} className="flex gap-x-[1.5rem]">
             <div className="h-[30rem] w-[0.2rem] bg-[#099EC8]"></div>
             <div className="flex flex-col">
-              <h1 className="text-[1.2rem] font-bold text-secondary">
+              <h1 className="text-[1.2rem] lg:text-[1.3rem] font-bold text-secondary">
                 {item.title}
               </h1>
               <p
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(item.description),
                 }}
-                className="text-[1rem] line-clamp-6 text-[#666666] whitespace-pre-line flex text-justify"
+                className={`${descriptionClasses} line-clamp-6 text-[#666666]`}
               />
 
               {item.image && (

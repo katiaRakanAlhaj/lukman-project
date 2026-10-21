@@ -1,13 +1,16 @@
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../../component/ux/descriptionClasses";
 const Model8 = ({ data }) => {
   return (
     <div>
-      <h1 className="font-bold text-[#333333] lg:text-[1.5rem] text-[1.3rem]">{data.title}</h1>
+      <h1 className="font-bold text-[#333333] lg:text-[1.5rem] text-[1.3rem]">
+        {data.title}
+      </h1>
       <p
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(data.description),
         }}
-        className="text-[1rem] text-[#333333] mt-2 flex text-justify whitespace-pre-line"
+        className={`${descriptionClasses} text-[#333333] mt-2 flex text-justify whitespace-pre-line`}
       />
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[2rem] mt-[1.6rem]">
         {data.content.map((item, index) => (

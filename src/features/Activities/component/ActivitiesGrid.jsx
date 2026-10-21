@@ -6,6 +6,7 @@ import ActivitiesGridSkeleton from "./ActivitiesGridSkeleton";
 import SeeMoreButton from "../../../component/ux/seeMoreButton";
 import formatDate from "../../../component/ux/formatDate";
 import EmptyState from "../../../component/ux/emptyState";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const INITIAL_COUNT = 4;
 const LOAD_MORE_COUNT = 6;
@@ -89,14 +90,14 @@ const ActivitiesGrid = ({ CategoryContent }) => {
                 <div className="mt-[2.5rem] grid lg:grid-cols-12 grid-cols-1 gap-x-[2rem] lg:gap-y-0 gap-y-[2rem]">
                   {/* Left: text */}
                   <div className="lg:col-span-8 col-span-1">
-                    <p className="text-[#000000] text-[0.9rem]">
+                    <p className="text-[#000000] text-lg">
                       {formatDate(activity.date)}
                     </p>
                     <h1 className="text-[#000000] mt-[1rem] font-bold lg:text-[1.3rem] text-[1.2rem]">
                       {activity.title}
                     </h1>
                     <div
-                      className="text-[#666666] text-lg mt-2 w-[95%] whitespace-pre-line"
+                      className={`text-[#666666] ${descriptionClasses} mt-2 w-[95%]`}
                       dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(activity.description || ""),
                       }}

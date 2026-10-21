@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../../component/ux/descriptionClasses";
 
 const Model12 = ({ data }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -20,7 +21,7 @@ const Model12 = ({ data }) => {
             <button
               key={index}
               onClick={() => setActiveTab(index)}
-              className={`text-[0.875rem] sm:text-[1rem] whitespace-nowrap pb-[0.5rem] transition-colors ${
+              className={`${descriptionClasses} whitespace-nowrap pb-[0.5rem] transition-colors ${
                 activeTab === index
                   ? "text-negative font-bold border-b-2 border-negative"
                   : "text-[#959595]"
@@ -34,14 +35,14 @@ const Model12 = ({ data }) => {
         {/* Content */}
         {activeItem && (
           <div className="space-y-2 mt-4 px-[0.5rem] sm:px-4">
-            <h1 className="text-[1.2rem] text-black font-bold">
+            <h1 className="lg:text-[1.3rem] text-[1.2rem] text-black font-bold">
               {activeItem.title}
             </h1>
             <p
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(activeItem.description),
               }}
-              className="text-[1rem] text-black leading-relaxed whitespace-pre-line flex text-justify"
+              className={`text-black ${descriptionClasses} leading-relaxed  flex text-justify`}
             />
           </div>
         )}

@@ -64,7 +64,7 @@ const VideosCategory = ({ videoCategoryData, onApplyFilters }) => {
 
         {/* ===== Language ===== */}
         <div className="mt-4 mb-3">
-          <p className="text-[1rem] mb-2 text-secondary font-medium">
+          <p className="text-[1rem] lg:text-[1.2rem] mb-2 text-secondary font-medium">
             {i18next.t("media.interview_language")}
           </p>
           <div className="flex gap-2 p-1 rounded-full">
@@ -117,7 +117,7 @@ const VideosCategory = ({ videoCategoryData, onApplyFilters }) => {
           <div className="space-y-2">
             <label
               htmlFor="sort"
-              className="block text-sm font-medium text-gray-700"
+              className="block lg:text-[1.2rem] text-[1.1rem] font-medium text-gray-700"
             >
               {i18next.t("media.sort_by")}
             </label>
@@ -151,7 +151,7 @@ const VideosCategory = ({ videoCategoryData, onApplyFilters }) => {
 
             <p
               onClick={handleReset}
-              className="text-[#5B1B1B] text-center cursor-pointer hover:text-red-700"
+              className="text-[#5B1B1B] text-center cursor-pointer text-lg hover:text-red-700"
             >
               {i18next.t("media.reset")}
             </p>

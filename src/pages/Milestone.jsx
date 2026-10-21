@@ -135,8 +135,13 @@ const Milestone = () => {
               <>
                 {showCategoryDescription && (
                   <div
-                    className="mb-[2rem] relative py-[1rem] px-[1.5rem] rounded-2xl bg-white overflow-hidden"
-                    style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px" }}
+                    className="category-desc-scroll mb-[2rem] relative py-[1rem] px-[1.5rem] rounded-2xl bg-white max-h-[12rem] overflow-y-auto scroll-smooth overscroll-contain"
+                    style={{
+                      boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",
+                      scrollbarWidth: "thin",
+                      scrollbarColor:
+                        "var(--color-negative, #e63946) transparent",
+                    }}
                     dir={isRTL ? "rtl" : "ltr"}
                   >
                     <div className="absolute w-[0.3rem] h-full bg-negative top-0 right-0" />
@@ -144,14 +149,13 @@ const Milestone = () => {
                       {activeCategoryData.name}
                     </h2>
                     <div
-                      className="text-[1rem] text-[#666666] leading-relaxed whitespace-pre-line line-clamp-3"
+                      className="text-lg text-[#666666] leading-relaxed"
                       dangerouslySetInnerHTML={{
                         __html: activeCategoryData.description,
                       }}
                     />
                   </div>
                 )}
-
                 <MilestoneGrid
                   milestoneData={displayedData}
                   milestoneCategoryData={milestoneCategoryData}

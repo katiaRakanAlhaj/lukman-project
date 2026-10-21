@@ -64,12 +64,12 @@ const BooksGrid = ({ booksData }) => {
                 </h1>
                 <div className="flex gap-x-2 mt-2 items-center">
                   <img className="w-6 h-6" src={date} alt="calendar" />
-                  <p className="text-secondary text-[0.9em]">
+                  <p className="text-secondary text-lg">
                     {formatDate(book.date)}
                   </p>
                 </div>
                 <div
-                  className="md:text-[1.1rem] text-[0.9rem] text-[#666] whitespace-pre-line line-clamp-4"
+                  className="md:text-[1.1rem] text-[0.9rem] text-[#666] line-clamp-4"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(book.description),
                   }}

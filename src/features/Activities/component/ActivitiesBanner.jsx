@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import i18next from "i18next";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 
 const ActivitiesBanner = ({ ActivitiesData }) => {
   // Safely access the data object
@@ -16,7 +17,7 @@ const ActivitiesBanner = ({ ActivitiesData }) => {
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(ActivitiesData?.data?.description),
         }}
-        className="text-[1rem] text-[#666666]"
+        className={`${descriptionClasses} text-[#666666]`}
       />
       <div className="lg:mt-[4rem] mt-[2rem] relative">
         <div className="w-full relative flex items-center justify-center text-center lg:h-[30rem] h-[20rem]">
@@ -31,7 +32,9 @@ const ActivitiesBanner = ({ ActivitiesData }) => {
         </div>
 
         {/* Bottom-right title label */}
-        <div className={`absolute bottom-[2rem] ${i18next.language == "en"?'left-[4rem]':'right-[4rem]'} text-[2rem] font-bold text-white`}>
+        <div
+          className={`absolute bottom-[2rem] ${i18next.language == "en" ? "left-[4rem]" : "right-[4rem]"} text-[2rem] font-bold text-white`}
+        >
           {title}
         </div>
       </div>

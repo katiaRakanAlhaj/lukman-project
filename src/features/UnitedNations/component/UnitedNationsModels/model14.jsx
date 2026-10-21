@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import { useTranslation } from "react-i18next";
+import { descriptionClasses } from "../../../../component/ux/descriptionClasses";
 
 const Model14 = ({ data }) => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -28,7 +29,7 @@ const Model14 = ({ data }) => {
                 onClick={() => toggleAccordion(index)}
               >
                 <h2
-                  className={`text-[1.1rem] font-bold transition-colors duration-300 ${
+                  className={`lg:text-[1.3rem] text-[1.2rem] font-bold transition-colors duration-300 ${
                     isOpen ? "text-[#099EC8]" : "text-[#333333]"
                   }`}
                 >
@@ -74,7 +75,7 @@ const Model14 = ({ data }) => {
                       dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(item.description),
                       }}
-                      className="text-[#333333] text-[1rem] leading-relaxed whitespace-pre-line"
+                      className={`text-[#333333] ${descriptionClasses} flex text-justify whitespace-pre-line`}
                     />
                   )}
                 </div>

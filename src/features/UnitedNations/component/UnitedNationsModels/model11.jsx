@@ -1,13 +1,16 @@
 import DOMPurify from "dompurify";
+import { descriptionClasses } from "../../../../component/ux/descriptionClasses";
 const Model11 = ({ data }) => {
   return (
     <div className="flex flex-col space-y-2">
-      <h1 className="font-bold lg:text-[1.5rem] text-[1.3rem] text-secondary">{data.title}</h1>
+      <h1 className="font-bold lg:text-[1.5rem] text-[1.3rem] text-secondary">
+        {data.title}
+      </h1>
       <p
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(data.description),
         }}
-        className="text-[1rem] text-[#333333] whitespace-pre-line flex text-justify"
+        className={`${descriptionClasses} text-[#333333]  flex text-justify`}
       />
       {data.image && (
         <img

@@ -147,7 +147,7 @@ const ContactGrid = ({ contactDataPage }) => {
             </p>
 
             <div
-              className="text-secondary text-[0.9rem] mt-2 whitespace-pre-line flex text-justify"
+              className="text-secondary  text-lg mt-2 flex text-justify"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(data.description || ""),
               }}
@@ -159,7 +159,7 @@ const ContactGrid = ({ contactDataPage }) => {
                   <h1 className="font-bold text-[#000000] text-[1.2rem]">
                     {i18next.t("contact.email")}
                   </h1>
-                  <p className="text-secondary text-[0.9rem]">{data.email}</p>
+                  <p className="text-secondary text-lg">{data.email}</p>
                 </div>
               </div>
 

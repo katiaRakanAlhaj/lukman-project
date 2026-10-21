@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import i18next from "i18next";
+import { descriptionClasses } from "../../../component/ux/descriptionClasses";
 const ResumeDescription = ({ ProfissionalExperiencesData }) => {
   // Safely access the data array
   const experiences = ProfissionalExperiencesData?.data || [];
@@ -24,7 +25,7 @@ const ResumeDescription = ({ ProfissionalExperiencesData }) => {
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(experience.description),
             }}
-            className="text-secondary flex text-justify text-[1.2rem] leading-[2.5rem] whitespace-pre-line"
+            className={`text-secondary flex text-justify ${descriptionClasses} leading-[2.5rem] whitespace-pre-line`}
           />
         )}
       </div>

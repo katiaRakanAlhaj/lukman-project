@@ -28,7 +28,7 @@ const AlbumImageCard = ({ img, onClick, innerRef }) => {
         {img.location && (
           <div className="flex items-start gap-2">
             <MapPinIcon className="w-4 h-4 mt-0.5 flex-shrink-0 text-negative" />
-            <p className="text-sm font-semibold text-gray-800 line-clamp-1">
+            <p className="lg:text-xl text-lg font-semibold text-gray-800 line-clamp-1">
               {img.location}
             </p>
           </div>
@@ -36,13 +36,13 @@ const AlbumImageCard = ({ img, onClick, innerRef }) => {
         {img.address && (
           <div className="flex items-start gap-2">
             <HomeIcon className="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-500" />
-            <p className="text-sm text-[#333333] line-clamp-2">{img.address}</p>
+            <p className={`text-lg  text-[#333333] line-clamp-2`}>{img.address}</p>
           </div>
         )}
         {img.date && (
           <div className="flex items-center gap-2 mt-auto pt-2">
             <CalendarIcon className="w-4 h-4 flex-shrink-0 text-gray-400" />
-            <p className="text-xs text-gray-500">{formatDate(img.date)}</p>
+            <p className="text-lg mt-2 text-gray-500">{formatDate(img.date)}</p>
           </div>
         )}
       </div>
