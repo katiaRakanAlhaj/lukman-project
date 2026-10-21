@@ -135,7 +135,7 @@ const Milestone = () => {
               <>
                 {showCategoryDescription && (
                   <div
-                    className="category-desc-scroll mb-[2rem] relative py-[1rem] px-[1.5rem] rounded-2xl bg-white max-h-[12rem] overflow-y-auto scroll-smooth overscroll-contain"
+                    className="category-desc-scroll mb-[2rem] relative py-[1rem] px-[1.5rem] rounded-2xl bg-white max-h-[16rem] overflow-y-auto scroll-smooth overscroll-contain"
                     style={{
                       boxShadow: "rgba(0, 0, 0, 0.25) 0px 0px 4px 0px",
                       scrollbarWidth: "thin",

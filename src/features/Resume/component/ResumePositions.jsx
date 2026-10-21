@@ -36,7 +36,7 @@ const ResumePositions = ({ PositionsData }) => {
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(position.description),
                     }}
-                    className={`lg:text-xl text-lg text-secondary mt-2`}
+                    className={`lg:text-xl text-lg text-secondary mt-2 whitespace-pre-line`}
                   />
                 )}
               </div>

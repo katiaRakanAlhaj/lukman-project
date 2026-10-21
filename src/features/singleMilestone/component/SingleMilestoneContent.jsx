@@ -17,7 +17,7 @@ const SingleMilestoneContent = ({ milestoneByIdData }) => {
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(milestoneByIdData?.description),
         }}
-        className={`text-[#666666] text-justify ${descriptionClasses} leading-[2rem] mt-3 whitespace-pre-line`}
+        className={`text-[#666666] text-justify ${descriptionClasses} leading-[2rem] mt-3`}
       ></p>
     </div>
   );

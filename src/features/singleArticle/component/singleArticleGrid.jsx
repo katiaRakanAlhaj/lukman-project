@@ -32,7 +32,7 @@ const SingleArticleContent = ({ articleByIdData }) => {
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(article.section_description),
           }}
-          className="rich-text text-[#666666] text-justify text-[1rem] leading-[2rem] mt-2 whitespace-pre-line"
+          className="rich-text text-[#666666] text-justify lg:text-xl text-lg leading-[2rem] mt-2 whitespace-pre-line"
         />
       </div>
     </div>
